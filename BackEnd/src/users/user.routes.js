@@ -6,5 +6,6 @@ const api = express.Router();
 const {ensureAuth, isAdmin} = require('../services/authenticated');
 
 api.get('/', userController.test);
+api.post('/registerUser', userController.registerUser);
 
 module.exports = api;
