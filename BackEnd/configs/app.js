@@ -7,7 +7,7 @@ const cors = require ('cors');
 const app = express();
 //constante del puerto
 const port = process.env.PORT || 3200;  
-
+const userRoutes = require('../src/users/user.routes')
 
 
 //configurar el servidor de http en express
@@ -18,7 +18,7 @@ app.use(helmet());
 app.use(morgan('dev'));
 
 //rutas de cada coleccion
-
+app.use('/user', userRoutes)
 
 
 //fucion para levantar el servidor
