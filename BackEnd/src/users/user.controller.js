@@ -69,3 +69,58 @@ exports.login = async(req, res)=>{
         return res.status(500).send({message: 'Error not logged'});
     }
 }
+
+exports.updateOwnUser = async(req,res)=>{
+    try {
+        let userId = req.user.sub
+        let data = req.body;
+        data.password = await encrypt(data.password);
+        //
+        let userExist = await User.findOne({_id:userId})
+        if(data.username !== userExist.username){
+            let user= await User.findOne({username:data.username});
+            if(user) return res.send({message:'Username is in use and not updated'})
+        }
+        //
+        if(userExist && await checkPassword(data.passwordCurrent, userExist.password)) {
+            let updateOwnUser = await User.findOneAndUpdate(
+                {_id:userId},
+                {
+                name:data.name,
+                surname: data.surname,
+                username:data.username,
+                phone:data.phone,
+                password: data.password
+                },
+                {new:true});
+            return res.send({message:'User updateing sucessfully', updateOwnUser});
+            
+        }
+        return res.send({message:'wrong current password'})
+        
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({mesage:'Error updating User'})
+    }
+}
+
+exports.deleteOwnUser = async(req,res)=>{
+    try {
+        let userId = req.user.sub;
+        let deleteUser = await User.findOne({_id:userId});
+        return res.send({message:`Account with username ${deleteUser.username} delete sucessfully`})
+    } catch (err) {
+        console.error(err);
+        return res.status(500).Usersend({message:'Error delete User'})
+    }
+}
+
+exports.get = async(req,res)=>{
+    try {
+        let users = await User.find({},{__v:0});
+        return res.send(users)
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({message:'Error geting users'})
+    }
+}
