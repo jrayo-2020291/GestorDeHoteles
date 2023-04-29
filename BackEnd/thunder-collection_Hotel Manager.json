@@ -1,0 +1,120 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Hotel Manager",
+    "dateExported": "2023-04-29T20:30:46.226Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "523b1c02-4f0d-4e05-a0db-45ec20c6b496",
+            "name": "Users",
+            "containerId": "",
+            "created": "2023-04-29T15:49:53.876Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "cec73a86-3133-499e-b5e1-02b916bd8b4a",
+            "colId": "591bff02-0b13-4a5b-a263-08da0e138496",
+            "containerId": "523b1c02-4f0d-4e05-a0db-45ec20c6b496",
+            "name": "Test",
+            "url": "/user/",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-04-29T15:50:05.102Z",
+            "modified": "2023-04-29T19:05:41.165Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "06fce19a-6f29-470b-8350-c903e30a5e9f",
+            "colId": "591bff02-0b13-4a5b-a263-08da0e138496",
+            "containerId": "523b1c02-4f0d-4e05-a0db-45ec20c6b496",
+            "name": "Register User",
+            "url": "",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-04-29T17:54:49.775Z",
+            "modified": "2023-04-29T17:54:49.775Z",
+            "headers": []
+        },
+        {
+            "_id": "bbff05dc-c516-4bb3-b9b4-262de08e0d37",
+            "colId": "591bff02-0b13-4a5b-a263-08da0e138496",
+            "containerId": "523b1c02-4f0d-4e05-a0db-45ec20c6b496",
+            "name": "Register User",
+            "url": "/user/registerUser",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-04-29T17:54:58.878Z",
+            "modified": "2023-04-29T19:21:02.503Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "josue"
+                    },
+                    {
+                        "name": "surname",
+                        "value": "hernandez"
+                    },
+                    {
+                        "name": "username",
+                        "value": "jhernandez2"
+                    },
+                    {
+                        "name": "password",
+                        "value": "123"
+                    },
+                    {
+                        "name": "email",
+                        "value": "jhernandez-2021111@kinal.edu.gt1"
+                    },
+                    {
+                        "name": "phone",
+                        "value": "36534283"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "ea33bed0-4ba1-4db8-ab38-b414105d8f1e",
+            "colId": "591bff02-0b13-4a5b-a263-08da0e138496",
+            "containerId": "523b1c02-4f0d-4e05-a0db-45ec20c6b496",
+            "name": "login",
+            "url": "/user/login",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-04-29T20:19:20.946Z",
+            "modified": "2023-04-29T20:24:15.166Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "username",
+                        "value": "jnoj"
+                    },
+                    {
+                        "name": "password",
+                        "value": "123"
+                    }
+                ]
+            },
+            "tests": []
+        }
+    ],
+    "settings": {
+        "options": {
+            "baseUrl": "localhost:3100"
+        }
+    }
+}
