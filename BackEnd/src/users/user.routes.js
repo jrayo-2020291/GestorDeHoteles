@@ -7,5 +7,6 @@ const {ensureAuth, isAdmin} = require('../services/authenticated');
 
 api.get('/', userController.test);
 api.post('/registerUser', userController.registerUser);
+api.post('/login',userController.login)
 
 module.exports = api;

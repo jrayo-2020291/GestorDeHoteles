@@ -1,7 +1,8 @@
 'use strict'
 
 const User = require('./user.model')
-const {encrypt} = require('../utils/validate')
+const { validateData, encrypt, checkPassword, checkUpdate } = require('../utils/validate');
+const { createToken } = require('../services/jwt');
 
 exports.test = (req, res) =>{
     res.send({message: 'Test function for User is running'});
@@ -47,3 +48,24 @@ exports.registerUser = async(req, res)=>{
         return res.status(500).send({message: 'Error creating account'});
     }
 };
+
+exports.login = async(req, res)=>{
+    try{
+        let data = req.body;
+        let credentials = {
+            username: data.username,
+            password: data.password
+        }
+        let msg = validateData(credentials);
+        if(msg) return res.status(400).send({message: msg});
+        let user = await User.findOne({username: data.username});
+        if(user && await checkPassword(data.password, user.password)) {
+            let token = await createToken(user)
+            return res.send({message: 'User logged successfully', token});
+        }
+        return res.status(404).send({message: 'Invalid credentials'});
+    }catch(err){
+        console.error(err);
+        return res.status(500).send({message: 'Error not logged'});
+    }
+}
