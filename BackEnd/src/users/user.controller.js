@@ -74,6 +74,7 @@ exports.updateOwnUser = async(req,res)=>{
     try {
         let userId = req.user.sub
         let data = req.body;
+        if(data.name===''||data.surname===''||data.username===''||data.password===''||data.phone==='') return res.send({message:'cannot send blank spaces'})
         data.password = await encrypt(data.password);
         //
         let userExist = await User.findOne({_id:userId})
@@ -107,7 +108,8 @@ exports.updateOwnUser = async(req,res)=>{
 exports.deleteOwnUser = async(req,res)=>{
     try {
         let userId = req.user.sub;
-        let deleteUser = await User.findOne({_id:userId});
+        let deleteUser = await User.findOneAndDelete({_id:userId});
+        if(!deleteUser) return res.send({message:'User not found'})
         return res.send({message:`Account with username ${deleteUser.username} delete sucessfully`})
     } catch (err) {
         console.error(err);
@@ -122,5 +124,17 @@ exports.get = async(req,res)=>{
     } catch (err) {
         console.error(err);
         return res.status(500).send({message:'Error geting users'})
+    }
+}
+
+exports.getById = async(req,res)=>{
+    try {
+        let userId = req.params.id;
+        let existUser = await User.findOne({_id:userId})
+        if(!existUser) return res.send({message:'Not found User'})
+        return res.send(existUser)
+    } catch (error) {
+        console.error(err);
+        return res.status(500).send({message:'Error get User'})
     }
 }

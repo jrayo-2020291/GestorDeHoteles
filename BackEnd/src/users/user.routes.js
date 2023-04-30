@@ -11,5 +11,6 @@ api.post('/login',userController.login);
 api.put('/updateOwnUser', ensureAuth,userController.updateOwnUser);
 api.delete('/deleteOwnUser', ensureAuth, userController.deleteOwnUser);
 api.get('/get',[ensureAuth,isAdmin], userController.get)
+api.get('/getById/:id', [ensureAuth,isAdmin], userController.getById)
 
 module.exports = api;
