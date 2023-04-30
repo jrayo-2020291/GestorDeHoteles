@@ -10,6 +10,7 @@ const port = process.env.PORT || 3200;
 const userRoutes = require('../src/users/user.routes');
 const servicesRoutes = require('../src/additionalServices/additionalService.routes');
 const eventsRoutes = require('../src/events/events.routes');
+const hotelsRoutes = require('../src/hotels/hotels.routes')
 
 
 //configurar el servidor de http en express
@@ -23,6 +24,7 @@ app.use(morgan('dev'));
 app.use('/user', userRoutes)
 app.use('/services', servicesRoutes);
 app.use('/events', eventsRoutes);
+app.use('/hotel', hotelsRoutes)
 
 //fucion para levantar el servidor
 exports.initServer = ()=>{
