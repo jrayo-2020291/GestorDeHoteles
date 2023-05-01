@@ -11,7 +11,7 @@ const userRoutes = require('../src/users/user.routes');
 const servicesRoutes = require('../src/additionalServices/additionalService.routes');
 const eventsRoutes = require('../src/events/events.routes');
 const hotelsRoutes = require('../src/hotels/hotels.routes')
-
+const roomRoutes = require('../src/rooms/rooms.routes')
 
 //configurar el servidor de http en express
 app.use(express.urlencoded({extended:false}));
@@ -25,6 +25,7 @@ app.use('/user', userRoutes)
 app.use('/services', servicesRoutes);
 app.use('/events', eventsRoutes);
 app.use('/hotel', hotelsRoutes)
+app.use('/room',roomRoutes)
 
 //fucion para levantar el servidor
 exports.initServer = ()=>{

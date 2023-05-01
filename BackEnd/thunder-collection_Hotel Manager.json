@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Hotel Manager",
-    "dateExported": "2023-05-01T02:08:08.574Z",
+    "dateExported": "2023-05-01T03:36:19.308Z",
     "version": "1.1",
     "folders": [
         {
@@ -31,6 +31,13 @@
             "containerId": "",
             "created": "2023-04-30T00:29:37.814Z",
             "sortNum": 50000
+        },
+        {
+            "_id": "1355cacd-577e-45ff-9b09-22662a634a9f",
+            "name": "Rooms",
+            "containerId": "",
+            "created": "2023-05-01T03:09:05.545Z",
+            "sortNum": 60000
         }
     ],
     "requests": [
@@ -742,6 +749,65 @@
                     {
                         "name": "event",
                         "value": "644ef448af49fb6aca3e32ea"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "c65e1521-3db0-41cc-9f84-5dde4d6737f2",
+            "colId": "362f5f24-f62a-40a1-ab48-4bd677c9e43a",
+            "containerId": "1355cacd-577e-45ff-9b09-22662a634a9f",
+            "name": "test",
+            "url": "/room/",
+            "method": "GET",
+            "sortNum": 300000,
+            "created": "2023-05-01T03:09:13.736Z",
+            "modified": "2023-05-01T03:10:12.779Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d2724515-c5d9-4971-bbb8-1171f4073ade",
+            "colId": "362f5f24-f62a-40a1-ab48-4bd677c9e43a",
+            "containerId": "1355cacd-577e-45ff-9b09-22662a634a9f",
+            "name": "Add Room",
+            "url": "/room/add",
+            "method": "POST",
+            "sortNum": 320000,
+            "created": "2023-05-01T03:23:37.447Z",
+            "modified": "2023-05-01T03:34:03.751Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDRkYTM1ZTU2ODU3MzI2YWMxMDE5NjUiLCJuYW1lIjoiSm9zdWUiLCJzdXJuYW1lIjoiTm9qIiwidXNlcm5hbWUiOiJqbm9qIiwiZW1haWwiOiJqbm9qQGtpbmFsLmVkdS5ndCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY4MjkxMTQ0MSwiZXhwIjoxNjgyOTE4NjQxfQ.nN4lslJwgp_h_Diq8DC3NCEWcNh32qZbeRSzLagAbTI\""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "noRoom",
+                        "value": "C4"
+                    },
+                    {
+                        "name": "category",
+                        "value": "normal"
+                    },
+                    {
+                        "name": "peopleCapacity",
+                        "value": "2"
+                    },
+                    {
+                        "name": "price",
+                        "value": "400"
+                    },
+                    {
+                        "name": "hotel",
+                        "value": "644dbb9f649679ece93865ff"
                     }
                 ]
             },
