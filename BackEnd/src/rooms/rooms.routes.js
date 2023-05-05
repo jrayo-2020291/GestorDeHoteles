@@ -7,5 +7,7 @@ const {ensureAuth, isAdmin}=require('../services/authenticated')
 
 api.get('/', roomsController.test);
 api.post('/add',[ensureAuth,isAdmin],roomsController.add);
+api.delete('/delete/:id',  [ensureAuth, isAdmin] ,  roomsController.delete);
+
 
 module.exports = api;

@@ -16,7 +16,10 @@ exports.add = async(req,res)=>{
         if(validate) return res.status(400).send({validate});
         let existHotel = await Hotel.findOne({_id:data.hotel});
         if(!existHotel) return res.send({message:'Hotel not found'});
-        let existRoom = await Room.findOne({noRoom:data.noRoom});
+        let existRoom = await Room.findOne({noRoom:data.noRoom,hotel:data.hotel});
+        if (existRoom)
+            console.log('hpa')
+        
         if(existRoom) return res.send({message:'This room already exists in this hotel'});
         let room = new Room(data);
         await room.save();
@@ -24,5 +27,17 @@ exports.add = async(req,res)=>{
     } catch (err) {
         console.error(err)
         return res.status(500).send({messgae:'Error add Room to Hotel'})
+    }
+}
+
+exports.delete = async(req, res)=>{
+    try{
+        let roomId = req.params.id;
+        let deletedRoom = await Hotel.findOneAndDelete({_id: roomId});
+        if(!deletedRoom) return res.status(404).send({message: 'Room not found and not deleted'});
+        return res.send({message: 'Event deleted: ', deletedRoom});
+    }catch(err){
+        console.error(err);
+        return res.status(500).send({message: 'Error deleting Room'});
     }
 }
