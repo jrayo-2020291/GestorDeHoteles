@@ -80,7 +80,7 @@ exports.updateOwnUser = async(req,res)=>{
         let userExist = await User.findOne({_id:userId})
         if(data.username !== userExist.username){
             let user= await User.findOne({username:data.username});
-            if(user) return res.send({message:'Username is in use and not updated'})
+            if(user) return res.send({message:'Username is in use and can not be updated'})
         }
         //
         if(userExist && await checkPassword(data.passwordCurrent, userExist.password)) {
@@ -94,7 +94,7 @@ exports.updateOwnUser = async(req,res)=>{
                 password: data.password
                 },
                 {new:true});
-            return res.send({message:'User updateing sucessfully', updateOwnUser});
+            return res.send({message:'User updated sucessfully', updateOwnUser});
             
         }
         return res.send({message:'wrong current password'})

@@ -19,6 +19,9 @@ const hotelsSchema = mongoose.Schema({
         type:Number,
         require:true
     },
+    counter:{
+        type:Number
+    },
     manager:{
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User' 
