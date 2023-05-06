@@ -1,6 +1,7 @@
 'use strict'
 
 const Hotel = require('./hotels.model');
+const User = require('../users/user.model')
 const Event = require('../events/events.model');
 const {validateData} = require('../utils/validate')
 const mongoose = require('mongoose');
@@ -13,8 +14,16 @@ exports.add = async(req,res)=>{
     try {
         let data = req.body;
         let validate = validateData(data);
+        let existUser = await User.findOne({ _id: data.manager });  
         if(validate) return res.status(400).send({validate})
-        let hotel = new Hotel(data);
+    if (!existUser) {
+      return res.send({ message: "User not found" });
+    }
+        let existHotel = await Hotel.findOne({ name: data.name });  
+    if (existHotel) {
+      return res.send({ message: "Hotel already created" });
+    }
+      let hotel = new Hotel(data);
         await hotel.save();
         return res.send({message:'hotel created sucessfully', hotel});
     } catch (err) {
@@ -25,11 +34,12 @@ exports.add = async(req,res)=>{
 
 exports.get = async(req,res)=>{
     try {
-        let hotels = await Hotel.find({});
+        let userId = req.user.sub;
+        let hotels = await Hotel.find({manager:req.user.sub});
         return res.send(hotels);
     } catch (err) {
         console.error(err);
-        return res.status(500).send({message:'Error get Hotels'})
+        return res.status(500).send({message:'Error getting Hotels'})
     }
 }
 
@@ -120,3 +130,33 @@ exports.getById = async(req,res)=>{
         return res.status(500).send({message:'Error get hotels'})
     }
 };
+exports.topHotel = async(req,res)=>{
+    try {
+        let hotels = await Hotel.find({},{manager:0}).sort({counter:-1});
+            return res.send({message:'Top Hotels',hotels});
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({message:'Error searching'});
+    }
+  }
+  exports.update = async(req,res)=>{
+    try{
+        let hotelId = req.params.id;
+        let data=req.body;
+        let params = {
+            name: data.name,
+            locationH: data.location,
+            availability:data.availability
+        }
+        if(data.name=='')
+        return res.send({message:'You have to add a valid name'})
+        let hotel = await Hotel.findOne({name: data.name});
+        if(hotel)return res.send({message: 'This Hotel already exists'});
+        let updatedHotel = await Hotel.findOneAndUpdate({_id: hotelId}, params, {new: true});
+        if(!updatedHotel) return res.status(404).send({message: 'Hotel not found and not updated'});
+        return res.send({message: 'Hotel updated', updatedHotel});
+    }catch (err){
+        console.error(err);
+        return res.status(500).send({message: 'Error updating hotel'})
+    }
+}

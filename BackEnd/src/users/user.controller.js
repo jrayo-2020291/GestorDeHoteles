@@ -12,11 +12,11 @@ exports.addAdminInitial = async(req, res)=>{
     try{
         let passwordEncrypt = await encrypt("123");
         let adminInitial = {
-            name: 'Josue',
-            surname: 'Noj',
-            username: 'jnoj',
+            name: 'ADMIN',
+            surname: 'admin',
+            username: 'admin',
             password: passwordEncrypt,
-            email: 'jnoj@kinal.edu.gt',
+            email: 'admin@kinal.edu.gt',
             phone:'12345678',
             role:'admin'
         }

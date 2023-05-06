@@ -59,6 +59,8 @@ exports.update = async(req,res)=>{
             price: data.price,
             availability:data.availability
         }
+        if(data.name=='')
+        return res.send({message:'You have to add a valid name'})
         let roomExist = Room.findOne({_id: roomId});
         let alreadyName= roomExist.name;
         if(data.room == alreadyName){'succsess'}
