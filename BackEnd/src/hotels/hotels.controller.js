@@ -19,6 +19,10 @@ exports.add = async(req,res)=>{
     if (!existUser) {
       return res.send({ message: "User not found" });
     }
+    let existUsers = await Hotel.findOne({manager:data.manager});
+    if(existUsers){
+        return res.send({message:'User already has an hotel'})
+    }
         let existHotel = await Hotel.findOne({ name: data.name });  
     if (existHotel) {
       return res.send({ message: "Hotel already created" });
@@ -35,7 +39,7 @@ exports.add = async(req,res)=>{
 exports.get = async(req,res)=>{
     try {
         let userId = req.user.sub;
-        let hotels = await Hotel.find({manager:req.user.sub});
+        let hotels = await Hotel.find({manager:userId});
         return res.send(hotels);
     } catch (err) {
         console.error(err);

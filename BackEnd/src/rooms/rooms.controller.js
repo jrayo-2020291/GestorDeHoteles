@@ -10,8 +10,13 @@ exports.test = (req, res)=>{
 };
 exports.get = async(req,res)=>{
     try {
-        let rooms = await Room.find({},{__v:0});
-        return res.send(rooms)
+        let userId = req.user.sub;
+        let hotels= await Hotel.findOne({manager:userId})
+            console.log(hotels.id)
+        
+        let rooms = await Room.find({hotel:hotels.id});
+        console.log(rooms)
+        return res.send({rooms})
     } catch (err) {
         console.error(err);
         return res.status(500).send({message:'Error geting rooms'})
@@ -59,13 +64,13 @@ exports.update = async(req,res)=>{
             price: data.price,
             availability:data.availability
         }
-        if(data.name=='')
-        return res.send({message:'You have to add a valid name'})
-        let roomExist = Room.findOne({_id: roomId});
-        let alreadyName= roomExist.name;
-        if(data.room == alreadyName){'succsess'}
-        let room = await Room.findOne({noRoom: data.room});
-        if(room)return res.send({message: 'This Room already exists'});
+        if(data.name=='')return res.send({message:'You have to add a valid name'})
+        let existRoom = await Room.findOne({_id: roomId})
+        console.log(existRoom.noRoom)
+        if(data.room !== existRoom.noRoom){
+            let room = await Room.findOne({noRoom: data.room});
+            if(room) return res.send({message:'Room name is already in use'})
+        }
         let updatedRoom = await Room.findOneAndUpdate({_id: roomId}, params, {new: true});
         if(!updatedRoom) return res.status(404).send({message: 'Room not found and not updated'});
         return res.send({message: 'Room updated', updatedRoom});

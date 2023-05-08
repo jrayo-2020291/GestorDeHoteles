@@ -22,7 +22,8 @@ const hotelsSchema = mongoose.Schema({
     availability:{
         type:String,
         require:true,
-        default:'AVAILABLE'
+        default:'AVAILABLE',
+        enum:['AVAILABLE','NOT AVAILABLE']
     },
     hotel:{
         type: mongoose.Schema.Types.ObjectId, 
