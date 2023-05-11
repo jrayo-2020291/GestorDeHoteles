@@ -22,6 +22,15 @@ exports.get = async(req,res)=>{
         return res.status(500).send({message:'Error geting rooms'})
     }
 }
+exports.getAvailability=async(req,res)=>{
+    try{
+        let state = 'DISPONIBLE'
+        let rooms=await roomsModel.find({})
+    }catch(err){
+        console.error(err);
+        return res.status(500).send({message:'Error getting availability'})
+    }
+}
 exports.add = async(req,res)=>{
     try {
         let data = req.body;
