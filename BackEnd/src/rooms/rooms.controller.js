@@ -29,6 +29,7 @@ exports.get =async(req,res)=>{ try{
     console.error(err);
     return res.status(500).send({message:'Error getting rooms'})
 }}
+
 exports.getAvailability=async(req,res)=>{
     try{
         let state = 'AVAILABLE'

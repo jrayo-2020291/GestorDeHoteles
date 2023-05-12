@@ -33,7 +33,17 @@ import { DashBoardPage } from './pages/DashBoardPage.jsx'
 export const AuthContext = createContext();
 
 export const Index = () => {
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [dataUser, setDataUser] = useState({
+      name: '',
+      username: '',
+      role: ''
+    })
 
+    useEffect(()=>{
+        let token = localStorage.getItem('token')
+        if(token) setLoggedIn(true)
+    }, [])
     const routes = createBrowserRouter([
         {
             path: '/',

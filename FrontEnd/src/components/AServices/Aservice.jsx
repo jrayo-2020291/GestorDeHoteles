@@ -1,7 +1,9 @@
-import React from 'react'
-
-export const Aservice = () => {
+export const A_Service = ({name, description, cost})=>{ 
     return (
-        <div>Aservice</div>
+        <>
+            <td>{name}</td>
+            <td>{description}</td>
+            <td>{cost}</td>
+        </>
     )
 }

@@ -61,7 +61,7 @@ exports.login = async(req, res)=>{
         let user = await User.findOne({username: data.username});
         if(user && await checkPassword(data.password, user.password)) {
             let token = await createToken(user)
-            return res.send({message: 'User logged successfully', token});
+            return res.send({message: 'User logged successfully', token,user});
         }
         return res.status(404).send({message: 'Invalid credentials'});
     }catch(err){
