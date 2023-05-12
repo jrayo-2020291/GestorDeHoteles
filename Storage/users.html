@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/stylesheet.css">
+    <script src="https://kit.fontawesome.com/32c2859f80.js" crossorigin="anonymous"></script>
+    <title>Usuarios</title>
+</head>
+<body>
+    <section id="sidebar">
+		<a href="#" class="brand"><img src="./img/manager.png" class="img"><h1 class="next">Richardson</h1></a>
+		<ul class="side-menu">
+			<li><a href="#" class="active"><i class="fa-solid fa-house icon"></i>Administrador</a></li>
+			<li class="divider" data-text="Principal">Principal</li>
+			<li><a href="#"><i class="fa-solid fa-bed icon side"></i>Usuarios</a></li>
+            <li><a href="./services.html"><i class="fa-solid fa-bell-concierge icon side"></i>Servicios Adicionales</a></li>
+            <li><a href="./events.html"><i class="fa-solid fa-calendar-days icon side"></i>Eventos</a></li>
+            <li><a href="./hotels.html"><i class="fa-solid fa-hotel icon side"></i>Hoteles</a></li>
+            <li><a href="/bedrooms.html"><i class="fa-solid fa-door-closed icon side"></i>Habitaciones</a></li>
+            <li><a href="./activities.html"><i class="fa-solid fa-dice-five icon side"></i>Actividades</a></li>
+            <li><a href="./reservations.html"><i class="fa-solid fa-suitcase-rolling icon side"></i>Reservaciones</a></li>
+            <li><a href="./bills.html"><i class="fa-solid fa-book-atlas icon side"></i>Facturas</a></li>
+	</section>
+
+	<section id="content">
+		<header>
+			<nav>
+				<i class="fa-solid fa-bars toggle-sidebar side"></i>
+				<form action="#">
+					<div class="form-group">
+						<input type="text" placeholder="Buscar...">
+						<i class="fa-solid fa-magnifying-glass icon"></i>
+					</div>
+				</form>
+                
+				<div class="profile">
+					<img src="./img/admin.png">
+					<ul class="profile-link">
+						<li><a href="#"><i class="fa-solid fa-user icon side"></i>Perfil</a></li>
+						<li><a href="#"><i class="fa-solid fa-envelope icon side"></i>Notificaciones</a></li>
+						<li><a href="#"><i class="fa-solid fa-gear icon side"></i>Configuración</a></li>
+						<li><a href="./login.html"><i class="fa-solid fa-right-from-bracket icon side"></i>Cerrar Sesión</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+	
+		<main>
+			<h1 class="title">Usuarios</h1>
+				<ul class="breadcrumbs">
+					<li><a href="#">Administrador</a></li>
+					<li class="divider">/</li>
+					<li><a href="#" class="active">Gestor de Hoteles</a></li>
+				</ul>
+			<br> 
+			<div class="info-data">
+				<div class="menu">
+					<div class="sub-menu">
+					</div>
+					<br>
+					<a href="#"><i class="fa-solid fa-plus add"></i></a>
+					<br>
+					<br>
+					<table>
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Apellido</th>
+								<th>Usuario</th>
+								<th>Contraseña</th>
+                                <th>Gmail</th>
+								<th>Teléfono</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+							<tbody>
+								<tr>
+									<td>Elisa</td>
+									<td>Ferrando</td>
+									<td>eferrando</td>
+									<td>oAy683DU</td>
+                                    <td>elisaferr@gmail.com</td>
+									<td>85629656</td>
+									<td>
+										<a href="#" class=""><i class="fa-solid fa-pen button"></i></a>
+										<a href="#" class=""><i class="fa-solid fa-trash-can button"></i></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+				   </div> 
+				</div> 
+			</div>
+		</main>
+	</section>	
+	
+    <script src="./js/main.js"></script>
+</body>
+</html>
