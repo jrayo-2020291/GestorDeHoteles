@@ -1,9 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
-import { ActivityTable } from './components/Activity/ActivityTable.jsx'
-import { AddActivity } from './components/Activity/AddActivity.jsx'
-import { UpdateActivity } from './components/Activity/UpdateActivity.jsx'
 import { AServiceTable } from './components/AServices/AServiceTable.jsx'
 import { AddAService } from './components/AServices/AddAService.jsx'
 import { UpdateAService } from './components/AServices/UpdateAService.jsx'
@@ -33,13 +30,22 @@ import { DashBoardPage } from './pages/DashBoardPage.jsx'
 export const AuthContext = createContext();
 
 export const Index = () => {
-<<<<<<< HEAD
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [dataUser, setDataUser] = useState({
+      name: '',
+      username: '',
+      role: ''
+    })
+
+
     useEffect(()=>{
+        let token = localStorage.getItem('token')
+        if(token) setLoggedIn(true)
         const LoadExternalScript = ()=>{
             const externalScript = document.createElement("script");
             externalScript.id = "external";
             externalScript.async = true;
-            externalScript.type ="text/javascript"
+            externalScript.type ="text/javascript";
             externalScript.setAttribute("crossorigin","anonymous")
             document.body.appendChild(externalScript);
             externalScript.src= '/src/main.js';
@@ -51,20 +57,6 @@ export const Index = () => {
         }
     }, []);
 
-    
-=======
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [dataUser, setDataUser] = useState({
-      name: '',
-      username: '',
-      role: ''
-    })
-
-    useEffect(()=>{
-        let token = localStorage.getItem('token')
-        if(token) setLoggedIn(true)
-    }, [])
->>>>>>> master
     const routes = createBrowserRouter([
         {
             path: '/',
@@ -83,18 +75,6 @@ export const Index = () => {
                     path: '/dashboard',
                     element: <DashBoardPage></DashBoardPage>,
                     children: [
-                        {
-                            path: 'activity',
-                            element: <ActivityTable></ActivityTable>
-                        },
-                        {
-                            path: 'addActivity',
-                            element: <AddActivity></AddActivity>
-                        },
-                        {
-                            path: 'updateActivity/:id',
-                            element: <UpdateActivity></UpdateActivity>
-                        },
                         {
                             path: 'aService',
                             element: <AServiceTable></AServiceTable>
