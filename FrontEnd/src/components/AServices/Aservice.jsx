@@ -1,4 +1,4 @@
-export const A_Service = ({name, description, cost})=>{ 
+export const Aservice = ({name, description, cost})=>{ 
     return (
         <>
             <td>{name}</td>
