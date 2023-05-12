@@ -10,6 +10,7 @@ api.post('/add',[ensureAuth,isAdmin],roomsController.add);
 api.delete('/delete/:id',  [ensureAuth, isAdmin] ,  roomsController.delete);
 api.get('/get',[ensureAuth,isAdmin],roomsController.get);
 api.put('/update/:id',[ensureAuth,isAdmin],roomsController.update)
+api.get('/getA',[ensureAuth,isAdmin],roomsController.getAvailability);
 
 
 module.exports = api;
