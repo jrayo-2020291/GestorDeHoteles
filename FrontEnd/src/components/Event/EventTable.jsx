@@ -1,7 +1,38 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import {Event} from './Event'
 
 export const EventTable = () => {
+    const [event,setEvent] = useState({})
+    const [loading, setLoading] = useState(true)
+    const token = localStorage.getItem('token')
+    const navigate = useNavigate()
+
+    const LogOut = ()=>{
+		localStorage.clear()
+		navigate('/')
+	}
+
+    const getEvents = async () => {
+        try {
+          const { data } = await axios('http://localhost:3100/events/getEvents', {
+            headers: {
+              'Authorization': token
+            }
+          })
+          setEvent(data.event)
+          setLoading(false)
+          console.log(data)
+        } catch (err) {
+          console.error(err)
+        }
+      }
+
+      useEffect(() => getEvents, [])
+
+     
+
     return (
 
         <>
@@ -34,17 +65,25 @@ export const EventTable = () => {
                                     </tr>
                                 </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Mirador</td>
-                                            <td>Vistas espectaculares de todo el valle</td>
-                                            <td>350</td>
-                                            <td>
-                                                <Link to='../updateEvent/:id'>
-                                                    <i className="fa-solid fa-pen button"></i>
-                                                </Link>
-                                                    <i className="fa-solid fa-trash-can button"></i>   
-                                            </td>
-                                        </tr>
+                                        {/*
+                                            event.map(({_id, name, description,costPerHour},index)=>{
+                                                return(
+                                                    <tr key={index}>
+                                                        <Event
+                                                            name={name}
+                                                            description={description}
+                                                            costPerHour={costPerHour}
+                                                        ></Event>
+                                                        <td>
+                                                            <Link to={`../updateEvent/${_id}`}>
+                                                                <i className="fa-solid fa-pen button"></i>
+                                                            </Link>
+                                                            <i className="fa-solid fa-trash-can button"></i>   
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            })*/
+                                        }
                                     </tbody>
                             </table>
                         </div>

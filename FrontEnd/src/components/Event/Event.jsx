@@ -1,5 +1,10 @@
-export const Event = () => {
+export const Event = ({name,description,costPerHour}) => {
     return (
-        <div>Event</div>
+        <>
+            <td>{name}</td>
+            <td>{description}</td>
+            <td>{costPerHour}</td>
+        </>
+        
     )
 }
