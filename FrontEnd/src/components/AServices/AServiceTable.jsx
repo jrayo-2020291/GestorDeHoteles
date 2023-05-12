@@ -40,7 +40,7 @@ export const AServiceTable = () => {
 							</tr>
 						</thead>
 							<tbody>
-              {
+              {/* { 
                   services.map(({ _id, name, description, price}, index) => {
                     return (
                       <tr key={index}>
@@ -57,7 +57,7 @@ export const AServiceTable = () => {
                       </tr>
                     )
                   })
-                }
+                } */}
 							</tbody>
 						</table>
 				  
