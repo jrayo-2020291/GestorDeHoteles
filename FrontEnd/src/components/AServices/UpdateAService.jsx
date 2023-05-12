@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 export const UpdateAService = () => {
   const [service, setService] = useState({})
   const { id } = useParams();
-  const token = localStorage.getItem(`token`)
+  const token = localStorage.getItem('token')
   const navigate = useNavigate()
 
   
@@ -25,7 +25,6 @@ export const UpdateAService = () => {
         console.error(err)
     }
 }
-
 
 const updateService = async(e)=>{
     try{
