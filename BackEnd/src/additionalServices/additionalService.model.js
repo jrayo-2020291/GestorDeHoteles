@@ -14,6 +14,11 @@ const servicesSchema = mongoose.Schema(
         cost:{
             type: Number,
             required: true
+        },
+        category:{
+            type: String,
+            required:true,
+            uppercase: true
         }
     },
     {
