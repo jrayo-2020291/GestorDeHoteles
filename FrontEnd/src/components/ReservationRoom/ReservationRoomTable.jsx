@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import imgLoading from '../../assets/Loading.gif'
 import { ReservationRoom } from './ReservationRoom'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -32,11 +31,7 @@ export const ReservationRoomTable = () => {
 
 
     useEffect(() => getReservation, [])
-    if (loading) {
-        return (
-            <img src={imgLoading} alt='Loading...' />
-        )
-    }
+
 
     return (
         <div></div>
