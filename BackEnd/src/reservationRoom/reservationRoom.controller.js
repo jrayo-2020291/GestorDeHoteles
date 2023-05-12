@@ -45,7 +45,7 @@ exports.addRoom = async(req, res)=> {
         if(roomExist.availability == 'NOTAVAILABLE') return res.send({message: 'This room already reservarted'});
         if((reservationExist.hotel).toString() !== (roomExist.hotel).toString()) return res.send({message: 'This room is in another hotel'});
         let days = ((reservationExist.dateEnd).getTime() - (reservationExist.dateStart).getTime())/86400000;
-        let roomOcuped =await Reservation.find({
+        let roomOcuped =await Reservation.findOne({
             $and:[
                 {dateStart: {$gte: reservationExist.dateStart}},
                 {dateEnd: {$lte: reservationExist.dateEnd}},
@@ -63,7 +63,6 @@ exports.addRoom = async(req, res)=> {
         let newCost = (reservationExist.cost + roomExist.price)* days;
         if(roomAlready) return res.send({message: 'You have already reserved this room'});
         let updatedReservation = await Reservation.findOneAndUpdate({_id: reservationId}, {$push:{'rooms': params}, cost: newCost}, {new: true});
-        //let updatedRoom = await Room.findByIdAndUpdate({_id: roomExist._id}, {availability: 'NOTAVAILABLE'}, {new: true});
         return res.send({message: 'New room agregated', updatedReservation});
     }catch(err){
         console.error(err);
@@ -223,11 +222,8 @@ exports.updateReservation = async(req, res) =>{
                     {'rooms.room': roomE._id}
                 ]
             })
-            console.log( roomOcuped._id)
-            console.log(reservationExist._id)
             if(roomOcuped._id) return res.send({message: 'This room is already reserved for this date'});
             let newCost = reservationExist.cost - (roomE.price * days) + (roomE.price*newDays)
-            console.log((roomE.price* days), (roomE.price*newDays))
             let updatedReservation1 = await Reservation.findOneAndUpdate({_id: reservationExist._id}, {cost: newCost}, {new:true});
         }
         let params = {
@@ -246,17 +242,59 @@ exports.setState = async(req, res)=>{
     try{
         let reservation = await Reservation.find()
         let date = new Date()
-        console.log(date);
         for(let i = 0; i < reservation.length; i++){
             let time = reservation[i].dateStart - date;
             let time1 = reservation[i].dateEnd - date
             if(time < 0 && time1 > 0){
-                return console.log('reservacion incativa');
-                //let updatedReservation = await Reservation.findOneAndUpdate({_id:})
-            }return console.log('reservacion inactiva')
+                let updatedReservation = await Reservation.findOneAndUpdate({_id: reservation[i]._id}, {state: 'ACTIVE'}, {new: true});
+            }let updatedReservation  = await Reservation.findOneAndUpdate({id: reservation[i]._id}, {state: 'DISABLED'}, {new:true});
         }
     }catch(err){
         console.error(err);
         return res.status(500).send({message: 'Error changing state'});
+    }
+}
+
+exports.changeRooms = async(req, res) =>{
+    try{
+        let reservation = await Reservation.find();
+        if(!reservation) return console.log('Reservations not found');
+        for(let i=0; i<reservation.length; i++){
+            if((reservation[i].state).toString() == 'ACTIVE'){
+                for(let a= 0; a<reservation[i].rooms.length; a++){
+                    let reservation1 = await Reservation.findOne({_id: reservation[i]._id})
+                    let idRoom = reservation1.rooms[a].room;
+                    let roomDisabled = await Room.findOneAndUpdate({_id: idRoom}, {state: 'NOTAVAILABLE'}, {new:true})
+                }
+            }
+            if((reservation[i].state).toString() == 'DISABLED'){
+                for(let a= 0; a<reservation[i].rooms.length; a++){
+                    let reservation1 = await Reservation.findOne({_id: reservation[i]._id})
+                    let idRoom = reservation1.rooms[a].room;
+                    let roomAvailable = await Room.findOneAndUpdate({_id: idRoom}, {availability: 'AVAILABLE'}, {new:true});
+                }
+            }
+        }
+    }catch(err){
+        console.error(err);
+        return res.status(500).send({message: 'Error changing the availability of a room'})
+    }
+}
+
+exports.deleteReservation = async(req, res) => {
+    try{
+        let reservationId = req.params.id;
+        let reservation = await Reservation.findOne({_id: reservationId});
+        if(!reservation) return res.status.send({message: 'Reservation not found'});
+        for(let i = 0; i<reservation.rooms.length; i++){
+            let roomId = reservation.rooms[i].room;
+            let roomAvailable = await Room.findOneAndUpdate({_id: roomId}, {availability: 'AVAILABLE'}, {new: true});
+            if(!roomAvailable) return res.status(404).send({message: 'Room not found'});
+        }
+        let deletedReservation = await Reservation.findOneAndDelete({_id: reservationId});
+        return res.send({message: 'Reservation deleted', deletedReservation});
+    }catch(err){
+        console.error(err);
+        return res.status(500).send({message: 'Error deleting reservation'});
     }
 }

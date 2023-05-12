@@ -1,98 +1,105 @@
 {
     "client": "Thunder Client",
     "collectionName": "Hotel Manager",
-    "dateExported": "2023-05-09T22:49:22.640Z",
+    "dateExported": "2023-05-12T15:03:00.087Z",
     "version": "1.1",
     "folders": [
         {
-            "_id": "049d5fd2-9ba8-4f97-9b21-7bf524d3f964",
+            "_id": "ac6006e8-729e-428a-adfc-71beaab9e92d",
             "name": "Users",
             "containerId": "",
-            "created": "2023-05-09T21:34:43.385Z",
+            "created": "2023-05-12T13:40:04.250Z",
             "sortNum": 10000
         },
         {
-            "_id": "a75f8bc0-13c6-4399-bc8c-a4e84150379e",
+            "_id": "c0cb5e92-8105-4914-bcee-f519f53d81de",
             "name": "Additional Services",
             "containerId": "",
-            "created": "2023-05-09T21:34:43.387Z",
+            "created": "2023-05-12T13:40:04.251Z",
             "sortNum": 20000
         },
         {
-            "_id": "ed660621-4513-4205-b952-2272c6975dde",
+            "_id": "23e503ff-6cf9-4cfc-ae2e-0b400a80d145",
             "name": "Events",
             "containerId": "",
-            "created": "2023-05-09T21:34:43.388Z",
+            "created": "2023-05-12T13:40:04.252Z",
             "sortNum": 30000
         },
         {
-            "_id": "24b2410f-1abe-4f15-b6af-8a06706db418",
+            "_id": "d7410fc8-29a3-4e47-966c-7b020d811579",
             "name": "Hotels",
             "containerId": "",
-            "created": "2023-05-09T21:34:43.389Z",
+            "created": "2023-05-12T13:40:04.253Z",
             "sortNum": 50000
         },
         {
-            "_id": "9a451783-ca12-47aa-8b5a-4a06c3a2fe76",
+            "_id": "bcc1b10f-3489-4135-be6e-8eb9921c64e4",
             "name": "Rooms",
             "containerId": "",
-            "created": "2023-05-09T21:34:43.390Z",
+            "created": "2023-05-12T13:40:04.254Z",
             "sortNum": 60000
         },
         {
-            "_id": "cd01f71d-1128-47f6-860a-af751cddd535",
+            "_id": "8524a44f-3f72-463b-a110-a352f4f6e42d",
             "name": "Activities",
             "containerId": "",
-            "created": "2023-05-09T21:35:02.842Z",
+            "created": "2023-05-12T13:40:04.255Z",
             "sortNum": 70000
         },
         {
-            "_id": "3bb3494b-74ff-437f-a67c-4e6f0daed955",
+            "_id": "816eb7f4-9e84-48ff-9d7a-6123e437eb55",
             "name": "Admin",
-            "containerId": "049d5fd2-9ba8-4f97-9b21-7bf524d3f964",
-            "created": "2023-05-09T22:41:45.621Z",
+            "containerId": "ac6006e8-729e-428a-adfc-71beaab9e92d",
+            "created": "2023-05-12T13:40:04.256Z",
+            "sortNum": 80000
+        },
+        {
+            "_id": "d949c8fa-5375-42ba-bd35-92271d92ef3d",
+            "name": "Reservation (Rooms)",
+            "containerId": "",
+            "created": "2023-05-12T13:40:04.257Z",
             "sortNum": 80000
         }
     ],
     "requests": [
         {
-            "_id": "3196dc70-b20d-4407-a590-e0e93027d646",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "a75f8bc0-13c6-4399-bc8c-a4e84150379e",
+            "_id": "143b1bce-1c55-4a6c-9cd6-53bb55d6dbb3",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "c0cb5e92-8105-4914-bcee-f519f53d81de",
             "name": "Test",
             "url": "/services/test",
             "method": "GET",
             "sortNum": 10000,
-            "created": "2023-05-09T21:34:43.386Z",
-            "modified": "2023-05-09T21:34:43.386Z",
+            "created": "2023-05-12T13:40:04.251Z",
+            "modified": "2023-05-12T13:40:04.251Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "1907f5fa-7150-4363-90c1-646095cc52d5",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "049d5fd2-9ba8-4f97-9b21-7bf524d3f964",
+            "_id": "d4d7552d-cd1c-4f5d-b65f-d944ea1e802a",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "ac6006e8-729e-428a-adfc-71beaab9e92d",
             "name": "Test",
             "url": "/user/",
             "method": "GET",
             "sortNum": 10000,
-            "created": "2023-05-09T21:34:43.387Z",
-            "modified": "2023-05-09T21:34:43.387Z",
+            "created": "2023-05-12T13:40:04.252Z",
+            "modified": "2023-05-12T13:40:04.252Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "174a0603-bb24-4b4b-96fe-0629efec5ff3",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "3bb3494b-74ff-437f-a67c-4e6f0daed955",
+            "_id": "af04c079-b62e-41eb-a029-da23b612ac68",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "816eb7f4-9e84-48ff-9d7a-6123e437eb55",
             "name": "Update Account",
             "url": "/user/updateAccount/645ac37b4c7c732e84a01a0e",
             "method": "PUT",
             "sortNum": 10000,
-            "created": "2023-05-09T22:41:27.804Z",
-            "modified": "2023-05-09T22:47:20.318Z",
+            "created": "2023-05-12T13:40:04.253Z",
+            "modified": "2023-05-12T13:40:04.253Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -129,15 +136,15 @@
             "tests": []
         },
         {
-            "_id": "f804d631-a519-4204-858f-ff3d9a61fe60",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "3bb3494b-74ff-437f-a67c-4e6f0daed955",
+            "_id": "150d89c3-b348-4c64-827e-af4aa8218f35",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "816eb7f4-9e84-48ff-9d7a-6123e437eb55",
             "name": "Add Admin, Manager or User",
             "url": "/user/addAccount",
             "method": "POST",
             "sortNum": 20000,
-            "created": "2023-05-09T22:26:37.588Z",
-            "modified": "2023-05-09T22:41:54.293Z",
+            "created": "2023-05-12T13:40:04.254Z",
+            "modified": "2023-05-12T13:40:04.254Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -182,15 +189,15 @@
             "tests": []
         },
         {
-            "_id": "4f0e2ffb-6413-42bb-a903-ca106cbcd872",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "049d5fd2-9ba8-4f97-9b21-7bf524d3f964",
+            "_id": "ec1115c6-e3a4-417c-8117-bcdaa1f233be",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "ac6006e8-729e-428a-adfc-71beaab9e92d",
             "name": "Update Own User",
             "url": "/user/updateOwnUser",
             "method": "PUT",
             "sortNum": 25000,
-            "created": "2023-05-09T21:34:43.388Z",
-            "modified": "2023-05-09T21:34:43.388Z",
+            "created": "2023-05-12T13:40:04.255Z",
+            "modified": "2023-05-12T13:40:04.255Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -231,34 +238,34 @@
             "tests": []
         },
         {
-            "_id": "b8d22de9-a7f7-4771-97f3-51a4767ecbcb",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "3bb3494b-74ff-437f-a67c-4e6f0daed955",
+            "_id": "7419683e-6f65-4eba-aa67-9ef00dad82b4",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "816eb7f4-9e84-48ff-9d7a-6123e437eb55",
             "name": "Get Users",
             "url": "/user/get",
             "method": "GET",
             "sortNum": 30000,
-            "created": "2023-05-09T21:34:43.405Z",
-            "modified": "2023-05-09T22:42:01.852Z",
+            "created": "2023-05-12T13:40:04.256Z",
+            "modified": "2023-05-12T13:57:03.170Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDU1YWNlNTFkOWViZDMzMjRjZmY0MTIiLCJuYW1lIjoiSm9zdWUiLCJzdXJuYW1lIjoiTm9qIiwidXNlcm5hbWUiOiJqbm9qIiwiZW1haWwiOiJqbm9qQGtpbmFsLmVkdS5ndCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY4MzM0MjAzNSwiZXhwIjoxNjgzMzQ5MjM1fQ.LsxC9bWalMaCZxlnU05gh0AhlwhBkMceXI0Bw8s9YFY"
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDVlNDFkZjQ1ZTFmMjljZWJmYjBkZWUiLCJuYW1lIjoiQURNSU4iLCJzdXJuYW1lIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBraW5hbC5lZHUuZ3QiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2ODM4OTk2NjksImV4cCI6MTY4MzkwNjg2OX0.6EbbXAZEpUrtiLq6kxPDggHdndhqtf0azpcxEqIbBBg\""
                 }
             ],
             "params": [],
             "tests": []
         },
         {
-            "_id": "b673ee4a-7c16-4a9b-8fdd-8de5c48ff354",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "049d5fd2-9ba8-4f97-9b21-7bf524d3f964",
+            "_id": "231910ce-5e10-436c-9cb8-170f19e1f8dd",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "ac6006e8-729e-428a-adfc-71beaab9e92d",
             "name": "Register User",
             "url": "/user/registerUser",
             "method": "POST",
             "sortNum": 40000,
-            "created": "2023-05-09T21:34:43.389Z",
-            "modified": "2023-05-09T21:34:43.389Z",
+            "created": "2023-05-12T13:40:04.257Z",
+            "modified": "2023-05-12T13:40:04.257Z",
             "headers": [],
             "params": [],
             "body": {
@@ -294,15 +301,15 @@
             "tests": []
         },
         {
-            "_id": "99d3a9fa-2e8a-4c4b-beea-28f26227d4ec",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "3bb3494b-74ff-437f-a67c-4e6f0daed955",
+            "_id": "c93802a6-a3ea-4ad6-b3a0-eb0c509c8d71",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "816eb7f4-9e84-48ff-9d7a-6123e437eb55",
             "name": "Get User By Id",
             "url": "/user/getById/644d6d820b34365199cf321e",
             "method": "GET",
             "sortNum": 40000,
-            "created": "2023-05-09T21:34:43.406Z",
-            "modified": "2023-05-09T22:42:03.427Z",
+            "created": "2023-05-12T13:40:04.258Z",
+            "modified": "2023-05-12T13:40:04.258Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -313,15 +320,15 @@
             "tests": []
         },
         {
-            "_id": "fac19a32-b9c7-4bdc-8a73-df413a710579",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "049d5fd2-9ba8-4f97-9b21-7bf524d3f964",
+            "_id": "0aa55cb1-845f-4032-982e-a07d12f25b1f",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "ac6006e8-729e-428a-adfc-71beaab9e92d",
             "name": "login",
             "url": "/user/login",
             "method": "POST",
             "sortNum": 50000,
-            "created": "2023-05-09T21:34:43.390Z",
-            "modified": "2023-05-09T22:04:12.865Z",
+            "created": "2023-05-12T13:40:04.259Z",
+            "modified": "2023-05-12T14:07:39.830Z",
             "headers": [],
             "params": [],
             "body": {
@@ -341,15 +348,15 @@
             "tests": []
         },
         {
-            "_id": "d361c1fe-f90e-4073-aa21-752a19075e90",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "3bb3494b-74ff-437f-a67c-4e6f0daed955",
+            "_id": "398605ba-b150-47bc-9b25-8f32cffcc95a",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "816eb7f4-9e84-48ff-9d7a-6123e437eb55",
             "name": "Get By Name",
             "url": "/user/getbyName",
             "method": "POST",
             "sortNum": 50000,
-            "created": "2023-05-09T21:59:54.560Z",
-            "modified": "2023-05-09T22:42:05.142Z",
+            "created": "2023-05-12T13:40:04.260Z",
+            "modified": "2023-05-12T13:40:04.260Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -370,19 +377,19 @@
             "tests": []
         },
         {
-            "_id": "8dbf046a-b0d6-4f13-a776-8159522c1a87",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "a75f8bc0-13c6-4399-bc8c-a4e84150379e",
+            "_id": "5eeea26d-055c-42c0-9663-1d453653fe3c",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "c0cb5e92-8105-4914-bcee-f519f53d81de",
             "name": "Add Service",
             "url": "/services/addService",
             "method": "POST",
             "sortNum": 60000,
-            "created": "2023-05-09T21:34:43.391Z",
-            "modified": "2023-05-09T21:34:43.391Z",
+            "created": "2023-05-12T13:40:04.261Z",
+            "modified": "2023-05-12T13:40:04.261Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDRkN2E0OTk2MjFiZTE0ZmE1MmI1NjMiLCJuYW1lIjoiSm9zdWUiLCJzdXJuYW1lIjoiTm9qIiwidXNlcm5hbWUiOiJqbm9qIiwiZW1haWwiOiJqbm9qQGtpbmFsLmVkdS5ndCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY4MjgwNDg3NywiZXhwIjoxNjgyODEyMDc3fQ.LWZBBZAUbRMkrAE5QCgaSI4ttifhZJj_g18wjrL9C6o\""
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDRkN2E0OTk2MjFiZTE0ZmE1MmI1NjMiLCJuYW1lIjoiSm9zdWUiLCJzdXJuYW1lIjoiTm9qIiwidXNlcm5hbWUiOiJqbm9qIiwiZW1haWwiOiJqbm9qQGtpbmFsLmVkdS5ndCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY4MzY3NTA0OCwiZXhwIjoxNjgzNjgyMjQ4fQ.vuykoZsKMb7_WsnL9cH0lsAdNfQH3ou2t--sVbbAhZk\""
                 }
             ],
             "params": [],
@@ -401,49 +408,58 @@
                     {
                         "name": "cost",
                         "value": "150"
+                    },
+                    {
+                        "name": "category",
+                        "value": "room"
                     }
                 ]
             },
             "tests": []
         },
         {
-            "_id": "dce339af-8144-43bb-a697-0f7b888a9102",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "a75f8bc0-13c6-4399-bc8c-a4e84150379e",
+            "_id": "4793841f-7fb0-4adf-b2f5-1e49f7237d6f",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "c0cb5e92-8105-4914-bcee-f519f53d81de",
             "name": "Get Services",
             "url": "/services/getServices",
             "method": "GET",
             "sortNum": 70000,
-            "created": "2023-05-09T21:34:43.392Z",
-            "modified": "2023-05-09T21:34:43.392Z",
-            "headers": [],
+            "created": "2023-05-12T13:40:04.262Z",
+            "modified": "2023-05-12T13:40:04.262Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDVhZDc3MWQ0NTI5Y2I0Zjk1ZmJkZGMiLCJuYW1lIjoiam9zdWUiLCJzdXJuYW1lIjoiaGVybmFuZGV6IiwidXNlcm5hbWUiOiJqaGVybmFuZGV6MiIsImVtYWlsIjoiamhlcm5hbmRlei0yMDIxMTExQGtpbmFsLmVkdS5ndDEiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNjgzNjc0OTk2LCJleHAiOjE2ODM2ODIxOTZ9.fxKvAWVnVK-KOw_6HcmYqB4FQ3REpVsTONov4tASkIU\""
+                }
+            ],
             "params": [],
             "tests": []
         },
         {
-            "_id": "c55ba072-fcc1-49dc-a16a-6708a931d5e1",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "a75f8bc0-13c6-4399-bc8c-a4e84150379e",
+            "_id": "13befbaa-8838-4d45-81b4-1a23408ad463",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "c0cb5e92-8105-4914-bcee-f519f53d81de",
             "name": "Get By Id",
             "url": "/services/get/644d810e86bcb1b311dbdb94",
             "method": "GET",
             "sortNum": 80000,
-            "created": "2023-05-09T21:34:43.393Z",
-            "modified": "2023-05-09T21:34:43.393Z",
+            "created": "2023-05-12T13:40:04.263Z",
+            "modified": "2023-05-12T13:40:04.263Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "2cb33cee-e065-43ec-83c3-03b4c1e71d1f",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "a75f8bc0-13c6-4399-bc8c-a4e84150379e",
+            "_id": "1be3cc41-4293-4bd6-82b1-071b47f3f9ee",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "c0cb5e92-8105-4914-bcee-f519f53d81de",
             "name": "Get By Name",
             "url": "/services/search",
             "method": "POST",
             "sortNum": 90000,
-            "created": "2023-05-09T21:34:43.394Z",
-            "modified": "2023-05-09T21:34:43.394Z",
+            "created": "2023-05-12T13:40:04.264Z",
+            "modified": "2023-05-12T13:40:04.264Z",
             "headers": [],
             "params": [],
             "body": {
@@ -459,16 +475,21 @@
             "tests": []
         },
         {
-            "_id": "6375f9c6-d94f-47ac-a05a-f433dcc0a3bc",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "a75f8bc0-13c6-4399-bc8c-a4e84150379e",
+            "_id": "56711ddf-7d31-42ad-86c5-bb38d3c7190b",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "c0cb5e92-8105-4914-bcee-f519f53d81de",
             "name": "Update Service",
-            "url": "/services/update/644d812786bcb1b311dbdb98",
+            "url": "/services/update/644d810e86bcb1b311dbdb94",
             "method": "PUT",
             "sortNum": 100000,
-            "created": "2023-05-09T21:34:43.395Z",
-            "modified": "2023-05-09T21:34:43.395Z",
-            "headers": [],
+            "created": "2023-05-12T13:40:04.265Z",
+            "modified": "2023-05-12T13:40:04.265Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDRkN2E0OTk2MjFiZTE0ZmE1MmI1NjMiLCJuYW1lIjoiSm9zdWUiLCJzdXJuYW1lIjoiTm9qIiwidXNlcm5hbWUiOiJqbm9qIiwiZW1haWwiOiJqbm9qQGtpbmFsLmVkdS5ndCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY4MzY3NTA0OCwiZXhwIjoxNjgzNjgyMjQ4fQ.vuykoZsKMb7_WsnL9cH0lsAdNfQH3ou2t--sVbbAhZk\""
+                }
+            ],
             "params": [],
             "body": {
                 "type": "formencoded",
@@ -485,49 +506,53 @@
                     {
                         "name": "cost",
                         "value": "50"
+                    },
+                    {
+                        "name": "category",
+                        "value": "room"
                     }
                 ]
             },
             "tests": []
         },
         {
-            "_id": "531d9a75-3dc7-463c-ac63-9ef23ec38843",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "a75f8bc0-13c6-4399-bc8c-a4e84150379e",
+            "_id": "e4340f57-149d-440b-b943-83b212d375b6",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "c0cb5e92-8105-4914-bcee-f519f53d81de",
             "name": "Delete Service",
             "url": "/services/delete/644d904a2cbf019e12ed3669",
             "method": "DELETE",
             "sortNum": 110000,
-            "created": "2023-05-09T21:34:43.396Z",
-            "modified": "2023-05-09T21:34:43.396Z",
+            "created": "2023-05-12T13:40:04.266Z",
+            "modified": "2023-05-12T13:40:04.266Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "6fe2d157-9b2e-4d93-bf9c-e6b1295a33b6",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "ed660621-4513-4205-b952-2272c6975dde",
+            "_id": "a7f210c7-b13a-4aaa-8e7d-b09903ace45d",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "23e503ff-6cf9-4cfc-ae2e-0b400a80d145",
             "name": "Test",
             "url": "/events/test",
             "method": "GET",
             "sortNum": 120000,
-            "created": "2023-05-09T21:34:43.397Z",
-            "modified": "2023-05-09T21:34:43.397Z",
+            "created": "2023-05-12T13:40:04.267Z",
+            "modified": "2023-05-12T13:40:04.267Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "44eb900e-1b12-4fc1-9a52-7d56e3d8dc3d",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "ed660621-4513-4205-b952-2272c6975dde",
+            "_id": "fed14327-8f25-4606-806e-2a85e9a5de8e",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "23e503ff-6cf9-4cfc-ae2e-0b400a80d145",
             "name": "Add Event",
             "url": "/events/addEvent",
             "method": "POST",
             "sortNum": 130000,
-            "created": "2023-05-09T21:34:43.398Z",
-            "modified": "2023-05-09T21:34:43.398Z",
+            "created": "2023-05-12T13:40:04.268Z",
+            "modified": "2023-05-12T13:40:04.268Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -556,43 +581,43 @@
             "tests": []
         },
         {
-            "_id": "65be5e26-1e54-468e-8b42-943f1d02ec64",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "ed660621-4513-4205-b952-2272c6975dde",
+            "_id": "3e389dd5-41fa-456f-81c3-46133ad4bd87",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "23e503ff-6cf9-4cfc-ae2e-0b400a80d145",
             "name": "Get Events",
             "url": "/events/getEvents",
             "method": "GET",
             "sortNum": 140000,
-            "created": "2023-05-09T21:34:43.399Z",
-            "modified": "2023-05-09T21:34:43.399Z",
+            "created": "2023-05-12T13:40:04.269Z",
+            "modified": "2023-05-12T13:40:04.269Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "2bf46b50-2900-492a-8aff-552f31cad0cf",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "ed660621-4513-4205-b952-2272c6975dde",
+            "_id": "5a56efb8-aa2e-4d1e-8be0-72e5f7f74630",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "23e503ff-6cf9-4cfc-ae2e-0b400a80d145",
             "name": "Get By ID",
             "url": "/events/get/644d97dbf23160b3a8ac9013",
             "method": "GET",
             "sortNum": 150000,
-            "created": "2023-05-09T21:34:43.400Z",
-            "modified": "2023-05-09T21:34:43.400Z",
+            "created": "2023-05-12T13:40:04.270Z",
+            "modified": "2023-05-12T13:40:04.270Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "badeb533-fe35-4715-9437-8f2b0b1e81b9",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "ed660621-4513-4205-b952-2272c6975dde",
+            "_id": "f8ea67a8-3f73-4c20-8220-a08c8bea6d0b",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "23e503ff-6cf9-4cfc-ae2e-0b400a80d145",
             "name": "Get By Name",
             "url": "/events/search",
             "method": "POST",
             "sortNum": 170000,
-            "created": "2023-05-09T21:34:43.401Z",
-            "modified": "2023-05-09T21:34:43.401Z",
+            "created": "2023-05-12T13:40:04.271Z",
+            "modified": "2023-05-12T13:40:04.271Z",
             "headers": [],
             "params": [],
             "body": {
@@ -608,15 +633,15 @@
             "tests": []
         },
         {
-            "_id": "8fee8766-370e-4bc4-ad72-2036803875bd",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "ed660621-4513-4205-b952-2272c6975dde",
+            "_id": "b749fe51-b262-46f4-82ad-8bb3c953e96f",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "23e503ff-6cf9-4cfc-ae2e-0b400a80d145",
             "name": "Update Event",
             "url": "/events/update/644d98f44831d9ffe8b846bb",
             "method": "PUT",
             "sortNum": 180000,
-            "created": "2023-05-09T21:34:43.402Z",
-            "modified": "2023-05-09T21:34:43.402Z",
+            "created": "2023-05-12T13:40:04.272Z",
+            "modified": "2023-05-12T13:40:04.272Z",
             "headers": [],
             "params": [],
             "body": {
@@ -640,29 +665,29 @@
             "tests": []
         },
         {
-            "_id": "afd08c54-8ad5-4d06-ba1a-92dcd8d9d2f8",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "ed660621-4513-4205-b952-2272c6975dde",
+            "_id": "345a979e-3738-480d-a344-935845c8cb80",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "23e503ff-6cf9-4cfc-ae2e-0b400a80d145",
             "name": "Delete Event",
             "url": "/events/delete/644d9e4674063378a9b08a83",
             "method": "DELETE",
             "sortNum": 190000,
-            "created": "2023-05-09T21:34:43.403Z",
-            "modified": "2023-05-09T21:34:43.403Z",
+            "created": "2023-05-12T13:40:04.273Z",
+            "modified": "2023-05-12T13:40:04.273Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "32f7fe5d-0d02-4b75-8035-34408bf1f829",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "049d5fd2-9ba8-4f97-9b21-7bf524d3f964",
+            "_id": "dbe68c23-76d6-40a4-b43a-42bbb98a402e",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "ac6006e8-729e-428a-adfc-71beaab9e92d",
             "name": "Delete Own User",
             "url": "/user/deleteOwnUser",
             "method": "DELETE",
             "sortNum": 210000,
-            "created": "2023-05-09T21:34:43.404Z",
-            "modified": "2023-05-09T21:34:43.404Z",
+            "created": "2023-05-12T13:40:04.275Z",
+            "modified": "2023-05-12T13:40:04.275Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -673,33 +698,33 @@
             "tests": []
         },
         {
-            "_id": "56481a41-400d-4d47-9ad8-7939042b1cc8",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "24b2410f-1abe-4f15-b6af-8a06706db418",
+            "_id": "9804b186-6c7a-4e92-a030-9acefc57bbc1",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d7410fc8-29a3-4e47-966c-7b020d811579",
             "name": "test",
             "url": "/hotel/",
             "method": "GET",
             "sortNum": 250000,
-            "created": "2023-05-09T21:34:43.407Z",
-            "modified": "2023-05-09T21:34:43.407Z",
+            "created": "2023-05-12T13:40:04.276Z",
+            "modified": "2023-05-12T13:40:04.276Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "0c9ca986-d8ca-4f31-bd5d-e603156e5824",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "24b2410f-1abe-4f15-b6af-8a06706db418",
+            "_id": "630763c7-d6c2-43d3-bb16-59432c5ac5b2",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d7410fc8-29a3-4e47-966c-7b020d811579",
             "name": "Add Hotel",
             "url": "/hotel/addHotel",
             "method": "POST",
             "sortNum": 260000,
-            "created": "2023-05-09T21:34:43.408Z",
-            "modified": "2023-05-09T21:34:43.408Z",
+            "created": "2023-05-12T13:40:04.277Z",
+            "modified": "2023-05-12T13:40:04.277Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDU5Mjc2Mjc0MGJlN2JmMGQ3ZDQ1OGMiLCJuYW1lIjoiam9zdWUiLCJzdXJuYW1lIjoiaGVybmFuZGV6IiwidXNlcm5hbWUiOiJqaGVybmFuZGV6MiIsImVtYWlsIjoiamhlcm5hbmRlei0yMDIxMTExQGtpbmFsLmVkdS5ndDEwIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjgzNTY0NTExLCJleHAiOjE2ODM1NzE3MTF9.jL4sWyL0-MZeSD6WTffKUgD_wtJPEi8x8qlqvo13rt4"
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDRkN2E0OTk2MjFiZTE0ZmE1MmI1NjMiLCJuYW1lIjoiSm9zdWUiLCJzdXJuYW1lIjoiTm9qIiwidXNlcm5hbWUiOiJqbm9qIiwiZW1haWwiOiJqbm9qQGtpbmFsLmVkdS5ndCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY4MzY3NTA0OCwiZXhwIjoxNjgzNjgyMjQ4fQ.vuykoZsKMb7_WsnL9cH0lsAdNfQH3ou2t--sVbbAhZk\""
                 }
             ],
             "params": [],
@@ -725,22 +750,22 @@
                     },
                     {
                         "name": "manager",
-                        "value": "64592762740be7bf0d7d458c"
+                        "value": "645ad5083cb35992e408eff1"
                     }
                 ]
             },
             "tests": []
         },
         {
-            "_id": "1cea2f02-8363-4546-aa01-50ec3e94bf33",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "24b2410f-1abe-4f15-b6af-8a06706db418",
+            "_id": "7f392953-a7da-4e77-ba19-0eb03796a7b1",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d7410fc8-29a3-4e47-966c-7b020d811579",
             "name": "Get Hotels",
             "url": "/hotel/get",
             "method": "GET",
             "sortNum": 270000,
-            "created": "2023-05-09T21:34:43.409Z",
-            "modified": "2023-05-09T21:34:43.409Z",
+            "created": "2023-05-12T13:40:04.278Z",
+            "modified": "2023-05-12T13:40:04.278Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -751,15 +776,15 @@
             "tests": []
         },
         {
-            "_id": "5135335e-6901-4bc7-8a24-c9fb7f386cfd",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "24b2410f-1abe-4f15-b6af-8a06706db418",
+            "_id": "e43893c8-ce13-4152-87ab-c8cda88f7964",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d7410fc8-29a3-4e47-966c-7b020d811579",
             "name": "get hotel By name",
             "url": "/hotel/getByName",
             "method": "POST",
             "sortNum": 280000,
-            "created": "2023-05-09T21:34:43.410Z",
-            "modified": "2023-05-09T21:34:43.410Z",
+            "created": "2023-05-12T13:40:04.279Z",
+            "modified": "2023-05-12T13:40:04.279Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -780,15 +805,15 @@
             "tests": []
         },
         {
-            "_id": "055192c2-b8e9-4a65-a53e-0b7e3a436886",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "24b2410f-1abe-4f15-b6af-8a06706db418",
+            "_id": "19c0af86-93f6-4bb5-8cc4-2041760449c0",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d7410fc8-29a3-4e47-966c-7b020d811579",
             "name": "get hotel By Id",
             "url": "/hotel/getById/644dbd3e70c0e12a412d2f77",
             "method": "GET",
             "sortNum": 282500,
-            "created": "2023-05-09T21:34:43.411Z",
-            "modified": "2023-05-09T21:34:43.411Z",
+            "created": "2023-05-12T13:40:04.280Z",
+            "modified": "2023-05-12T13:40:04.280Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -809,15 +834,15 @@
             "tests": []
         },
         {
-            "_id": "f3d93c8d-e31c-47dc-ba35-a68d39348903",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "24b2410f-1abe-4f15-b6af-8a06706db418",
+            "_id": "d9112571-595b-4421-830d-94ec9d72a104",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d7410fc8-29a3-4e47-966c-7b020d811579",
             "name": "get hotel By location",
             "url": "/hotel/getbyLocation",
             "method": "POST",
             "sortNum": 285000,
-            "created": "2023-05-09T21:34:43.412Z",
-            "modified": "2023-05-09T21:34:43.412Z",
+            "created": "2023-05-12T13:40:04.281Z",
+            "modified": "2023-05-12T13:40:04.281Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -838,15 +863,15 @@
             "tests": []
         },
         {
-            "_id": "51786f9c-3202-48fb-bb4d-03a405a0d233",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "24b2410f-1abe-4f15-b6af-8a06706db418",
+            "_id": "b5358427-e05d-42c2-8433-0f46dcf78a35",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d7410fc8-29a3-4e47-966c-7b020d811579",
             "name": "Add Event to Hotel",
             "url": "/hotel/addEvent/644dbb9f649679ece93865ff",
             "method": "PUT",
             "sortNum": 290000,
-            "created": "2023-05-09T21:34:43.413Z",
-            "modified": "2023-05-09T21:34:43.413Z",
+            "created": "2023-05-12T13:40:04.282Z",
+            "modified": "2023-05-12T13:40:04.282Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -867,15 +892,15 @@
             "tests": []
         },
         {
-            "_id": "266a65cc-bd9c-42b7-9b1f-22a509dd83d3",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "24b2410f-1abe-4f15-b6af-8a06706db418",
+            "_id": "d1afd68d-16c3-4ed8-914c-870e4e9195ec",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d7410fc8-29a3-4e47-966c-7b020d811579",
             "name": "Delete Event to Hotel",
             "url": "/hotel/deleteEvent/644dbb9f649679ece93865ff",
             "method": "PUT",
             "sortNum": 300000,
-            "created": "2023-05-09T21:34:43.414Z",
-            "modified": "2023-05-09T21:34:43.414Z",
+            "created": "2023-05-12T13:40:04.283Z",
+            "modified": "2023-05-12T13:40:04.283Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -896,33 +921,33 @@
             "tests": []
         },
         {
-            "_id": "7333407d-423a-4478-9370-f7a4e3a27927",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "9a451783-ca12-47aa-8b5a-4a06c3a2fe76",
+            "_id": "e817ccbd-9c3f-43f7-b053-56f7df8f9673",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "bcc1b10f-3489-4135-be6e-8eb9921c64e4",
             "name": "test",
             "url": "/room/",
             "method": "GET",
             "sortNum": 300000,
-            "created": "2023-05-09T21:34:43.415Z",
-            "modified": "2023-05-09T21:34:43.415Z",
+            "created": "2023-05-12T13:40:04.284Z",
+            "modified": "2023-05-12T13:40:04.284Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "328787ea-2efd-4baa-874d-44ba45d3bc84",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "9a451783-ca12-47aa-8b5a-4a06c3a2fe76",
+            "_id": "1939961a-1623-4f2e-8e42-6126a47c3182",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "bcc1b10f-3489-4135-be6e-8eb9921c64e4",
             "name": "Add Room",
             "url": "/room/add",
             "method": "POST",
             "sortNum": 320000,
-            "created": "2023-05-09T21:34:43.416Z",
-            "modified": "2023-05-09T21:34:43.416Z",
+            "created": "2023-05-12T13:40:04.285Z",
+            "modified": "2023-05-12T14:08:13.349Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDU1MTNhOWZlNzJiNDdkZWYzY2M2MWMiLCJuYW1lIjoiSm9zdWUiLCJzdXJuYW1lIjoiTm9qIiwidXNlcm5hbWUiOiJqbm9qIiwiZW1haWwiOiJqbm9qQGtpbmFsLmVkdS5ndCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY4MzU2MzIwMSwiZXhwIjoxNjgzNTcwNDAxfQ.LWa7VFvc20h0Hzac8vaLbQiDngSzlewAOFYc9TOrz6A"
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDVlNDFkZjQ1ZTFmMjljZWJmYjBkZWUiLCJuYW1lIjoiQURNSU4iLCJzdXJuYW1lIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBraW5hbC5lZHUuZ3QiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2ODM5MDA0NTksImV4cCI6MTY4MzkwNzY1OX0.vAybXHF0jsxJIQbzgTcAtos524rOxqxtG6sJn6TqrQc\""
                 }
             ],
             "params": [],
@@ -932,7 +957,7 @@
                 "form": [
                     {
                         "name": "noRoom",
-                        "value": "C43"
+                        "value": "C431"
                     },
                     {
                         "name": "category",
@@ -948,22 +973,22 @@
                     },
                     {
                         "name": "hotel",
-                        "value": "64590dd92ed950fe329a5b89"
+                        "value": "6459107e13f9a900d383a115"
                     }
                 ]
             },
             "tests": []
         },
         {
-            "_id": "699c923e-2ba4-4209-96bd-2c00290b10e8",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "9a451783-ca12-47aa-8b5a-4a06c3a2fe76",
+            "_id": "c78cd151-7e50-4549-999a-a6b6e11c5f72",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "bcc1b10f-3489-4135-be6e-8eb9921c64e4",
             "name": "Update Room",
             "url": "/room/update/64551b2def6a5432e46fe27c",
             "method": "PUT",
             "sortNum": 330000,
-            "created": "2023-05-09T21:34:43.417Z",
-            "modified": "2023-05-09T21:34:43.417Z",
+            "created": "2023-05-12T13:40:04.286Z",
+            "modified": "2023-05-12T13:40:04.286Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -996,15 +1021,15 @@
             "tests": []
         },
         {
-            "_id": "79ab767a-bb34-4af3-894c-fadaa2a4155c",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "24b2410f-1abe-4f15-b6af-8a06706db418",
+            "_id": "54376daa-81de-4538-bd76-cedf1b21ebf5",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d7410fc8-29a3-4e47-966c-7b020d811579",
             "name": "update Hotel",
             "url": "/hotel/update/6455af06666f917b98c0faa6",
             "method": "PUT",
             "sortNum": 340000,
-            "created": "2023-05-09T21:34:43.418Z",
-            "modified": "2023-05-09T21:34:43.418Z",
+            "created": "2023-05-12T13:40:04.287Z",
+            "modified": "2023-05-12T13:40:04.287Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -1029,15 +1054,15 @@
             "tests": []
         },
         {
-            "_id": "837e9853-2ad1-4821-b497-c1bdf1821098",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "9a451783-ca12-47aa-8b5a-4a06c3a2fe76",
+            "_id": "78f00d2b-b6c8-4f00-b8f5-66ad081a5d1f",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "bcc1b10f-3489-4135-be6e-8eb9921c64e4",
             "name": "Delete Room",
             "url": "/room/delete/64551b23ef6a5432e46fe274",
             "method": "DELETE",
             "sortNum": 350000,
-            "created": "2023-05-09T21:34:43.419Z",
-            "modified": "2023-05-09T21:34:43.419Z",
+            "created": "2023-05-12T13:40:04.288Z",
+            "modified": "2023-05-12T13:40:04.288Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -1048,49 +1073,353 @@
             "tests": []
         },
         {
-            "_id": "17667eaa-d894-43a1-9ff2-5d4c83eb1eb1",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "9a451783-ca12-47aa-8b5a-4a06c3a2fe76",
+            "_id": "b1f7779b-952e-4580-aa14-2c8401b4b702",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d949c8fa-5375-42ba-bd35-92271d92ef3d",
+            "name": "Test",
+            "url": "/reservationRoom/test/645928fd8db0417741c50a04",
+            "method": "GET",
+            "sortNum": 350000,
+            "created": "2023-05-12T13:40:04.289Z",
+            "modified": "2023-05-12T14:34:05.233Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "9e08ef79-3a81-4623-ab4b-610960a5b29a",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "bcc1b10f-3489-4135-be6e-8eb9921c64e4",
             "name": "Get Rooms",
             "url": "/room/get",
             "method": "GET",
             "sortNum": 360000,
-            "created": "2023-05-09T21:34:43.420Z",
-            "modified": "2023-05-09T21:34:43.420Z",
+            "created": "2023-05-12T13:40:04.290Z",
+            "modified": "2023-05-12T13:57:51.488Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDU1MTdmOWZlNzJiNDdkZWYzY2M2MjEiLCJuYW1lIjoiam9zdWUiLCJzdXJuYW1lIjoiaGVybmFuZGV6IiwidXNlcm5hbWUiOiJqaGVybmFuZGV6MjEiLCJlbWFpbCI6ImpoZXJuYW5kZXotMjAyMTExMUBraW5hbC5lZHUuZ3QxIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjgzNTYzOTY4LCJleHAiOjE2ODM1NzExNjh9.SNhRsDdKILby550DuLv0Ju_O48u0dWrECLC5AqriVkg\""
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDU1MDk2NzNhMDUyODBlNWFjYmRiOGUiLCJuYW1lIjoiam9zdWUiLCJzdXJuYW1lIjoiaGVybmFuZGV6IiwidXNlcm5hbWUiOiJqaGVybmFuZGV6MiIsImVtYWlsIjoiamhlcm5hbmRlei0yMDIxMTExQGtpbmFsLmVkdS5ndDEiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNjgzODk5ODU5LCJleHAiOjE2ODM5MDcwNTl9.LsIqeTWLqnW62EqaFfc2myMkjjAAOfuMwkLcj6Ta3Gw\""
                 }
             ],
             "params": [],
             "tests": []
         },
         {
-            "_id": "7f0aea33-6350-46f0-bff3-eb4b11da35b5",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "cd01f71d-1128-47f6-860a-af751cddd535",
+            "_id": "0ca4bb92-7e2f-4e4a-a412-c1cb6236d781",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "8524a44f-3f72-463b-a110-a352f4f6e42d",
             "name": "Test",
             "url": "/activities/",
             "method": "GET",
             "sortNum": 370000,
-            "created": "2023-05-09T21:35:08.900Z",
-            "modified": "2023-05-09T21:35:24.754Z",
+            "created": "2023-05-12T13:40:04.291Z",
+            "modified": "2023-05-12T13:40:04.291Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "560e4a7a-a5d9-4939-b7b1-599109c437d4",
-            "colId": "8e5917a1-1f41-4b2e-aaaf-f0fb0f05ee28",
-            "containerId": "cd01f71d-1128-47f6-860a-af751cddd535",
+            "_id": "7d679eed-9ca4-4194-b7da-d5f5d9d42039",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d949c8fa-5375-42ba-bd35-92271d92ef3d",
+            "name": "Add Reservation",
+            "url": "/reservationRoom/add",
+            "method": "POST",
+            "sortNum": 370000,
+            "created": "2023-05-12T13:40:04.292Z",
+            "modified": "2023-05-12T13:40:04.292Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDVhZDc3MWQ0NTI5Y2I0Zjk1ZmJkZGMiLCJuYW1lIjoiam9zdWUiLCJzdXJuYW1lIjoiaGVybmFuZGV6IiwidXNlcm5hbWUiOiJqaGVybmFuZGV6MiIsImVtYWlsIjoiamhlcm5hbmRlei0yMDIxMTExQGtpbmFsLmVkdS5ndDEiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNjgzNjc0OTk2LCJleHAiOjE2ODM2ODIxOTZ9.fxKvAWVnVK-KOw_6HcmYqB4FQ3REpVsTONov4tASkIU\""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "dateStart",
+                        "value": "2023-5-31"
+                    },
+                    {
+                        "name": "dateEnd",
+                        "value": "2023-6-05"
+                    },
+                    {
+                        "name": "hotel",
+                        "value": "645ad7edd4529cb4f95fbde5"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "5cd366f8-ee72-4c94-b6f0-7aca21a35d67",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "8524a44f-3f72-463b-a110-a352f4f6e42d",
             "name": "Add Activity",
             "url": "",
             "method": "GET",
             "sortNum": 380000,
-            "created": "2023-05-09T21:40:14.418Z",
-            "modified": "2023-05-09T21:40:14.418Z",
+            "created": "2023-05-12T13:40:04.294Z",
+            "modified": "2023-05-12T13:40:04.294Z",
             "headers": []
+        },
+        {
+            "_id": "6ea57c95-7006-436d-94ac-c32a554d368f",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d949c8fa-5375-42ba-bd35-92271d92ef3d",
+            "name": "Add Room",
+            "url": "/reservationRoom/addRoom/645928fd8db0417741c50a04",
+            "method": "PUT",
+            "sortNum": 390000,
+            "created": "2023-05-12T13:40:04.295Z",
+            "modified": "2023-05-12T14:08:24.679Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDU1MDk2NzNhMDUyODBlNWFjYmRiOGUiLCJuYW1lIjoiam9zdWUiLCJzdXJuYW1lIjoiaGVybmFuZGV6IiwidXNlcm5hbWUiOiJqaGVybmFuZGV6MiIsImVtYWlsIjoiamhlcm5hbmRlei0yMDIxMTExQGtpbmFsLmVkdS5ndDEiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNjgzODk5ODU5LCJleHAiOjE2ODM5MDcwNTl9.LsIqeTWLqnW62EqaFfc2myMkjjAAOfuMwkLcj6Ta3Gw\""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "room",
+                        "value": "645e484dc9e40e0a32a9b3ed"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "e9180e2d-355a-4f9c-b36f-d9ba265b7f09",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d949c8fa-5375-42ba-bd35-92271d92ef3d",
+            "name": "Get Reservations",
+            "url": "/reservationRoom/get",
+            "method": "GET",
+            "sortNum": 400000,
+            "created": "2023-05-12T13:40:04.296Z",
+            "modified": "2023-05-12T13:40:04.296Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDRkN2E0OTk2MjFiZTE0ZmE1MmI1NjMiLCJuYW1lIjoiSm9zdWUiLCJzdXJuYW1lIjoiTm9qIiwidXNlcm5hbWUiOiJqbm9qIiwiZW1haWwiOiJqbm9qQGtpbmFsLmVkdS5ndCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY4MzY3NTA0OCwiZXhwIjoxNjgzNjgyMjQ4fQ.vuykoZsKMb7_WsnL9cH0lsAdNfQH3ou2t--sVbbAhZk\""
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "ea08f39e-ca0f-4f47-bdb6-25c72557bc8a",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d949c8fa-5375-42ba-bd35-92271d92ef3d",
+            "name": "Remove Room",
+            "url": "/reservationRoom/removeRoom/645ad7f6d4529cb4f95fbdea",
+            "method": "PUT",
+            "sortNum": 410000,
+            "created": "2023-05-12T13:40:04.297Z",
+            "modified": "2023-05-12T13:40:04.297Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDVhZDc3MWQ0NTI5Y2I0Zjk1ZmJkZGMiLCJuYW1lIjoiam9zdWUiLCJzdXJuYW1lIjoiaGVybmFuZGV6IiwidXNlcm5hbWUiOiJqaGVybmFuZGV6MiIsImVtYWlsIjoiamhlcm5hbmRlei0yMDIxMTExQGtpbmFsLmVkdS5ndDEiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNjgzNjc0OTk2LCJleHAiOjE2ODM2ODIxOTZ9.fxKvAWVnVK-KOw_6HcmYqB4FQ3REpVsTONov4tASkIU\""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "roomId",
+                        "value": "645ad81bd4529cb4f95fbdee"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "0f3633f8-d37c-4a51-b033-82df46b199dd",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d949c8fa-5375-42ba-bd35-92271d92ef3d",
+            "name": "Add Service",
+            "url": "/reservationRoom/addService/645ad7f6d4529cb4f95fbdea",
+            "method": "PUT",
+            "sortNum": 420000,
+            "created": "2023-05-12T13:40:04.298Z",
+            "modified": "2023-05-12T13:40:04.298Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDVhZDc3MWQ0NTI5Y2I0Zjk1ZmJkZGMiLCJuYW1lIjoiam9zdWUiLCJzdXJuYW1lIjoiaGVybmFuZGV6IiwidXNlcm5hbWUiOiJqaGVybmFuZGV6MiIsImVtYWlsIjoiamhlcm5hbmRlei0yMDIxMTExQGtpbmFsLmVkdS5ndDEiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNjgzNjc0OTk2LCJleHAiOjE2ODM2ODIxOTZ9.fxKvAWVnVK-KOw_6HcmYqB4FQ3REpVsTONov4tASkIU\""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "service",
+                        "value": "645ae651ea2fb7df889cf5fe"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "8176ac19-046e-43f6-906e-e3a80d8f13b9",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d949c8fa-5375-42ba-bd35-92271d92ef3d",
+            "name": "Remove Service",
+            "url": "/reservationRoom/removeService/645ad7f6d4529cb4f95fbdea",
+            "method": "PUT",
+            "sortNum": 430000,
+            "created": "2023-05-12T13:40:04.299Z",
+            "modified": "2023-05-12T13:40:04.299Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDVhZDc3MWQ0NTI5Y2I0Zjk1ZmJkZGMiLCJuYW1lIjoiam9zdWUiLCJzdXJuYW1lIjoiaGVybmFuZGV6IiwidXNlcm5hbWUiOiJqaGVybmFuZGV6MiIsImVtYWlsIjoiamhlcm5hbmRlei0yMDIxMTExQGtpbmFsLmVkdS5ndDEiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNjgzNjc0OTk2LCJleHAiOjE2ODM2ODIxOTZ9.fxKvAWVnVK-KOw_6HcmYqB4FQ3REpVsTONov4tASkIU\""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "service",
+                        "value": "645ae651ea2fb7df889cf5fe"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "e1e68630-8f7c-4a63-8871-8aae4ffa4f2a",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d949c8fa-5375-42ba-bd35-92271d92ef3d",
+            "name": "Get Reservation",
+            "url": "/reservationRoom/getReservation/645ad7f6d4529cb4f95fbdea",
+            "method": "GET",
+            "sortNum": 440000,
+            "created": "2023-05-12T13:40:04.300Z",
+            "modified": "2023-05-12T13:40:04.300Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDVhZDc3MWQ0NTI5Y2I0Zjk1ZmJkZGMiLCJuYW1lIjoiam9zdWUiLCJzdXJuYW1lIjoiaGVybmFuZGV6IiwidXNlcm5hbWUiOiJqaGVybmFuZGV6MiIsImVtYWlsIjoiamhlcm5hbmRlei0yMDIxMTExQGtpbmFsLmVkdS5ndDEiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNjgzNjc0OTk2LCJleHAiOjE2ODM2ODIxOTZ9.fxKvAWVnVK-KOw_6HcmYqB4FQ3REpVsTONov4tASkIU\""
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "2aa4015a-a50f-40b8-aef4-0669d9f81f5a",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d949c8fa-5375-42ba-bd35-92271d92ef3d",
+            "name": "Get Reservation By User",
+            "url": "/reservationRoom/getReservationByUser/645ad771d4529cb4f95fbddc",
+            "method": "GET",
+            "sortNum": 450000,
+            "created": "2023-05-12T13:40:04.301Z",
+            "modified": "2023-05-12T13:40:04.301Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDRkN2E0OTk2MjFiZTE0ZmE1MmI1NjMiLCJuYW1lIjoiSm9zdWUiLCJzdXJuYW1lIjoiTm9qIiwidXNlcm5hbWUiOiJqbm9qIiwiZW1haWwiOiJqbm9qQGtpbmFsLmVkdS5ndCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY4MzY3NTA0OCwiZXhwIjoxNjgzNjgyMjQ4fQ.vuykoZsKMb7_WsnL9cH0lsAdNfQH3ou2t--sVbbAhZk\""
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "37603e80-211c-4be9-81b2-611037d9f244",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d949c8fa-5375-42ba-bd35-92271d92ef3d",
+            "name": "Get Own Reservations",
+            "url": "/reservationRoom/getOwnReservation",
+            "method": "GET",
+            "sortNum": 460000,
+            "created": "2023-05-12T13:40:04.302Z",
+            "modified": "2023-05-12T13:40:04.302Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDVhZDc3MWQ0NTI5Y2I0Zjk1ZmJkZGMiLCJuYW1lIjoiam9zdWUiLCJzdXJuYW1lIjoiaGVybmFuZGV6IiwidXNlcm5hbWUiOiJqaGVybmFuZGV6MiIsImVtYWlsIjoiamhlcm5hbmRlei0yMDIxMTExQGtpbmFsLmVkdS5ndDEiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNjgzNjg5MDU1LCJleHAiOjE2ODM2OTYyNTV9.sY9ZrL8Kc1XRnC6X_dg9e-RFZAI52TxgG7ptSC-7af8\""
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "3a2a2514-6c32-4b60-af99-32d03af18014",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d949c8fa-5375-42ba-bd35-92271d92ef3d",
+            "name": "Update Reservation",
+            "url": "/reservationRoom/updateReservation/645ad7f6d4529cb4f95fbdea",
+            "method": "PUT",
+            "sortNum": 470000,
+            "created": "2023-05-12T13:40:04.303Z",
+            "modified": "2023-05-12T13:40:04.303Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDVhZDc3MWQ0NTI5Y2I0Zjk1ZmJkZGMiLCJuYW1lIjoiam9zdWUiLCJzdXJuYW1lIjoiaGVybmFuZGV6IiwidXNlcm5hbWUiOiJqaGVybmFuZGV6MiIsImVtYWlsIjoiamhlcm5hbmRlei0yMDIxMTExQGtpbmFsLmVkdS5ndDEiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNjgzODUyODE0LCJleHAiOjE2ODM4NjAwMTR9.4ACAKEzEOERGCis3HlnwfP_99aBhlVOzd9Oa_2cC6UY\""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "dateStart",
+                        "value": "2023-05-11"
+                    },
+                    {
+                        "name": "dateEnd",
+                        "value": "2023-05-14"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "4e921810-e4a6-413d-a9c3-4d267d41b08e",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d949c8fa-5375-42ba-bd35-92271d92ef3d",
+            "name": "SetState (Prueba)",
+            "url": "/reservationRoom/setState",
+            "method": "GET",
+            "sortNum": 480000,
+            "created": "2023-05-12T13:40:04.304Z",
+            "modified": "2023-05-12T13:40:04.304Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "2a1601c9-a308-49ab-bc88-29129fa678b4",
+            "colId": "6115464a-9dfe-4b45-8725-f84e951268c2",
+            "containerId": "d949c8fa-5375-42ba-bd35-92271d92ef3d",
+            "name": "Delete Reservation",
+            "url": "/reservationRoom/deleteReservation/645928fd8db0417741c50a04",
+            "method": "DELETE",
+            "sortNum": 490000,
+            "created": "2023-05-12T15:01:42.175Z",
+            "modified": "2023-05-12T15:02:50.575Z",
+            "headers": [],
+            "params": [],
+            "tests": []
         }
     ],
     "settings": {
