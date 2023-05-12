@@ -33,7 +33,24 @@ import { DashBoardPage } from './pages/DashBoardPage.jsx'
 export const AuthContext = createContext();
 
 export const Index = () => {
+    useEffect(()=>{
+        const LoadExternalScript = ()=>{
+            const externalScript = document.createElement("script");
+            externalScript.id = "external";
+            externalScript.async = true;
+            externalScript.type ="text/javascript"
+            externalScript.setAttribute("crossorigin","anonymous")
+            document.body.appendChild(externalScript);
+            externalScript.src= '/src/main.js';
+        }
+        LoadExternalScript();
+        return()=>{
+            let externalScript = document.getElementById('external');
+            document.body.removeChild(externalScript)
+        }
+    }, []);
 
+    
     const routes = createBrowserRouter([
         {
             path: '/',
