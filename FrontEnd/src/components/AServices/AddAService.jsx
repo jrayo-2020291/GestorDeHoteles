@@ -16,6 +16,7 @@ export const AddAService = () => {
                 name: document.getElementById('name').value,
                 cost: document.getElementById('cost').value,
                 description: document.getElementById('description').value,
+                category:document.getElementById('category').value
             }
             const { data } = await axios.post('http://localhost:3100/services/addService', service,  {
                 headers: {
@@ -23,7 +24,7 @@ export const AddAService = () => {
                 }
             })
             Swal.fire({
-                title: data.message || 'Service creates',
+                title: data.message || 'Service created',
                 icon: 'success',
                 timer: 2000
               })
@@ -60,6 +61,12 @@ export const AddAService = () => {
                 <div>
                     <i className="fa-solid fa-tag"></i>
                     <input type="number" placeholder="Precio" id='cost'/>
+                </div>
+                <br/>
+
+                <div>
+                    <i className="fa-solid fa-pencil"></i>
+                    <input type="text" placeholder="Category" id='category'/>
                 </div>
                 <br/>
                 <button onClick={(e)=>  addService(e)} type="submit" className="btn btn-primary">Add</button>

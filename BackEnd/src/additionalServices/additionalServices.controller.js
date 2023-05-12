@@ -1,5 +1,8 @@
 'use strict'
 const Services = require('./additionalService.model');
+const {validateData} = require('../utils/validate')
+const mongoose = require('mongoose');
+
 
 exports.test = (req, res)=>{
     return res.send({message: 'Test function for Additional Services is running'});
@@ -16,6 +19,8 @@ exports.addService = async(req, res)=>{
         }
         let existService = await Services.findOne({name: params.name});
         if(existService) return res.send({message: 'This service already exist'});
+        if (data.category!=='ROOM'||'EVENT')
+        return res.send({message:'Unvalid category'})
         let newService = new Services(params);
         await newService.save();
         return res.status(201).send({message: 'New service created;', newService});
@@ -28,7 +33,7 @@ exports.addService = async(req, res)=>{
 exports.getServices = async(req, res)=>{
     try{
         let services = await Services.find();
-        return res.send({services})
+        return res.send({services});
     }catch(err){
         console.log(err);
         return res.status(500).send({message: 'Error getting services'});
