@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 exports.test = (req, res)=>{
     res.send({message: 'Test function is running'});
 };
-exports.get = async(req,res)=>{
+exports.getRooms = async(req,res)=>{
     try {
         let userId = req.user.sub;
         let hotels= await Hotel.findOne({manager:userId})
@@ -20,6 +20,24 @@ exports.get = async(req,res)=>{
     } catch (err) {
         console.error(err);
         return res.status(500).send({message:'Error geting rooms'})
+    }
+}
+exports.get =async(req,res)=>{ try{
+    let rooms=await Room.find({})
+    return res.send({rooms})
+}catch(err){
+    console.error(err);
+    return res.status(500).send({message:'Error getting rooms'})
+}}
+
+exports.getAvailability=async(req,res)=>{
+    try{
+        let state = 'AVAILABLE'
+        let rooms=await Room.find({availability:state})
+        return res.send({rooms})
+    }catch(err){
+        console.error(err);
+        return res.status(500).send({message:'Error getting availability'})
     }
 }
 exports.add = async(req,res)=>{
