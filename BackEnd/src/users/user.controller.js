@@ -20,7 +20,7 @@ exports.addAdminInitial = async(req, res)=>{
             phone:'12345678',
             role:'admin'
         }
-        let existAdmin = await User.findOne({username: 'jnoj'});
+        let existAdmin = await User.findOne({username: 'admin'});
         if(existAdmin) return console.log('Admin initial already created');
         let createAdminInitial = new User(adminInitial);
         await createAdminInitial.save();
@@ -61,7 +61,7 @@ exports.login = async(req, res)=>{
         let user = await User.findOne({username: data.username});
         if(user && await checkPassword(data.password, user.password)) {
             let token = await createToken(user)
-            return res.send({message: 'User logged successfully', token});
+            return res.send({message: 'User logged successfully', token, user});
         }
         return res.status(404).send({message: 'Invalid credentials'});
     }catch(err){
@@ -113,7 +113,7 @@ exports.deleteOwnUser = async(req,res)=>{
         return res.send({message:`Account with username ${deleteUser.username} delete sucessfully`})
     } catch (err) {
         console.error(err);
-        return res.status(500).Usersend({message:'Error delete User'})
+        return res.status(500).send({message:'Error delete User'})
     }
 }
 
@@ -130,7 +130,7 @@ exports.get = async(req,res)=>{
 exports.getById = async(req,res)=>{
     try {
         let userId = req.params.id;
-        let existUser = await User.findOne({_id:userId})
+        let existUser = await User.findOne({_id:userId},{__v:0})
         if(!existUser) return res.send({message:'Not found User'})
         return res.send(existUser)
     } catch (error) {
@@ -138,3 +138,74 @@ exports.getById = async(req,res)=>{
         return res.status(500).send({message:'Error get User'})
     }
 }
+
+exports.getByName = async(req,res)=>{
+    try {
+        let users = await User.find({
+            username: {
+                $regex: req.body.username, 
+                $options: 'i'
+            }
+        },{__v:0})
+        return res.send(users)
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({message:'Error geting User'})
+    }
+}
+
+exports.addAccount = async(req,res)=>{
+    try {
+        let data = req.body;
+        let validate = validateData(data);
+        if(validate) return res.status(400).send(validate);
+        data.password = await encrypt(data.password);
+        let existUsername =await User.findOne({username: data.username});
+        if(existUsername) return res.send({message:'username is already taken'});
+        let existEmail = await User.findOne({email: data.email});
+        if(existEmail) return res.send({message:'Email is already taken'});
+        let account = new User(data);
+        await account.save();
+        return res.send({message: `${data.role} created sucessfully`});
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({message:'Error adding manager'})
+    }
+}
+
+exports.updateAccount = async(req,res)=>{
+    try {
+        let userId = req.params.id
+        let data = req.body;
+        let validate = validateData(data);
+        if(validate) return res.status(400).send(validate);
+        data.password = await encrypt(data.password);
+        let userExist = await User.findOne({_id:userId})
+        if(!userExist) return res.send({message:'User not found'})
+        if(userExist.role==='ADMIN') return res.send({message:'Cant upgrade admins'})
+        if(data.username !== userExist.username){
+            let user= await User.findOne({username:data.username});
+            if(user) return res.send({message:'Username is in use and can not be updated'})
+        }
+        let updateOwnUser = await User.findOneAndUpdate(
+            {_id:userId},
+            {
+            name:data.name,
+            surname: data.surname,
+            username:data.username,
+            phone:data.phone,
+            password: data.password
+            },
+            {new:true});
+        return res.send({message:'User updated sucessfully', updateOwnUser});
+            
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({message:'Error updating Account'})
+    }
+}
+
+/*
+    editar user y manager
+
+ */
