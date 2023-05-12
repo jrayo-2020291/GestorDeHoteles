@@ -11,7 +11,8 @@ exports.addService = async(req, res)=>{
         let params = {
             name: data.name,
             description: data.description,
-            cost: data.cost
+            cost: data.cost,
+            category: data.category
         }
         let existService = await Services.findOne({name: params.name});
         if(existService) return res.send({message: 'This service already exist'});
