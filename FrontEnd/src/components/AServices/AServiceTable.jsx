@@ -12,13 +12,13 @@ export const AServiceTable = () => {
     
       const getServices = async () => {
         try {
-          const { data } = await axios('http://localhost:3100/services/getServices', {
+          const {data} = await axios('http://localhost:3100/services/getServices', {
             headers: {
               'Authorization': token
             }
           })
+          console.log(data)
           setServices(data.services)
-          setLoading(false)
         } catch (err) {
           console.error(err)
         }
@@ -26,7 +26,6 @@ export const AServiceTable = () => {
     
     
       useEffect(() => getServices, [])
-    
     return (
         <> 
         <section id="content">
@@ -41,14 +40,14 @@ export const AServiceTable = () => {
 							</tr>
 						</thead>
 							<tbody>
-                            {
-                  services.map(({ _id, name, description, cost}, index) => {
+              {
+                  services.map(({ _id, name, description, price}, index) => {
                     return (
                       <tr key={index}>
                         <Aservice
                           name={name}
                           description={description}
-                          cost={cost}
+                          price={price}
                         ></Aservice>
                         <td>
                           <Link to={`/../updateA_Service/${_id}`}>
