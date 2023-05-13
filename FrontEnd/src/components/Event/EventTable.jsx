@@ -5,15 +5,10 @@ import {Event} from './Event'
 
 export const EventTable = () => {
 
-    const [event,setEvent] = useState({})
+    const [event,setEvent] = useState([{}])
     const [loading, setLoading] = useState(true)
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
-
-    const LogOut = ()=>{
-		localStorage.clear()
-		navigate('/')
-	}
 
     const getEvents = async () => {
         try {
@@ -26,6 +21,23 @@ export const EventTable = () => {
           setLoading(false)
         } catch (err) {
           console.error(err)
+        }
+      };
+
+      const deleteEvent = async (id) => {
+        try {
+          let confirmDelete = confirm('Estás seguro de eliminar este evento?')
+          if (confirmDelete) {
+            const { data } = await axios.delete(`http://localhost:3100/events/delete/${id}`, {
+              headers: {
+                  'Authorization': token
+              }
+          })
+            getEvents()
+          }
+        } catch (err) {
+          console.error(err)
+          alert(err.response.data.message)
         }
       }
       useEffect(() => getEvents, [])
@@ -74,7 +86,7 @@ export const EventTable = () => {
                                                             <Link to={`../updateEvent/${_id}`}>
                                                                 <i className="fa-solid fa-pen button"></i>
                                                             </Link>
-                                                            <i className="fa-solid fa-trash-can button"></i>   
+                                                            <i onClick={()=>deleteEvent(_id)} className="fa-solid fa-trash-can button"></i>   
                                                         </td>
                                                     </tr>
                                                 )

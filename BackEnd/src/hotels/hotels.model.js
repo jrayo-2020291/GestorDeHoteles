@@ -12,7 +12,7 @@ const hotelsSchema = mongoose.Schema({
         required: true
     },
     qualification:{
-        type: Date,
+        type: Number,
         required: true
     },
     numberRooms:{
