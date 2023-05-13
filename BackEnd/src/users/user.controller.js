@@ -127,6 +127,10 @@ exports.get = async(req,res)=>{
     }
 }
 
+const getManager = async()=>{
+        
+}
+
 exports.getById = async(req,res)=>{
     try {
         let userId = req.params.id;

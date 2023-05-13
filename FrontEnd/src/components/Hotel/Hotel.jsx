@@ -1,7 +1,12 @@
 import React from 'react'
 
-export const Hotel = () => {
+export const Hotel = (name, locationH,qualification,numberRooms) => {
     return (
-        <div>Hotel</div>
+        <>
+            <td>{name}</td>
+            <td>{locationH}</td>
+            <td>{qualification}</td>
+            <td>{numberRooms}</td>
+        </>
     )
 }

@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 export const AddEvent = () => {
     const navigate = useNavigate()
-    const title = 'ADD USER';
+    const title = 'ADD EVENT';
     const token = localStorage.getItem(`token`)
 
     const addEvent = async(e)=>{
@@ -42,33 +42,33 @@ export const AddEvent = () => {
 
     return (
         <>
-    <div className="container">
-        <div className="box">
-            <h1>Event</h1>
-            <form>
-                <div>
-                    <i className="fa-solid fa-user"></i>
-                    <input type="text" placeholder="name" id='name'/>
+            <div className="container">
+                <div className="box">
+                    <h1>Event</h1>
+                    <form>
+                        <div>
+                            <i className="fa-solid fa-user"></i>
+                            <input type="text" placeholder="name" id='name'/>
+                        </div>
+                        <br/>
+                        <div>
+                            <i className="fa-solid fa-user-clock"></i>
+                            <input type="text" placeholder="description" id='description'/>
+                        </div>
+                        <br/>
+                        <div>
+                            <i className="fa-solid fa-id-card"></i>
+                            <input type="number" placeholder="costPerHour" id='costPerHour'/>
+                        </div>
+                        <br/>
+                        <button onClick={(e)=>  addEvent(e)} type="submit" className="btn btn-primary">Add</button>
+                        <Link to='/dashboard/event'>
+                            <button  type="submit" className="btn btn-primary">Cancel</button>
+                        </Link>
+                        
+                    </form>
                 </div>
-                <br/>
-                <div>
-                    <i className="fa-solid fa-user-clock"></i>
-                    <input type="text" placeholder="description" id='description'/>
-                </div>
-                <br/>
-                <div>
-                    <i className="fa-solid fa-id-card"></i>
-                    <input type="number" placeholder="costPerHour" id='costPerHour'/>
-                </div>
-                <br/>
-                <button onClick={(e)=>  addEvent(e)} type="submit" className="btn btn-primary">Add</button>
-                <Link to='/dashboard/event'>
-                    <button  type="submit" className="btn btn-primary">Cancel</button>
-                </Link>
-                
-            </form>
-        </div>
-    </div>
-    </>
+            </div>
+            </>
     )
 }
