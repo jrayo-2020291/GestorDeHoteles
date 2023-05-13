@@ -42,18 +42,18 @@ export const Index = () => {
         let token = localStorage.getItem('token')
         if(token) setLoggedIn(true)
         // const LoadExternalScript = ()=>{
-        //     const externalScript = document.createElement("script");
-        //     externalScript.id = "external";
-        //     externalScript.async = true;
-        //     externalScript.type ="text/javascript";
-        //     externalScript.setAttribute("crossorigin","anonymous")
-        //     document.body.appendChild(externalScript);
-        //     externalScript.src= '/src/main.js';
+        // const externalScript = document.createElement("script");
+        // externalScript.id = "external";
+        // externalScript.async = true;
+        // externalScript.type ="text/javascript";
+        // externalScript.setAttribute("crossorigin","anonymous")
+        // document.body.appendChild(externalScript);
+        // externalScript.src= '/src/main.js';
         // }
         // LoadExternalScript();
         // return()=>{
-        //     let externalScript = document.getElementById('external');
-        //     document.body.removeChild(externalScript)
+        // let externalScript = document.getElementById('external');
+        // document.body.removeChild(externalScript)
         // }
     }, []);
 

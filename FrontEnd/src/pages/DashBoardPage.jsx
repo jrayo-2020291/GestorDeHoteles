@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 export const DashBoardPage = () => {
     return (
         <>
-        <div>DashBoardPage</div>
+        <div></div>
         <Outlet></Outlet>
         </>
     )
