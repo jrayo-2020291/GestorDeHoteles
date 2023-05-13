@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Hotel = (name, locationH,qualification,numberRooms) => {
+export const Hotel = ({name, locationH,qualification,numberRooms}) => {
     return (
         <>
             <td>{name}</td>

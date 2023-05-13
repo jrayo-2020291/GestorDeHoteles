@@ -13,6 +13,7 @@ api.put('/updateOwnUser', ensureAuth,userController.updateOwnUser);
 api.put('/updateAccount/:id',[ensureAuth,isAdmin],userController.updateAccount);
 api.delete('/deleteOwnUser', ensureAuth, userController.deleteOwnUser);
 api.get('/get',[ensureAuth,isAdmin], userController.get);
+api.get('/getManager',[ensureAuth,isAdmin], userController.getManager);
 api.get('/getById/:id', [ensureAuth,isAdmin], userController.getById);
 api.post('/getByName',[ensureAuth, isAdmin],userController.getByName);
 

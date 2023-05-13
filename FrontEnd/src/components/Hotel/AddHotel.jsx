@@ -52,13 +52,14 @@ export const AddHotel = () => {
 
     const getUsers = async () => {
         try {
-            const { data } = await axios('http://localhost:3100/user/get',
+            const { data } = await axios('http://localhost:3100/user/getManager',
                 {
                     headers: {
                         'Authorization': token
                     }
                 })
             setUsers(data)
+            console.log(data)
         } catch (err) {
             console.error(err);
         }

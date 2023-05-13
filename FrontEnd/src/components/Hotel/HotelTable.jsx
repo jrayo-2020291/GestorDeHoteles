@@ -18,7 +18,7 @@ export const HotelTable = () => {
           })
           setHotel(data.hotels)
           setLoading(false)
-          console.log(data.hotels)
+          
         } catch (err) {
           console.error(err)
         }
