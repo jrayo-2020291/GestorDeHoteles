@@ -5,7 +5,7 @@ import { Aservice } from './Aservice'
 
 export const AServiceTable = () => {
   const navigate = useNavigate()
-  const [services, setServices] = useState({})
+  const [services, setServices] = useState([{}])
   const [loading, setLoading] = useState(true)
   const token = localStorage.getItem('token')
 
@@ -17,15 +17,14 @@ export const AServiceTable = () => {
           'Authorization': token
         }
       })
-      console.log(data)
       setServices(data.services)
+      console.log(services)
     } catch (err) {
       console.error(err)
     }
   }
 
   useEffect(() => getServices, [])
-
   return (
     <>
       <section id="content">
