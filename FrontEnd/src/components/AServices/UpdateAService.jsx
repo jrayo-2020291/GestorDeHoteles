@@ -59,11 +59,14 @@ const updateService = async(e)=>{
 useEffect(()=> getService, [])
   return (
    
+    
     <div className="container">
         <div className="box">
+       
             <h1>Servicio</h1>
             <form>
                 <div>
+          
                     <i className="fa-solid fa-user"></i>
                     <input  type="text" defaultValue={service.name} className="form-control" placeholder='New Name' id="inputName" required/>
                 </div>
@@ -79,7 +82,7 @@ useEffect(()=> getService, [])
                 </div>
                 <br/>
                 <button onClick={(e)=>  updateService(e)} type="submit" className="btn btn-outline-primary">Update</button>
-                <Link to='/dashboard/A_Services'>
+                <Link to='/dashboard/aService'>
                 <button type="submit" className="btn btn-outline-primary">Cancel</button>
                 </Link>
             </form>
