@@ -22,19 +22,13 @@ export const EventTable = () => {
               'Authorization': token
             }
           })
-          console.log(data)
           setEvent(data.events)
           setLoading(false)
-          console.log(data)
         } catch (err) {
           console.error(err)
         }
       }
-
       useEffect(() => getEvents, [])
-
-     
-
     return (
 
         <>
@@ -67,7 +61,7 @@ export const EventTable = () => {
                                     </tr>
                                 </thead>
                                     <tbody>
-                                        {
+                                        {/* {
                                             event.map(({_id, name, description,costPerHour},index)=>{
                                                 return(
                                                     <tr key={index}>
@@ -85,7 +79,7 @@ export const EventTable = () => {
                                                     </tr>
                                                 )
                                             })
-                                        }
+                                        } */}
                                     </tbody>
                             </table>
                         </div>
