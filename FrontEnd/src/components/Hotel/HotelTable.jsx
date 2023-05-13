@@ -24,6 +24,23 @@ export const HotelTable = () => {
         }
       };
 
+      /*const deleteHotel = async (id) => {
+        try {
+          let confirmDelete = confirm('Estás seguro de eliminar este evento?')
+          if (confirmDelete) {
+            const { data } = await axios.delete(`http://localhost:3100/hotel/deleteHotel/${id}`, {
+              headers: {
+                  'Authorization': token
+              }
+          })
+            getHotels()
+          }
+        } catch (err) {
+          console.error(err)
+          alert(err.response.data.message)
+        }
+      }*/
+
       useEffect(() => getHotels, [])
 
     return (
@@ -73,13 +90,12 @@ export const HotelTable = () => {
                                                             <Link to={`../updateHotel/${_id}`}>
                                                                 <i className="fa-solid fa-pen button"></i>
                                                             </Link>
-                                                            <i  className="fa-solid fa-trash-can button"></i>   
+                                                            <i  className="fa-solid fa-trash-can button"></i>  
                                                         </td>
                                                     </tr>
                                                 )
                                             })
                                         }
-                                    
                                     </tbody>
                                 </table>
                         </div> 

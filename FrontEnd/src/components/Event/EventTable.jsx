@@ -73,7 +73,7 @@ export const EventTable = () => {
                                     </tr>
                                 </thead>
                                     <tbody>
-                                        {/* {
+                                        { 
                                             event.map(({_id, name, description,costPerHour},index)=>{
                                                 return(
                                                     <tr key={index}>
@@ -91,7 +91,7 @@ export const EventTable = () => {
                                                     </tr>
                                                 )
                                             })
-                                        } */}
+                                        }
                                     </tbody>
                             </table>
                         </div>

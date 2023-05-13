@@ -59,7 +59,6 @@ export const AddHotel = () => {
                     }
                 })
             setUsers(data)
-            console.log(data)
         } catch (err) {
             console.error(err);
         }

@@ -146,16 +146,11 @@ exports.topHotel = async(req,res)=>{
     try{
         let hotelId = req.params.id;
         let data=req.body;
-        let params = {
-            name: data.name,
-            locationH: data.location,
-            availability:data.availability
-        }
         if(data.name=='')
         return res.send({message:'You have to add a valid name'})
         let hotel = await Hotel.findOne({name: data.name});
         if(hotel)return res.send({message: 'This Hotel already exists'});
-        let updatedHotel = await Hotel.findOneAndUpdate({_id: hotelId}, params, {new: true});
+        let updatedHotel = await Hotel.findOneAndUpdate({_id: hotelId}, data, {new: true});
         if(!updatedHotel) return res.status(404).send({message: 'Hotel not found and not updated'});
         return res.send({message: 'Hotel updated', updatedHotel});
     }catch (err){
