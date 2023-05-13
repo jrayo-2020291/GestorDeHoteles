@@ -5,75 +5,43 @@ import { Aservice } from './Aservice'
 import Swal from 'sweetalert2';
 
 export const AServiceTable = () => {
-    const navigate = useNavigate()
-    const [services, setServices] = useState([{}])
-    const token = localStorage.getItem('token')
-  
-    
-      const getServices = async () => {
-        try {
-          const {data} = await axios('http://localhost:3100/services/getServices', {
-            headers: {
-              'Authorization': token
-            }
-          })
-          console.log(data)
-          setServices(data.services)
-        } catch (err) {
-          console.error(err)
-        }
-      }
-      /* const { data } = await axios.delete(`http://localhost:2651/account/delete/${id}`, {
-         headers: {
-             'Authorization': token
-         }
-     })*/
-    
-     const deleteService = async (id) => {
-      try {
-        
-        const { data } = await axios.delete(`http://localhost:3100/services/delete/${id}`, {
-          headers: {
-            'Authorization': token
-          }
-        })
-        Swal.fire({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          icon: 'success'
-        }).then(() => {
-          getServices()
-        })
-      } catch (err) {
-        console.error(err)
-        alert(err.response.data.message)
-      }
-    }
-    
-      useEffect(() => getServices, [])
-    return (
-        <> 
-        <section id="content">
-		<main>
-    <Link to='/../dashboard/addAService'>
-            <i className="fa-solid fa-plus add"></i>
-            </Link>
-            <br/>
-            <br/>
+  const navigate = useNavigate()
+  const [services, setServices] = useState([{}])
+  const [loading, setLoading] = useState(true)
+  const token = localStorage.getItem('token')
 
-				<table>
-						<thead>
-							<tr>
-								<th>Nombre</th>
-								<th>Descripción</th>
-								<th>Costo</th>
-								<th>Categoria</th>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-							<tbody>
-              { 
-                  services.map(({ _id, name, description, cost,category}, index) => {
+
+  const getServices = async () => {
+    try {
+      const { data } = await axios('http://localhost:3100/services/getServices', {
+        headers: {
+          'Authorization': token
+        }
+      })
+      setServices(data.services)
+      console.log(services)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  useEffect(() => getServices, [])
+  return (
+    <>
+      <section id="content">
+        <main>
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Costo</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                  services.map(({ _id, name, description, price}, index) => {
                     return (
                       <tr key={index}>
                         <Aservice

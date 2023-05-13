@@ -5,8 +5,8 @@ export const DashBoardPage = () => {
     
     return (
         <>
-        <div>DashBoardPage</div>
-        <Outlet></Outlet>
+            <div>Dashborad</div>
+            <Outlet></Outlet>
         </>
     )
 }
