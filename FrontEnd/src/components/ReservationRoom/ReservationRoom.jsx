@@ -1,4 +1,4 @@
-export const ReservationRoom = ({dateStart, dateEnd, cost, user, hotel, room, additionalServices /* state*/}) => {
+export const ReservationRoom = ({dateStart, dateEnd, cost, user, hotel /* state*/}) => {
     return (
         <>
             <td>{dateStart}</td>
@@ -6,8 +6,6 @@ export const ReservationRoom = ({dateStart, dateEnd, cost, user, hotel, room, ad
             <td>{cost}</td>
             <td>{user}</td>
             <td>{hotel}</td>
-            <td>{room}</td>
-            <td>{additionalServices}</td>
         </>
     )
 }

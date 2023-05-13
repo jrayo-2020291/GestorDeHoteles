@@ -22,12 +22,22 @@ exports.getRooms = async(req,res)=>{
         return res.status(500).send({message:'Error geting rooms'})
     }
 }
+
 exports.get =async(req,res)=>{ try{
-    let rooms=await Room.find({})
+    let rooms=await Room.find({}).populate('hotel')
     return res.send({rooms})
 }catch(err){
     console.error(err);
     return res.status(500).send({message:'Error getting rooms'})
+}}
+
+exports.getById =async(req,res)=>{ try{
+    let roomId = req.params.id
+    let room=await Room.findOne({_id: roomId}).populate('hotel')
+    return res.send({room})
+}catch(err){
+    console.error(err);
+    return res.status(500).send({message:'Error getting room'})
 }}
 
 exports.getAvailability=async(req,res)=>{
@@ -78,9 +88,11 @@ exports.update = async(req,res)=>{
         let data=req.body;
         let params = {
             noRoom: data.room,
+            category: data.category,
             peopleCapacity: data.capacity,
             price: data.price,
-            availability:data.availability
+            availability:data.availability,
+            hotel: data.hotel
         }
         if(data.name=='')return res.send({message:'You have to add a valid name'})
         let existRoom = await Room.findOne({_id: roomId})

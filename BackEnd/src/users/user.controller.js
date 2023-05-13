@@ -117,10 +117,22 @@ exports.deleteOwnUser = async(req,res)=>{
     }
 }
 
+exports.delete = async(req,res)=>{
+    try {
+        let userId = req.params.id;
+        let deleteUser = await User.findOneAndDelete({_id:userId});
+        if(!deleteUser) return res.send({message:'User not found'})
+        return res.send({message:`Account with username ${deleteUser.username} delete sucessfully`})
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({message:'Error delete User'})
+    }
+}
+
 exports.get = async(req,res)=>{
     try {
         let users = await User.find({},{__v:0});
-        return res.send(users)
+        return res.send({users})
     } catch (err) {
         console.error(err);
         return res.status(500).send({message:'Error geting users'})
@@ -132,7 +144,7 @@ exports.getById = async(req,res)=>{
         let userId = req.params.id;
         let existUser = await User.findOne({_id:userId},{__v:0})
         if(!existUser) return res.send({message:'Not found User'})
-        return res.send(existUser)
+        return res.send({existUser})
     } catch (error) {
         console.error(err);
         return res.status(500).send({message:'Error get User'})

@@ -8,7 +8,7 @@ const {ensureAuth, isAdmin}=require('../services/authenticated')
 
 api.get('/', hotelsController.test);
 api.post('/addHotel', [ensureAuth,isAdmin], hotelsController.add)
-api.get('/get',[ensureAuth,isAdmin], hotelsController.get)
+api.get('/get',ensureAuth, hotelsController.get)
 api.get('/getById/:id',[ensureAuth,isAdmin],hotelsController.getById)
 api.post('/getByName', ensureAuth, hotelsController.getByName)
 api.post('/getbyLocation',ensureAuth,hotelsController.getByLocation)

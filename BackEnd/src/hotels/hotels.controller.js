@@ -39,8 +39,8 @@ exports.add = async(req,res)=>{
 exports.get = async(req,res)=>{
     try {
         let userId = req.user.sub;
-        let hotels = await Hotel.find({manager:userId});
-        return res.send(hotels);
+        let hotels = await Hotel.find();
+        return res.send({hotels});
     } catch (err) {
         console.error(err);
         return res.status(500).send({message:'Error getting Hotels'})
