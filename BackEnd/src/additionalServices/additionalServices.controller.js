@@ -19,8 +19,6 @@ exports.addService = async(req, res)=>{
         }
         let existService = await Services.findOne({name: params.name});
         if(existService) return res.send({message: 'This service already exist'});
-        if (data.category!=='ROOM'||'EVENT')
-        return res.send({message:'Unvalid category'})
         let newService = new Services(params);
         await newService.save();
         return res.status(201).send({message: 'New service created;', newService});

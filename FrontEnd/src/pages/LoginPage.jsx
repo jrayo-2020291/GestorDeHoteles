@@ -31,6 +31,7 @@ export const LoginPage = () => {
           timer: 2000
         })
         navigate('/dashboard')
+        
       }
     }catch(err){
       console.log(err)
