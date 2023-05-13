@@ -1,10 +1,13 @@
-const allDropdown = document.querySelectorAll('#sidebar .side-dropdown');
-const sidebar = document.getElementById('sidebar');
-const toggleSidebar = document.querySelector('nav .toggle-sidebar');
-const allSideDivider = document.querySelectorAll('#sidebar .divider');
-const profile = document.querySelector('nav .profile');
-const imgProfile = profile.querySelector('img');
-const dropdownProfile = profile.querySelector('.profile-link');
+if(!allDropdown){
+var allDropdown = document.querySelectorAll('#sidebar .side-dropdown');
+var sidebar = document.getElementById('sidebar');
+var toggleSidebar = document.querySelector('nav .toggle-sidebar');
+var allSideDivider = document.querySelectorAll('#sidebar .divider');
+var profile = document.querySelector('nav .profile');
+var imgProfile = profile.querySelector('img');
+var dropdownProfile = profile.querySelector('.profile-link');
+var stars = document.querySelectorAll(".stars i");
+}
 
 
 allDropdown.forEach(item=> {
@@ -103,7 +106,7 @@ imgProfile.addEventListener('click', function () {
 })
 
 
-const stars = document.querySelectorAll(".stars i");
+
 
 stars.forEach((star, index1) => {
   star.addEventListener("click", () => {

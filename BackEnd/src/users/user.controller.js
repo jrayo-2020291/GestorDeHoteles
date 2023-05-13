@@ -139,6 +139,16 @@ exports.get = async(req,res)=>{
     }
 }
 
+exports.getManager = async(req,res)=>{
+    try {
+        let users = await User.find({role:'MANAGER'},{__v:0});
+        return res.send(users)
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({message:'Error geting users'})
+    }
+}
+
 exports.getById = async(req,res)=>{
     try {
         let userId = req.params.id;

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import { Aservice } from './Aservice'
+import Swal from 'sweetalert2';
 
 export const AServiceTable = () => {
   const navigate = useNavigate()
-  const [services, setServices] = useState({})
+  const [services, setServices] = useState([{}])
   const [loading, setLoading] = useState(true)
   const token = localStorage.getItem('token')
 
@@ -17,15 +18,14 @@ export const AServiceTable = () => {
           'Authorization': token
         }
       })
-      console.log(data)
       setServices(data.services)
+      console.log(services)
     } catch (err) {
       console.error(err)
     }
   }
 
   useEffect(() => getServices, [])
-
   return (
     <>
       <section id="content">
@@ -47,23 +47,25 @@ export const AServiceTable = () => {
                         <Aservice
                           name={name}
                           description={description}
-                          price={price}
+                          cost={cost}
+                          category={category}
                         ></Aservice>
                         <td>
-                          <Link to={`/../updateA_Service/${_id}`}>
+                          <Link to={`/../dashboard/updateAService/${_id}`}>
                             <i className="fa-solid fa-pen-to-square button"></i>
                           </Link>
+                          <i onClick={()=>deleteService(_id)}className="fa sharp fa-solid fa-trash button"></i>
                         </td>
                       </tr>
                     )
                   })
-                }
-            </tbody>
-          </table>
-
-        </main>
-      </section>
-    </>
-
-  )
+                } 
+							</tbody>
+						</table>
+				  
+		</main>
+	</section>	
+        </>
+	
+    )
 }

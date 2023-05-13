@@ -38,8 +38,7 @@ exports.add = async(req,res)=>{
 
 exports.get = async(req,res)=>{
     try {
-        let userId = req.user.sub;
-        let hotels = await Hotel.find();
+        let hotels = await Hotel.find({});
         return res.send({hotels});
     } catch (err) {
         console.error(err);
@@ -147,20 +146,32 @@ exports.topHotel = async(req,res)=>{
     try{
         let hotelId = req.params.id;
         let data=req.body;
-        let params = {
-            name: data.name,
-            locationH: data.location,
-            availability:data.availability
-        }
-        if(data.name=='')
-        return res.send({message:'You have to add a valid name'})
+        if(data.name=='') return res.send({message:'You have to add a valid name'})
+  
         let hotel = await Hotel.findOne({name: data.name});
-        if(hotel)return res.send({message: 'This Hotel already exists'});
-        let updatedHotel = await Hotel.findOneAndUpdate({_id: hotelId}, params, {new: true});
+        if(hotel && hotel._id.toString() !== hotelId) { // validar si el hotel ya existe pero no es el mismo que se está actualizando
+          return res.send({message: 'This Hotel already exists'});
+        }
+        let existUsers = await Hotel.findOne({manager:data.manager});
+    if(existUsers){
+        return res.send({message:'User already has an hotel'})}
+  
+        let updatedHotel = await Hotel.findOneAndUpdate({_id: hotelId}, data, {new: true});
         if(!updatedHotel) return res.status(404).send({message: 'Hotel not found and not updated'});
-        return res.send({message: 'Hotel updated', updatedHotel});
-    }catch (err){
+        return res.send({message: 'Hotel updated', updatedHotel, name: data.name});
+    } catch (err){
         console.error(err);
         return res.status(500).send({message: 'Error updating hotel'})
+    }
+  }
+exports.delete = async(req, res)=>{
+    try{
+        let hotelId = req.params.id;
+        let deletedHotel = await Hotel.findOneAndDelete({_id: hotelId});
+        if(!deletedHotel) return res.status(404).send({message: 'Hotel not found and not deleted'});
+        return res.send({message: 'Hotel deleted', deletedHotel});
+    }catch(err){
+        console.error(err);
+        return res.status(500).send({message: 'Error deleting Hotel'});
     }
 }
