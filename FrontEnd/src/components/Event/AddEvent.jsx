@@ -10,6 +10,7 @@ export const AddEvent = () => {
 
     const addEvent = async(e)=>{
         try {
+            e.preventDefault()
             let event = {
                 name: document.getElementById('name').value,
                 description: document.getElementById('description').value,

@@ -10,11 +10,6 @@ export const EventTable = () => {
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
 
-    const LogOut = ()=>{
-		localStorage.clear()
-		navigate('/')
-	}
-
     const getEvents = async () => {
         try {
           const { data } = await axios('http://localhost:3100/events/getEvents', {

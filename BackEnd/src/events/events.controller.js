@@ -77,7 +77,6 @@ exports.update = async(req, res) =>{
         let eventExist = Events.findOne({_id: eventId});
         if(!eventExist) return res.status(404).send({message: 'Event not found'});
         let updatedEvent = await Events.findOneAndUpdate({_id: eventId}, params, {new: true});
-        if(!updatedEvent) return res.status(404).send({message: 'Event not found and not updated'});
         return res.send({message: 'Event updated', updatedEvent});
     }catch(err){
         console.error(err);
