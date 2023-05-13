@@ -51,7 +51,21 @@ export const UpdateHotel = () => {
         }
     };
 
+    const getHotel = async ()=>{
+        try {
+            const {data} = await axios(`http://localhost:3100/hotel/getById/${id}`,{
+                headers: {
+                    'Authorization': token
+                }
+            })
+            setHotel(data)
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     useEffect(() => getUsers, [])
+    useEffect(() => getHotel, [])
 
     return (
         <>
@@ -71,12 +85,12 @@ export const UpdateHotel = () => {
                         <br/>
                         <div>
                             <i className="fa-solid fa-id-card"></i>
-                            <input defaultValue={hotel.costPerHour} type="number" placeholder="numberRooms" className="form-control" id="numberRooms" required/>
+                            <input defaultValue={hotel.numberRooms} type="number" placeholder="numberRooms" className="form-control" id="numberRooms" required/>
                         </div>
                         <br/>
                         <div>
                             <i className="fa-solid fa-user-shield icon side">Manager</i>
-                            <select className="form-control" id="manager" required>
+                            <select defaultValue='' className="form-control" id="manager" required>
                                 {
                                     users.map(({ _id, name }, i) => {
                                         return (
