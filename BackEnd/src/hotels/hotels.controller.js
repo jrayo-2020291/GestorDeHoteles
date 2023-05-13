@@ -164,3 +164,14 @@ exports.topHotel = async(req,res)=>{
         return res.status(500).send({message: 'Error updating hotel'})
     }
 }
+exports.delete = async(req, res)=>{
+    try{
+        let hotelId = req.params.id;
+        let deletedHotel = await Hotel.findOneAndDelete({_id: hotelId});
+        if(!deletedHotel) return res.status(404).send({message: 'Hotel not found and not deleted'});
+        return res.send({message: 'Hotel deleted', deletedHotel});
+    }catch(err){
+        console.error(err);
+        return res.status(500).send({message: 'Error deleting Hotel'});
+    }
+}
