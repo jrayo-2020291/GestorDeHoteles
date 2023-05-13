@@ -4,6 +4,7 @@ import axios from 'axios'
 import {Event} from './Event'
 
 export const EventTable = () => {
+
     const [event,setEvent] = useState({})
     const [loading, setLoading] = useState(true)
     const token = localStorage.getItem('token')
@@ -21,7 +22,8 @@ export const EventTable = () => {
               'Authorization': token
             }
           })
-          setEvent(data.event)
+          console.log(data)
+          setEvent(data.events)
           setLoading(false)
           console.log(data)
         } catch (err) {
@@ -65,7 +67,7 @@ export const EventTable = () => {
                                     </tr>
                                 </thead>
                                     <tbody>
-                                        {/*
+                                        {
                                             event.map(({_id, name, description,costPerHour},index)=>{
                                                 return(
                                                     <tr key={index}>
@@ -82,7 +84,7 @@ export const EventTable = () => {
                                                         </td>
                                                     </tr>
                                                 )
-                                            })*/
+                                            })
                                         }
                                     </tbody>
                             </table>
