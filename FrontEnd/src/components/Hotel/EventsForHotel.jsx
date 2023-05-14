@@ -78,13 +78,7 @@ export const EventForHotel = () => {
                 icon: 'success',
                 timer: 2000
               })
-              if(data.message== 'This event is already registered at the hotel'){ 
-                Swal.fire({
-                    title: data.message ,
-                      icon: 'warning',
-                      timer: 2000
-                    })
-              }
+              getEventsForHotel()
             getEvents()
         } catch (err) {
           console.error(err)
