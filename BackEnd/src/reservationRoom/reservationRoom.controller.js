@@ -203,9 +203,11 @@ exports.getReservationsByHotel = async(req, res)=>{
 exports.updateReservation = async(req, res) =>{
     try{
         let reservationId = req.params.id;
+        console.log(reservationId)
         let data = req.body;
         let userId = req.user.sub;
         let reservationExist = await Reservation.findOne({_id: reservationId});
+        console.log(reservationExist.user)
         if(!reservationExist) return res.status(404).send({message: 'Reservation not found'});
         if((reservationExist.user).toString() !== (userId).toString()) return res.send({message: 'You can not update someone else reservation'});
         let newDateStart = new Date(data.dateStart);
