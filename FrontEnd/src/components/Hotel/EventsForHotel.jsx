@@ -1,18 +1,34 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import {Event} from './Event'
+import { useNavigate, Link, useParams } from 'react-router-dom'
+import { Event } from '../Event/Event';
+import Swal from 'sweetalert2';
 
-export const EventTable = () => {
-
+export const EventForHotel = () => {
+    const [events,setEvents] = useState([{}])
     const [event,setEvent] = useState([{}])
     const [loading, setLoading] = useState(true)
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
+    const {id} = useParams();
 
     const getEvents = async () => {
         try {
           const { data } = await axios('http://localhost:3100/events/getEvents', {
+            headers: {
+              'Authorization': token
+            }
+          })
+          setEvents(data.events)
+          setLoading(false)
+        } catch (err) {
+          console.error(err)
+        }
+      };
+
+    const getEventsForHotel = async () => {
+        try {
+          const { data } = await axios(`http://localhost:3100/hotel/getById/${id}`, {
             headers: {
               'Authorization': token
             }
@@ -22,27 +38,64 @@ export const EventTable = () => {
         } catch (err) {
           console.error(err)
         }
-      };
+    };
 
-    const deleteEvent = async (id) => {
+    const deleteEvent = async (idEvent) => {
         try {
           let confirmDelete = confirm('Estás seguro de eliminar este evento?')
           if (confirmDelete) {
-            const { data } = await axios.delete(`http://localhost:3100/events/delete/${id}`, {
+            const { data } = await axios.put(`http://localhost:3100/hotel/deleteEvent/${id}`, {event:idEvent},{
               headers: {
                   'Authorization': token
               }
           })
-            getEvents()
+            getEventsForHotel();
+            Swal.fire({
+                title: data.message || 'Deleting sucessfully',
+                icon: 'success',
+                timer: 2000
+              })
           }
         } catch (err) {
           console.error(err)
           alert(err.response.data.message)
         }
     }
-    useEffect(() => getEvents, [])
-    return (
+    
+    const addEvent = async(e) => {
+        try {
+            e.preventDefault()
+            let event = {
+                event: document.getElementById('event').value
+            }
+            const { data } = await axios.put(`http://localhost:3100/hotel/addEvent/${id}`, event,{
+                headers: {
+                    'Authorization': token
+                }
+            })
+            Swal.fire({
+                title: data.message || 'Adding event sucessfully',
+                icon: 'success',
+                timer: 2000
+              })
+              if(data.message== 'This event is already registered at the hotel'){ 
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'warning',
+                      timer: 2000
+                    })
+              }
+            getEvents()
+        } catch (err) {
+          console.error(err)
+          alert(err.response.data.message)
+        }
+    }
 
+    useEffect(() => getEventsForHotel, [])
+    useEffect(() => getEvents, [])
+
+    return(
         <>
             <section id="content">
                 <main>
@@ -57,10 +110,6 @@ export const EventTable = () => {
                         <div className="menu">
                             <div className="sub-menu">
                             </div>
-                            <br/>
-                            <Link to ='../addEvent'>
-                                <i className="fa-solid fa-plus add"></i>
-                            </Link>
                             <br/>
                             <br/>
                             <table>
@@ -83,17 +132,37 @@ export const EventTable = () => {
                                                             costPerHour={costPerHour}
                                                         ></Event>
                                                         <td>
-                                                            <Link to={`../updateEvent/${_id}`}>
-                                                                <i className="fa-solid fa-pen button"></i>
-                                                            </Link>
                                                             <i onClick={()=>deleteEvent(_id)} className="fa-solid fa-trash-can button"></i>   
                                                         </td>
                                                     </tr>
+                                                    
                                                 )
                                             })
                                         }
                                     </tbody>
                             </table>
+                            <br />
+                            <br />
+                            <br />
+                            <form>
+                                <div>
+                                    <i className="fa-solid fa-user-shield icon side">Eventos</i>
+                                    <select className="form-control" id="event" required>
+                                        {
+                                            events.map(({ _id, name }, i) => {
+                                                return (
+                                                    <option key={i} value={_id}>{name}</option>
+                                                )
+                                            })
+                                        }
+                                    </select>
+                                </div>
+                                <br />
+                                <button onClick={(e) => addEvent(e)} type="submit" className="btn btn-primary">Add</button>
+                                <Link to='/dashboard/hotel'>
+                                    <button  type="submit" className="btn btn-primary">Volver</button>
+                                </Link>
+                            </form>
                         </div>
                     </div>
                 </main>

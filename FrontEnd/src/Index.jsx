@@ -26,6 +26,7 @@ import { NotFoundPage } from './pages/NotFoundPage.jsx'
 import { LoginPage } from './pages/LoginPage.jsx'
 import { HomePage } from './pages/HomePage.jsx'
 import { DashBoardPage } from './pages/DashBoardPage.jsx'
+import {EventForHotel} from './components/Hotel/EventsForHotel.jsx'
 
 export const AuthContext = createContext();
 
@@ -110,6 +111,10 @@ export const Index = () => {
                         {
                             path: 'updateHotel/:id',
                             element: <UpdateHotel></UpdateHotel>
+                        },
+                        {
+                            path: 'hotel/event/:id',
+                            element: <EventForHotel></EventForHotel>
                         },
                         {
                             path: 'reservationRoom',

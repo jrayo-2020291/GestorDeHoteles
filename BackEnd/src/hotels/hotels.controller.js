@@ -62,7 +62,7 @@ exports.addEvent = async(req,res)=>{
             {$push:{events:req.body.event}},
             {new:true});
         if(!updateHotel) return res.send({message:'hotel not found and not update'});
-        return res.send({message:'updating sucessfully',updateHotel})
+        return res.send({message:'Adding event sucessfully',updateHotel})
     } catch (err) {
         console.error(err);
         return res.status(500).send({message:'Error add Event to Hotel'})
@@ -79,7 +79,7 @@ exports.deleteEvent = async(req,res)=>{
             {$pullAll:{events:[req.body.event]}},
             {new:true});
         if(!updateHotel) return res.send({message:'hotel not found and not update'});
-        return res.send({message:'updating sucessfully',updateHotel})
+        return res.send({message:'Deleting sucessfully',updateHotel})
     } catch (err) {
         console.error(err);
         return res.status(500).send({message:'Error deleting event to hotel'})
@@ -125,7 +125,7 @@ exports.getById = async(req,res)=>{
         let hotelId = req.params.id;
         let data = req.body;
         if(data.location==='') return res.send({message:'You must enter a location'});
-        let hotel = await Hotel.findOne({_id:hotelId},{__v:0}).populate('events',['name']);
+        let hotel = await Hotel.findOne({_id:hotelId},{__v:0}).populate('events');
         if(!hotel) return res.send({message:'Hotel not found'})
         return res.send(hotel);
     } catch (err) {
@@ -152,10 +152,12 @@ exports.topHotel = async(req,res)=>{
         if(hotel && hotel._id.toString() !== hotelId) { // validar si el hotel ya existe pero no es el mismo que se está actualizando
           return res.send({message: 'This Hotel already exists'});
         }
-        let existUsers = await Hotel.findOne({manager:data.manager});
-    if(existUsers){
-        return res.send({message:'User already has an hotel'})}
+        if(data.user!==hotel.user){
+            let existUsers = await Hotel.findOne({manager:data.manager});
+            if(existUsers){
+                return res.send({message:'User already has an hotel'})}
   
+        }
         let updatedHotel = await Hotel.findOneAndUpdate({_id: hotelId}, data, {new: true});
         if(!updatedHotel) return res.status(404).send({message: 'Hotel not found and not updated'});
         return res.send({message: 'Hotel updated', updatedHotel, name: data.name});

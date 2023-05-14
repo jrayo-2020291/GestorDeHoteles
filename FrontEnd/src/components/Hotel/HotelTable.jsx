@@ -24,11 +24,11 @@ export const HotelTable = () => {
         }
       };
 
-      /*const deleteHotel = async (id) => {
+      const deleteHotel = async (id) => {
         try {
           let confirmDelete = confirm('Estás seguro de eliminar este evento?')
           if (confirmDelete) {
-            const { data } = await axios.delete(`http://localhost:3100/hotel/deleteHotel/${id}`, {
+            const { data } = await axios.delete(`http://localhost:3100/hotel/delete/${id}`, {
               headers: {
                   'Authorization': token
               }
@@ -39,7 +39,7 @@ export const HotelTable = () => {
           console.error(err)
           alert(err.response.data.message)
         }
-      }*/
+      }
 
       useEffect(() => getHotels, [])
 
@@ -71,6 +71,7 @@ export const HotelTable = () => {
                                         <th>Ubicación</th>
                                         <th>Calificación</th>
                                         <th>Habitaciones</th>
+                                        <th>Services</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -87,16 +88,22 @@ export const HotelTable = () => {
                                                             numberRooms={numberRooms}
                                                         ></Hotel>
                                                         <td>
+                                                            <Link to={`../hotel/event/${_id}`}>
+                                                                <i className="fa-solid fa-clipboard button"></i>
+                                                            </Link>
+                                                        </td>
+                                                        <td>
                                                             <Link to={`../updateHotel/${_id}`}>
                                                                 <i className="fa-solid fa-pen button"></i>
                                                             </Link>
-                                                            <i  className="fa-solid fa-trash-can button"></i>  
+                                                            <i onClick={() => deleteHotel(_id)} className="fa sharp fa-solid fa-trash button"></i> 
                                                         </td>
                                                     </tr>
                                                 )
                                             })
                                         }
                                     </tbody>
+
                                 </table>
                         </div> 
                     </div>
