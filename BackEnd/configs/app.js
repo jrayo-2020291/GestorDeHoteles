@@ -14,6 +14,7 @@ const hotelsRoutes = require('../src/hotels/hotels.routes')
 const roomRoutes = require('../src/rooms/rooms.routes')
 const activitiesRoutes = require('../src/activities/activities.routes')
 const reservationRoomRoutes = require('../src/reservationRoom/reservationRoom.routes')
+const reservationEventRoutes = require('../src/reservationEvent/reservationEvent.routes')
 
 //configurar el servidor de http en express
 app.use(express.urlencoded({extended:false}));
@@ -30,6 +31,7 @@ app.use('/hotel', hotelsRoutes)
 app.use('/room',roomRoutes)
 app.use('/activities',activitiesRoutes)
 app.use('/reservationRoom', reservationRoomRoutes);
+app.use('/reservationEvent', reservationEventRoutes);
 
 //fucion para levantar el servidor
 exports.initServer = ()=>{

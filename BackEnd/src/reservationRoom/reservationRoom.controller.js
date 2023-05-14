@@ -238,20 +238,22 @@ exports.updateReservation = async(req, res) =>{
     }
 }
 
-exports.setState = async(req, res)=>{
+exports.setState = async()=>{
     try{
         let reservation = await Reservation.find()
         let date = new Date()
         for(let i = 0; i < reservation.length; i++){
-            let time = reservation[i].dateStart - date;
-            let time1 = reservation[i].dateEnd - date
+            let time = (reservation[i].dateStart) - (date);
+            let time1 = (reservation[i].dateEnd) - (date);
             if(time < 0 && time1 > 0){
-                let updatedReservation = await Reservation.findOneAndUpdate({_id: reservation[i]._id}, {state: 'ACTIVE'}, {new: true});
-            }let updatedReservation  = await Reservation.findOneAndUpdate({id: reservation[i]._id}, {state: 'DISABLED'}, {new:true});
+                let updatedReservation = await Reservation.findOneAndUpdate({_id: reservation[i]._id}, {state: "ACTIVE"}, {new: true});
+            }
+            if(time1 <0 && time>0){
+                let updatedReservation1  = await Reservation.findOneAndUpdate({_id: reservation[i]._id}, {state: "DISABLED"}, {new:true});
+            }
         }
     }catch(err){
-        console.error(err);
-        return res.status(500).send({message: 'Error changing state'});
+        return console.error(err);
     }
 }
 
@@ -264,7 +266,7 @@ exports.changeRooms = async(req, res) =>{
                 for(let a= 0; a<reservation[i].rooms.length; a++){
                     let reservation1 = await Reservation.findOne({_id: reservation[i]._id})
                     let idRoom = reservation1.rooms[a].room;
-                    let roomDisabled = await Room.findOneAndUpdate({_id: idRoom}, {state: 'NOTAVAILABLE'}, {new:true})
+                    let roomDisabled = await Room.findOneAndUpdate({_id: idRoom}, {availability: 'NOTAVAILABLE'}, {new:true})
                 }
             }
             if((reservation[i].state).toString() == 'DISABLED'){
