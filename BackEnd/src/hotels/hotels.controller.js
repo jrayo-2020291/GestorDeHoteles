@@ -149,14 +149,8 @@ exports.topHotel = async(req,res)=>{
         if(data.name=='') return res.send({message:'You have to add a valid name'})
   
         let hotel = await Hotel.findOne({name: data.name});
-        if(hotel && hotel._id.toString() !== hotelId) { // validar si el hotel ya existe pero no es el mismo que se está actualizando
+        if(hotel && hotel._id.toString() !== hotelId) { 
           return res.send({message: 'This Hotel already exists'});
-        }
-        if(data.user!==hotel.user){
-            let existUsers = await Hotel.findOne({manager:data.manager});
-            if(existUsers){
-                return res.send({message:'User already has an hotel'})}
-  
         }
         let updatedHotel = await Hotel.findOneAndUpdate({_id: hotelId}, data, {new: true});
         if(!updatedHotel) return res.status(404).send({message: 'Hotel not found and not updated'});

@@ -9,7 +9,25 @@ export const AServiceTable = () => {
   const [services, setServices] = useState([{}])
   const [loading, setLoading] = useState(true)
   const token = localStorage.getItem('token')
-
+  const deleteService = async (id) => {
+    try {
+      const { data } = await axios.delete(`http://localhost:3100/services/delete/${id}`, {
+        headers: {
+          'Authorization': token
+        }
+      })
+      Swal.fire({
+        title: 'Deleted!',
+        text: 'Your file has been deleted.',
+        icon: 'success'
+      }).then(() => {
+        getServices()
+      })
+    } catch (err) {
+      console.error(err)
+      alert(err.response.data.message)
+    }
+  }
 
   const getServices = async () => {
     try {
@@ -30,6 +48,11 @@ export const AServiceTable = () => {
     <>
       <section id="content">
         <main>
+        <Link to='/../dashboard/addAService'>
+          <i className="fa-solid fa-plus add"></i>
+          </Link>
+          <br />
+          <br />
           <table>
             <thead>
               <tr>
@@ -41,7 +64,7 @@ export const AServiceTable = () => {
             </thead>
             <tbody>
               {
-                  services.map(({ _id, name, description, price}, index) => {
+                  services.map(({ _id, name, description, cost,category}, index) => {
                     return (
                       <tr key={index}>
                         <Aservice

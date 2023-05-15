@@ -81,8 +81,12 @@ exports.update = async(req, res) =>{
         }
         let serviceExist = await Services.findOne({_id: serviceId});
         if(!serviceExist) return res.status(404).send({message: 'Service not found'});
-        let service = await Services.findOne({name: data.name});
-        if(service)return res.send({message: 'This Service already exists'});
+        
+        let services = await Services.findOne({name: data.name});
+        if(services && services._id.toString() !== serviceId) { 
+          return res.send({message: 'This Service already exists'});
+        }
+  
         let updatedService = await Services.findOneAndUpdate({_id: serviceId}, params, {new: true});
         if(!updatedService) return res.status(404).send({message: 'Service not found and not updated'});
         return res.send({message: 'Service updated:', updatedService});
