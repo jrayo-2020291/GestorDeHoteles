@@ -65,8 +65,10 @@ export const AddAService = () => {
                 <br/>
 
                 <div>
-                    <i className="fa-solid fa-pencil"></i>
-                    <input type="text" placeholder="Category" id='category'/>
+                <select id="category">
+                    <option value="ROOM" selected>ROOM</option>
+                    <option value="EVENT">EVENT</option>
+</select>
                 </div>
                 <br/>
                 <button onClick={(e)=>  addService(e)} type="submit" className="btn btn-primary">Add</button>
