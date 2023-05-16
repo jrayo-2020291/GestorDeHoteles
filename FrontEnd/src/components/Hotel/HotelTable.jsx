@@ -112,7 +112,7 @@ export const HotelTable = () => {
                                     <Link to='../addHotel'>
                                         <i className="fa-solid fa-plus add"></i>
                                     </Link>
-                                ):(<br></br>)
+                                ):(<></>)
                             }
                             <br/>
                             <br/>
@@ -178,6 +178,23 @@ export const HotelTable = () => {
                                 </table>
                         </div> 
                     </div>
+
+
+
+
+
+
+                    <div>
+                        Grafica
+                    </div>
+
+
+
+
+
+
+
+
                 </main>
 	        </section>
         </>
