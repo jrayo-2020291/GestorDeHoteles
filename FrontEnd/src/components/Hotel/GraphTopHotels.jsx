@@ -42,7 +42,7 @@ export const GraphTopHotels = () => {
             labels: nombres,
             datasets: [
                 {
-                    label: 'Hoteles',
+                    label: 'Presiona para ver',
                     data: datos,
                     backgroundColor: 'rgba(75,192,192,1)',
                     borderColor: 'rgba(0,0,0,1)',
