@@ -12,6 +12,7 @@ api.get('/get',ensureAuth,roomsController.get);
 api.get('/get/:id',ensureAuth,roomsController.getById);
 api.put('/update/:id',[ensureAuth,isAdmin],roomsController.update)
 api.get('/getA/:id', ensureAuth,roomsController.getAvailability);
+api.post('/getByHotel', ensureAuth, roomsController.getByHotel)
 
 
 module.exports = api;

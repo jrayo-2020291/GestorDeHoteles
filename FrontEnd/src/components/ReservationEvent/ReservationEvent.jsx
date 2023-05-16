@@ -1,13 +1,12 @@
-export const ReservationEvent = ({date, cost, hours,user,hotel,event,additionalServices})=>{ 
+export const ReservationEvent = ({dateEvent, cost, hoursEvent,user,hotel,event,additionalServices})=>{ 
     return (
         <>
-            <td>{date}</td>
+            <td>{dateEvent}</td>
             <td>{cost}</td>
-            <td>{hours}</td>
+            <td>{hoursEvent}</td>
             <td>{user}</td>
             <td>{hotel}</td>
             <td>{event}</td>
-            <td>{additionalServices}</td>
         </>
     )
 }

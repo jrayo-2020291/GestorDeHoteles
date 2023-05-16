@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
+import { AddService } from './components/ReservationEvent/AddService.jsx'
 import { AServiceTable } from './components/AServices/AServiceTable.jsx'
 import { AddAService } from './components/AServices/AddAService.jsx'
 import { UpdateAService } from './components/AServices/UpdateAService.jsx'
@@ -139,6 +140,10 @@ export const Index = () => {
                         {
                             path: 'addReservationEvent',
                             element: loggedIn ? <AddReservationEvent></AddReservationEvent> : <LoginPage></LoginPage>
+                        },
+                        {
+                            path: 'addService/:id',
+                            element:<AddService></AddService>
                         },
                         {
                             path: 'updateReservationEvent/:id',

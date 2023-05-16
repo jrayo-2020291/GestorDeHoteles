@@ -55,11 +55,11 @@ export const AddReservationEvent = () => {
                 }
             })
             Swal.fire({
-                title: data.message || 'Service created',
+                title: data.message || 'Reservation created',
                 icon: 'success',
                 timer: 2000
               })
-              if(data.message== 'This Reservation already exist'){ 
+              if(data.message== 'Only clients can have a reservation'){ 
                 Swal.fire({
                     title: data.message ,
                       icon: 'warning',

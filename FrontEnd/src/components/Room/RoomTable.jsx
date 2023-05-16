@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Room } from './Room'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
 
 
 export const RoomTable = () => {
@@ -10,10 +11,48 @@ export const RoomTable = () => {
   const navigate = useNavigate()
   const [room, setRoom] = useState([{}])
   const token = localStorage.getItem('token')
+  const [hotels, setHotels] = useState([{}])
 
   const restringir = () => {
     if (role === 'ADMIN' || role === 'MANAGER') {
       setShow(true)
+    }
+  }
+
+  const getHotels = async () => {
+    try {
+      const { data } = await axios(`http://localhost:3100/hotel/get`, {
+        headers: {
+          'Authorization': token
+        }
+      })
+      setHotels(data.hotels)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  const getByHotel = async (e) => {
+    try {
+      e.preventDefault()
+      let form = {
+        hotel: document.getElementById('inputHotel').value
+      }
+      if (form.hotel === 'ALL'){
+        return getRoom()
+        
+      }
+      const { data } = await axios.post(`http://localhost:3100/room/getByHotel`, form, {
+        headers: {
+          'Authorization': token
+        }
+      })
+      if(data.rooms){
+        setRoom(data.rooms)
+      }
+      
+    } catch (err) {
+      console.error(err)
     }
   }
 
@@ -31,6 +70,11 @@ export const RoomTable = () => {
             'Authorization': token
           }
         })
+        Swal.fire({
+          title: 'Added!',
+          text: 'Room deleted Succesfully.',
+          icon: 'success'
+        }),
         getRoom()
       }
     } catch (err) {
@@ -53,6 +97,7 @@ export const RoomTable = () => {
   }
   useEffect(() => getRoom, [])
   useEffect(() => restringir, [])
+  useEffect(() => getHotels, [])
 
   return (
     <>
@@ -60,14 +105,33 @@ export const RoomTable = () => {
         {
           show ? (
             <>
-            <br />
-            <Link to='../addReservationRoom'>
-              <i className="fa-solid fa-plus add"></i>
-            </Link>
+              <br />
+              <Link to='../addReservationRoom'>
+                <i className="fa-solid fa-plus add"></i>
+              </Link>
+              <br />
+              <br />
             </>
           ) : (<></>)
         }
         <main>
+          <form action="#">
+            <div className="form-group">
+              <i className="fa-solid fa-user-shield icon side">Hotels</i>
+              <select className="form-control" id="inputHotel"  required>
+                {
+                  hotels.map(({ _id, name }, i) => {
+                    return (
+                      <option key={i} value={_id}>{name}</option>
+                    )
+                  })
+                }
+                  <option value="ALL">Todos</option>
+              </select>
+              <button onClick={(e)=>getByHotel(e)}>Buscar</button>
+            </div>
+          </form>
+          <br />
           <table>
             <thead>
               <tr>

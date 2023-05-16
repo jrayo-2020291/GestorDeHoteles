@@ -10,6 +10,7 @@ export const AServiceTable = () => {
   const [loading, setLoading] = useState(true)
   const token = localStorage.getItem('token')
   const [show, setShow] = useState(false)
+  const role = localStorage.getItem('role')
 
   const restringir = () => {
     if (role === 'ADMIN' || role === 'MANAGER') {

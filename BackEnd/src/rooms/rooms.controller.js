@@ -24,6 +24,18 @@ exports.getRooms = async(req,res)=>{
     }
 }
 
+exports.getByHotel = async(req,res)=>{
+    try {
+        let data = req.body;
+        if(data.hotel==='') return res.send({message:'Does not exist Rooms'})
+        let rooms = await Room.find({hotel: data.hotel}).populate('hotel')
+        return res.send({rooms})
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({message:'Error search Rooms'})
+    }
+}
+
 exports.get =async(req,res)=>{ try{
     let rooms=await Room.find({}).populate('hotel')
     return res.send({rooms})

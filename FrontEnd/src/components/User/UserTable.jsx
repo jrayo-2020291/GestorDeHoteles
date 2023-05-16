@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { User } from './User'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
 
 
 export const UserTable = () => {
+  const role = localStorage.getItem('role')
   const navigate = useNavigate()
   const [user, setUser] = useState([{}])
   const token = localStorage.getItem('token')
@@ -30,7 +32,17 @@ export const UserTable = () => {
             'Authorization': token
           }
         })
-        getUser()
+        Swal.fire({
+          title: 'Deleted!',
+          text: data.message,
+          icon: 'success'
+        })
+
+        if(role === 'CLIENT'){
+          LogOut()
+        } else {
+          getUser()
+        }    
       }
     } catch (err) {
       console.error(err)
@@ -45,7 +57,11 @@ export const UserTable = () => {
           'Authorization': token
         }
       })
-      setUser(data.users)
+      if (role === 'ADMIN' || role === 'MANAGER') {
+        setUser(data.users)
+      } else {
+        setUser(data.user2)
+      }
     } catch (err) {
       console.error(err)
     }
@@ -95,18 +111,13 @@ export const UserTable = () => {
                         phone={phone}
                         role={role}
                       ></User>
-                      {
-                        show ? (
-                          <>
-                            <td>
-                              <Link to={`../updateUser/${_id}`}>
-                                <i className="fa-solid fa-pen-to-square button"></i>
-                              </Link>
-                              <i onClick={() => deleteUser(_id)} className="fa sharp fa-solid fa-trash button"></i>
-                            </td>
-                          </>
-                        ) : (<></>)
-                      }
+                      <td>
+                        <Link to={`../updateUser/${_id}`}>
+                          <i className="fa-solid fa-pen-to-square button"></i>
+                        </Link>
+                        <i onClick={() => deleteUser(_id)} className="fa sharp fa-solid fa-trash button"></i>
+                      </td>
+
                     </tr>
                   )
                 })

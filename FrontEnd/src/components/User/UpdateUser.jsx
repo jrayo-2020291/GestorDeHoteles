@@ -2,6 +2,8 @@ import React from 'react'
 import axios from "axios"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
+import Swal from 'sweetalert2';
+
 
 export const UpdateUser = () => {
     const navigate = useNavigate()
@@ -30,16 +32,19 @@ export const UpdateUser = () => {
                 surname: document.getElementById('inputSurname').value,
                 username: document.getElementById('inputUsername').value,
                 email: document.getElementById('inputEmail').value,
-                phone: document.getElementById('inputPhone').value,
-                role: document.getElementById('inputRole').value,
+                phone: document.getElementById('inputPhone').value
             }
             const { data } = await axios.put(`http://localhost:3100/user/updateAccount/${id}`, update, {
                 headers: {
                     'Authorization': token
                 }
             })
-            alert(data.message)
-            navigate('/dashboard/user')
+            Swal.fire({
+                title: 'Updated!',
+                text: data.message,
+                icon: 'success'
+              }),
+                          navigate('/dashboard/user')
         } catch (err) {
             alert(err.response.data.message)
         }
@@ -75,11 +80,6 @@ export const UpdateUser = () => {
                     <div>
                         <i className="fa-solid fa-tag"></i>
                         <input  type="text"  id='inputPhone' className="form-control" defaultValue={user.phone} required />
-                    </div>
-                    <br />
-                    <div>
-                        <i className="fa-solid fa-tag"></i>
-                        <input  type="text" id='inputRole' className="form-control" defaultValue={user.role} required />
                     </div>
                     <br />
                     <button onClick={(e) => updateUser(e)} type="submit" className="btn btn-outline-primary">update</button>
