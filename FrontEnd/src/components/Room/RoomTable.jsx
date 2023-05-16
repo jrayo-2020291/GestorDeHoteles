@@ -38,19 +38,19 @@ export const RoomTable = () => {
       let form = {
         hotel: document.getElementById('inputHotel').value
       }
-      if (form.hotel === 'ALL'){
+      if (form.hotel === 'ALL') {
         return getRoom()
-        
+
       }
       const { data } = await axios.post(`http://localhost:3100/room/getByHotel`, form, {
         headers: {
           'Authorization': token
         }
       })
-      if(data.rooms){
+      if (data.rooms) {
         setRoom(data.rooms)
       }
-      
+
     } catch (err) {
       console.error(err)
     }
@@ -75,7 +75,7 @@ export const RoomTable = () => {
           text: 'Room deleted Succesfully.',
           icon: 'success'
         }),
-        getRoom()
+          getRoom()
       }
     } catch (err) {
       console.error(err)
@@ -102,79 +102,96 @@ export const RoomTable = () => {
   return (
     <>
       <section id="content">
-        {
-          show ? (
-            <>
-              <br />
-              <Link to='../addReservationRoom'>
-                <i className="fa-solid fa-plus add"></i>
-              </Link>
-              <br />
-              <br />
-            </>
-          ) : (<></>)
-        }
         <main>
-          <form action="#">
-            <div className="form-group">
-              <i className="fa-solid fa-user-shield icon side">Hotels</i>
-              <select className="form-control" id="inputHotel"  required>
-                {
-                  hotels.map(({ _id, name }, i) => {
-                    return (
-                      <option key={i} value={_id}>{name}</option>
-                    )
-                  })
-                }
-                  <option value="ALL">Todos</option>
-              </select>
-              <button onClick={(e)=>getByHotel(e)}>Buscar</button>
-            </div>
-          </form>
+          <h1 className="title">Usuarios</h1>
+          <ul className="breadcrumbs">
+            {
+              show ? (
+                <li><a href="#">Administrador</a></li>
+              ) : (<li><a href="#">User</a></li>)
+            }
+            <li className="divider">/</li>
+            <li><a href="#" className="active">Gestor de Hoteles</a></li>
+          </ul>
           <br />
-          <table>
-            <thead>
-              <tr>
-                <th>No.Habitación</th>
-                <th>Category</th>
-                <th>Capacidad</th>
-                <th>precio</th>
-                <th>Disponibilidad</th>
-                <th>Hotel</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                room.map(({ _id, noRoom, category, peopleCapacity, price, availability, hotel }, index) => {
-                  return (
-                    <tr key={index}>
-                      <Room
-                        noRoom={noRoom}
-                        category={category}
-                        peopleCapacity={peopleCapacity}
-                        price={price}
-                        availability={availability}
-                        hotel={hotel?.name}
-                      ></Room>
-                      {
-                        show ? (
-                          <td>
-                            <Link to={`../updateRoom/${_id}`}>
-                              <i className="fa-solid fa-pen-to-square button"></i>
-                            </Link>
-                            <i onClick={() => deleteRoom(_id)} className="fa sharp fa-solid fa-trash button"></i>
-                          </td>
-                        ) : (<td></td>)
-                      }
+          {
+            show ? (
+              <>
+                <br />
+                <Link to='../addReservationRoom'>
+                  <i className="fa-solid fa-plus add"></i>
+                </Link>
+                <br />
+                <br />
+              </>
+            ) : (<></>)
+          }
+          <div className="info-data">
+            <div className="menu">
+              <div className="sub-menu">
+              </div>
+              <br />
+              <form action="#">
+                <div className="form-group">
+                  <i className="fa-solid fa-user-shield icon side">Hotels</i>
+                  <select className="form-control" id="inputHotel" required>
+                    {
+                      hotels.map(({ _id, name }, i) => {
+                        return (
+                          <option key={i} value={_id}>{name}</option>
+                        )
+                      })
+                    }
+                    <option value="ALL">Todos</option>
+                  </select>
+                  <button onClick={(e) => getByHotel(e)}>Buscar</button>
+                </div>
+              </form>
+              <br />
+              <table>
+                <thead>
+                  <tr>
+                    <th>No.Habitación</th>
+                    <th>Category</th>
+                    <th>Capacidad</th>
+                    <th>precio</th>
+                    <th>Disponibilidad</th>
+                    <th>Hotel</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    room.map(({ _id, noRoom, category, peopleCapacity, price, availability, hotel }, index) => {
+                      return (
+                        <tr key={index}>
+                          <Room
+                            noRoom={noRoom}
+                            category={category}
+                            peopleCapacity={peopleCapacity}
+                            price={price}
+                            availability={availability}
+                            hotel={hotel?.name}
+                          ></Room>
+                          {
+                            show ? (
+                              <td>
+                                <Link to={`../updateRoom/${_id}`}>
+                                  <i className="fa-solid fa-pen-to-square button"></i>
+                                </Link>
+                                <i onClick={() => deleteRoom(_id)} className="fa sharp fa-solid fa-trash button"></i>
+                              </td>
+                            ) : (<td></td>)
+                          }
 
 
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </table>
-
+                        </tr>
+                      )
+                    })
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
         </main>
       </section>
     </>
