@@ -10,6 +10,7 @@ api.get('/', hotelsController.test);
 api.post('/addHotel', [ensureAuth,isAdmin], hotelsController.add)
 api.get('/get',ensureAuth,hotelsController.get)
 api.get('/getById/:id',ensureAuth,hotelsController.getById)
+api.get('/getTop',ensureAuth,hotelsController.topHotel)
 api.post('/getByName', ensureAuth, hotelsController.getByName)
 api.post('/getbyLocation',ensureAuth,hotelsController.getByLocation)
 api.put('/addEvent/:id',[ensureAuth,isAdmin], hotelsController.addEvent)

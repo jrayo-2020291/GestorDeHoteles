@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import {Hotel} from './Hotel'
+import { GraphTopHotels } from './GraphTopHotels'
 
 export const HotelTable = () => {
     const role = localStorage.getItem('role')
@@ -178,23 +179,14 @@ export const HotelTable = () => {
                                 </table>
                         </div> 
                     </div>
-
-
-
-
-
-
-                    <div>
-                        Grafica
-                    </div>
-
-
-
-
-
-
-
-
+                    <br />
+                    <br />
+                    <br />
+                    <GraphTopHotels></GraphTopHotels>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                 </main>
 	        </section>
         </>
