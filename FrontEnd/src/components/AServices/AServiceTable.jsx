@@ -59,6 +59,7 @@ export const AServiceTable = () => {
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Costo</th>
+                <th>Category</th>
                 <th>Acciones</th>
               </tr>
             </thead>

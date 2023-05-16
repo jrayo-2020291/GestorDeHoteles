@@ -38,6 +38,18 @@ exports.getServices = async(req, res)=>{
     }
 }
 
+exports.getByCategory=async(req,res)=>{
+    try{
+        let data = req.body;
+        let categories = data.category;
+        let services = await Services.find({category:categories})
+        return res.send({services})
+    }catch(err){
+        console.log(err);
+        return res.status(500).send({message:'Error getting categories'})
+    }
+}
+
 exports.getServiceById = async(req, res)=>{
     try{
         let serviceId = req.params.id;

@@ -7,18 +7,49 @@ import Swal from 'sweetalert2';
 
 export const AddReservationEvent = () => {
     const token = localStorage.getItem('token')
+    const [hotel, setHotels] = useState([{}])
+    const [events, setEvents] = useState([{}])
     const title = 'ADD RESERVATION'
     const navigate = useNavigate()
-    const addService = async(e)=>{
+
+    const getHotels = async()=>{
+        try{
+            const { data } = await axios('http://localhost:3100/hotel/get' ,
+            {
+                headers: {
+                    'Authorization': token
+                }
+            })
+            setHotels(data.hotels)
+        }catch(err){
+            console.error(err);
+        }
+    }
+
+    const getEvents = async()=>{
+        try{
+            const { data } = await axios('http://localhost:3100/events/getEvents' ,
+            {
+                headers: {
+                    'Authorization': token
+                }
+            })
+            setEvents(data.events)
+        }catch(err){
+            console.error(err);
+        }
+    }
+    const addReservation = async(e)=>{
         try{
             e.preventDefault()
-            let service = {
-                name: document.getElementById('name').value,
+            let reservation = {
+                dateEvent: document.getElementById('date').value,
                 cost: document.getElementById('cost').value,
-                description: document.getElementById('description').value,
-                category:document.getElementById('category').value
+                hoursEvent: document.getElementById('hours').value,
+                hotel:document.getElementById('hotel').value,
+                event:document.getElementById('event').value
             }
-            const { data } = await axios.post('http://localhost:3100/services/addService', service,  {
+            const { data } = await axios.post('http://localhost:3100/reservationEvent/addReservation', reservation,  {
                 headers: {
                     'Authorization': token
                 }
@@ -28,7 +59,7 @@ export const AddReservationEvent = () => {
                 icon: 'success',
                 timer: 2000
               })
-              if(data.message== 'This service already exist'){ 
+              if(data.message== 'This Reservation already exist'){ 
                 Swal.fire({
                     title: data.message ,
                       icon: 'warning',
@@ -37,11 +68,14 @@ export const AddReservationEvent = () => {
               }
             
               
-            navigate('/dashboard/aService')
+            navigate('/dashboard/reservationEvent')
         }catch(err){
             alert(err.response.data.message)
         }
     }
+    useEffect(()=> getHotels, [])
+    useEffect(()=> getEvents, [])
+
   return (
     <>
     <div className="container">
@@ -50,12 +84,12 @@ export const AddReservationEvent = () => {
             <form>
                 <div>
                     <i className="fa-solid fa-user"></i>
-                    <input type="text" placeholder="Nombre" id='name'/>
+                    <input type="date" placeholder="Fecha" id='date'/>
                 </div>
                 <br/>
                 <div>
                     <i className="fa-solid fa-pencil"></i>
-                    <input type="text" placeholder="Descripción" id='description'/>
+                    <input type="Number" placeholder="Horas" id='hours'/>
                 </div>
                 <br/>
                 <div>
@@ -63,14 +97,34 @@ export const AddReservationEvent = () => {
                     <input type="number" placeholder="Precio" id='cost'/>
                 </div>
                 <br/>
-
-                <div>
-                    <i className="fa-solid fa-pencil"></i>
-                    <input type="text" placeholder="Category" id='category'/>
-                </div>
                 <br/>
-                <button onClick={(e)=>  addService(e)} type="submit" className="btn btn-primary">Add</button>
-                <Link to='/dashboard/aService'>
+                <div>
+                    <i className="fa-solid fa-user-shield icon side">Evento</i>
+                    <select className="form-control" id="event" required>
+                    {
+                           events.map(({_id, name}, i)=>{
+                            return (
+                                <option key={i} value={_id}>{name}</option>
+                            )
+                           }) 
+                        }
+                    </select>
+                </div>
+                <br />
+                <div>
+                    <i className="fa-solid fa-user-shield icon side">Hotel</i>
+                    <select className="form-control" id="hotel" required>
+                    {
+                           hotel.map(({_id, name}, i)=>{
+                            return (
+                                <option key={i} value={_id}>{name}</option>
+                            )
+                           }) 
+                        }
+                    </select>
+                </div>
+                <button onClick={(e)=>  addReservation(e)} type="submit" className="btn btn-primary">Add</button>
+                <Link to='/dashboard/reservationEvent'>
                 <button type="submit" className="btn btn-primary">Cancel</button>
                 </Link>
             </form>

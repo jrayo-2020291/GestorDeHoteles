@@ -1,5 +1,13 @@
-export const ReservationEvent = () => {
+export const ReservationEvent = ({date, cost, hours,user,hotel,event,additionalServices})=>{ 
     return (
-        <div>ReservationEvent</div>
+        <>
+            <td>{date}</td>
+            <td>{cost}</td>
+            <td>{hours}</td>
+            <td>{user}</td>
+            <td>{hotel}</td>
+            <td>{event}</td>
+            <td>{additionalServices}</td>
+        </>
     )
 }

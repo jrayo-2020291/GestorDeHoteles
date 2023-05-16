@@ -12,5 +12,6 @@ api.get('/get/:id',  ensureAuth,  servicesController.getServiceById);
 api.post('/search',  ensureAuth,   servicesController.getByName);
 api.put('/update/:id',  [ensureAuth, isAdmin],  servicesController.update);
 api.delete('/delete/:id',  [ensureAuth, isAdmin] ,  servicesController.delete);
+api.get('/getcategory',  ensureAuth,  servicesController.getByCategory);
 
 module.exports = api;
