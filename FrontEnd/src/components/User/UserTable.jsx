@@ -11,7 +11,6 @@ export const UserTable = () => {
   const [user, setUser] = useState([{}])
   const token = localStorage.getItem('token')
   const [show, setShow] = useState(false)
-  const role = localStorage.getItem('role')
 
   const restringir = () => {
     if (role === 'ADMIN' || role === 'MANAGER') {
