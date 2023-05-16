@@ -2,6 +2,8 @@ import React from 'react'
 import axios from "axios"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect} from "react"
+import Swal from 'sweetalert2';
+
 
 export const AddReservationRoom = () => {
     const navigate = useNavigate()
@@ -49,7 +51,18 @@ export const AddReservationRoom = () => {
                     'Authorization': token
                 }
             })
-            alert(data.message)
+            Swal.fire({
+                title: data.message || 'Reservation created',
+                icon: 'success',
+                timer: 2000
+              })
+              if(data.message== 'Only clients can have a reservation'){ 
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'warning',
+                      timer: 2000
+                    })
+              }
             navigate('/dashboard/reservationRoom')
         } catch (err) {
             alert(err.response.data.message)

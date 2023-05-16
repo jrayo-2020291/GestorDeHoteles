@@ -2,6 +2,8 @@ import React from 'react'
 import axios from "axios"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
+import Swal from 'sweetalert2';
+
 
 export const UpdateUser = () => {
     const navigate = useNavigate()
@@ -38,8 +40,12 @@ export const UpdateUser = () => {
                     'Authorization': token
                 }
             })
-            alert(data.message)
-            navigate('/dashboard/user')
+            Swal.fire({
+                title: 'Updated!',
+                text: data.message,
+                icon: 'success'
+              }),
+                          navigate('/dashboard/user')
         } catch (err) {
             alert(err.response.data.message)
         }

@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import { Aservice } from '../AServices/Aservice'
+import Swal from 'sweetalert2';
+
 
 export const AddServiceReservationRoom = () => {
     const [services, setServices] = useState([{}])
@@ -56,8 +58,19 @@ export const AddServiceReservationRoom = () => {
                         'Authorization': token
                     }
                 })
-            alert(`${data.message}`)
-            navigate('../reservationRoom')
+                Swal.fire({
+                    title: data.message || 'Service Added',
+                    icon: 'success',
+                    timer: 2000
+                  })
+                  if (data.message == 'Service already contrated') {
+                    Swal.fire({
+                        title: data.message,
+                        icon: 'warning',
+                        timer: 2000
+                    })
+                }
+                  getReservation();
         } catch (err) {
             console.error(err)
         }

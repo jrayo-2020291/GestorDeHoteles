@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { User } from './User'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
 
 
 export const UserTable = () => {
+  const role = localStorage.getItem('role')
   const navigate = useNavigate()
   const [user, setUser] = useState([{}])
   const token = localStorage.getItem('token')
@@ -30,6 +32,11 @@ export const UserTable = () => {
             'Authorization': token
           }
         })
+        Swal.fire({
+          title: 'Deleted!',
+          text: data.message,
+          icon: 'success'
+        }),
         getUser()
       }
     } catch (err) {
