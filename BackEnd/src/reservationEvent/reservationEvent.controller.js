@@ -102,7 +102,7 @@ exports.getReservation = async(req, res)=>{
         return res.send({reservation});
     } catch (err) {
         console.error(err);
-        return req.status(500).send({message: 'Error getting reservation'});
+        return res.status(500).send({message: 'Error getting reservation'});
     }
 }
 
@@ -140,6 +140,25 @@ exports.getReservationsByHotel = async(req, res)=>{
         return res.send({reservations});
     }catch(err){
         console.error(err);
+        return res.status(500).send({message: 'Error getting reservations'});
+    }
+}
+
+exports.getReservationsGeneral = async(req, res)=>{
+    try {
+        let userId = req.user.sub;
+        let findUser = await User.findOne({_id: userId});
+        if(findUser.role == 'ADMIN' || findUser.role == 'MANAGER'){
+            let reservations = await ReservationEvent.find().populate('user').populate('hotel').populate('additionalServices.service').populate('event');
+            if(!reservations) return res.status(404).send({message: 'Reservations not found'});
+            return res.send({reservations});
+        }if(findUser.role == 'CLIENT'){
+            let reservations = await ReservationEvent.find({user: userId}).populate('user').populate('hotel').populate('additionalServices.service').populate('event');
+            if(!reservations) return res.status(404).send({message: 'Reservations not found'});
+            return res.send({reservations});
+        }return res.status(404).send({message: 'Reservations not found'});
+    } catch (error) {
+        console.error(error);
         return res.status(500).send({message: 'Error getting reservations'});
     }
 }
