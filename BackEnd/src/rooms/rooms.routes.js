@@ -11,7 +11,7 @@ api.delete('/delete/:id',  [ensureAuth, isAdmin] ,  roomsController.delete);
 api.get('/get',ensureAuth,roomsController.get);
 api.get('/get/:id',ensureAuth,roomsController.getById);
 api.put('/update/:id',[ensureAuth,isAdmin],roomsController.update)
-api.get('/getA',[ensureAuth,isAdmin],roomsController.getAvailability);
+api.get('/getA/:id', ensureAuth,roomsController.getAvailability);
 
 
 module.exports = api;

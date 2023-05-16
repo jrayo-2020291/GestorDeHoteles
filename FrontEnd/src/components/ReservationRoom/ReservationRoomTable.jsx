@@ -91,9 +91,12 @@ export const ReservationRoomTable = () => {
                           <i className="fa-solid fa-pen-to-square button"></i>
                         </Link>
                         <i onClick={() => deleteReservationRoom(_id)} className="fa sharp fa-solid fa-trash button"></i>
-                        {/* <Link to={`../addAService/${_id}`}>
+                        <Link to={`../addServiceReservationRoom/${_id}`}>
                           <i className='fa-solid fa-clipboard button'></i>
-                        </Link>  */}
+                        </Link>
+                        <Link to={`../addRoomReservationRoom/${_id}`}>
+                          <i className='fa-solid fa-clipboard button'></i>
+                        </Link>
                       </td>
                     </tr>
                   )

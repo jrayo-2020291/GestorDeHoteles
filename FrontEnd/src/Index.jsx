@@ -27,6 +27,8 @@ import { LoginPage } from './pages/LoginPage.jsx'
 import { HomePage } from './pages/HomePage.jsx'
 import { DashBoardPage } from './pages/DashBoardPage.jsx'
 import {EventForHotel} from './components/Hotel/EventsForHotel.jsx'
+import { AddRoomReservationRoom } from './components/ReservationRoom/AddRoomReservationRoom.jsx'
+import { AddServiceReservationRoom } from './components/ReservationRoom/AddServiceReservationRoom.jsx'
 
 export const AuthContext = createContext();
 
@@ -121,6 +123,14 @@ export const Index = () => {
                         {
                             path: 'updateReservationRoom/:id',
                             element: <UpdateReservationRoom></UpdateReservationRoom>
+                        },
+                        {
+                            path: 'addServiceReservationRoom/:id',
+                            element: <AddServiceReservationRoom></AddServiceReservationRoom>
+                        },
+                        {
+                            path: 'addRoomReservationRoom/:id',
+                            element: <AddRoomReservationRoom></AddRoomReservationRoom>
                         },
                         {
                             path: 'reservationEvent',

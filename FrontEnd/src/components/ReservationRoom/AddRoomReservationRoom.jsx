@@ -9,11 +9,10 @@ export const AddRoomReservationRoom = () => {
     const token = localStorage.getItem(`token`)
     const navigate = useNavigate()
     const { id } = useParams()
-    const role = localStorage.getItem('role')
 
     const getRooms = async () => {
         try {
-            const { data } = await axios(`http://localhost:3100/room/get`, {
+            const { data } = await axios(`http://localhost:3100/room/getA/${id}`, {
                 headers: {
                     'Authorization': token
                 }
@@ -31,30 +30,31 @@ export const AddRoomReservationRoom = () => {
                     'Authorization': token
                 }
             })
-            setReservation(data.reservation)
+            let array = []
+            let room = data.reservation.rooms
+            room.forEach(element=>{
+                array.push(element.room)
+            })
+            setReservation(array)
         } catch (err) {
             console.error(err)
         }
     }
 
-    const updateLease = async (e) => {
+    const updateReservation = async (e) => {
         try {
             e.preventDefault()
-            let updatedLease = {
-                serviceId: document.getElementById('inputService').value
+            let updatedReservation = {
+                room: document.getElementById('inputRoom').value
             }
-            const { data } = await axios.put(`http://localhost:2651/lease/addService/${id}`, updatedLease,
+            const { data } = await axios.put(`http://localhost:3100/reservationRoom/addRoom/${id}`, updatedReservation,
                 {
                     headers: {
                         'Authorization': token
                     }
                 })
             alert(`${data.message}`)
-            if(role === 'ADMIN'){
-                navigate('/dashboard/Lease')
-            }else{
-                navigate('/worker')
-            }
+            navigate('../reservationRoom')
         } catch (err) {
             console.error(err)
         }
@@ -64,51 +64,53 @@ export const AddRoomReservationRoom = () => {
     useEffect(() => getReservation, [])
 
 
-  return (
-    <>
+    return (
+        <>
             <div className="container">
                 <div className="box">
                     <h1>Arrendamiento</h1>
                     <table>
-              <thead>
-                <tr>
-                  <th>Servicios contratados</th>
-                  <th>Descripción</th>
-                  <th>Precio</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  lease.map(({ _id, name, description, price}, index) => {
-                    return (
-                      <tr key={index}>
-                        <A_Service
-                          name={name}
-                          description={description}
-                          price={price}
-                        ></A_Service>
-                      </tr>
-                    )
-                  })
-                }
-              </tbody>
-            </table>
+                        <thead>
+                            <tr>
+                                <th>Habitaciones reservadas</th>
+                                <th>Categoria</th>
+                                <th>Capacidad</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                reservation.map(({ _id, noRoom, category, peopleCapacity, price}, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <Room
+                                                noRoom={noRoom}
+                                                category={category}
+                                                peopleCapacity={peopleCapacity}
+                                                price={price}
+                                            ></Room>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
                     <form>
                         <div>
                             <i className="fa-solid fa-user-shield icon side">Servicio</i>
-                            <select className="form-control" id="inputService" required>
+                            <select className="form-control" id="inputRoom" required>
                                 {
-                                    services.map(({ _id, name }, i) => {
+                                    rooms.map(({ _id, noRoom }, i) => {
                                         return (
-                                            <option key={i} value={_id}>{name}</option>
+                                            <option key={i} value={_id}>{noRoom}</option>
                                         )
                                     })
                                 }
                             </select>
                         </div>
                         <br />
-                        <button onClick={(e) => updateLease(e)} type="submit" className="btn btn-primary">Add</button>
-                        <Link to={addressingUrl}>
+                        <button onClick={(e) => updateReservation(e)} type="submit" className="btn btn-primary">Add</button>
+                        <Link to='../reservationRoom'>
                             <button type="submit" className="btn btn-primary">Cancel</button>
                         </Link>
 
@@ -116,5 +118,5 @@ export const AddRoomReservationRoom = () => {
                 </div>
             </div>
         </>
-  )
+    )
 }

@@ -2,6 +2,7 @@
 
 const Room = require('./rooms.model');
 const Hotel = require('../hotels/hotels.model');
+const Reservation = require('../reservationRoom/reservationRoom.model')
 const {validateData} = require('../utils/validate')
 const mongoose = require('mongoose');
 
@@ -42,8 +43,10 @@ exports.getById =async(req,res)=>{ try{
 
 exports.getAvailability=async(req,res)=>{
     try{
+        let reservationId = req.params.id
+        let reservation = await Reservation.findOne({_id: reservationId})
         let state = 'AVAILABLE'
-        let rooms=await Room.find({availability:state})
+        let rooms=await Room.find({availability:state, hotel: reservation.hotel})
         return res.send({rooms})
     }catch(err){
         console.error(err);
