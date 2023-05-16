@@ -17,7 +17,7 @@ export const ReservationRoomTable = () => {
 
   const getReservation = async () => {
     try {
-      const { data } = await axios('http://localhost:3100/reservationRoom/get', {
+      const { data } = await axios('http://localhost:3100/reservationRoom/getReservationGeneral', {
         headers: {
           'Authorization': token
         }

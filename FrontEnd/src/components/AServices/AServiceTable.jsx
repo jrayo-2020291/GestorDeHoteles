@@ -9,6 +9,14 @@ export const AServiceTable = () => {
   const [services, setServices] = useState([{}])
   const [loading, setLoading] = useState(true)
   const token = localStorage.getItem('token')
+  const [show, setShow] = useState(false)
+
+  const restringir = () => {
+    if (role === 'ADMIN' || role === 'MANAGER') {
+      setShow(true)
+    }
+  }
+
   const deleteService = async (id) => {
     try {
       const { data } = await axios.delete(`http://localhost:3100/services/delete/${id}`, {
@@ -44,15 +52,22 @@ export const AServiceTable = () => {
   }
 
   useEffect(() => getServices, [])
+  useEffect(() => restringir, [])
   return (
     <>
       <section id="content">
         <main>
-        <Link to='/../dashboard/addAService'>
-          <i className="fa-solid fa-plus add"></i>
-          </Link>
-          <br />
-          <br />
+          {
+            show ? (
+              <>
+                <Link to='/../dashboard/addAService'>
+                  <i className="fa-solid fa-plus add"></i>
+                </Link>
+                <br />
+                <br />
+              </>
+            ) : (<></>)
+          }
           <table>
             <thead>
               <tr>
@@ -65,31 +80,38 @@ export const AServiceTable = () => {
             </thead>
             <tbody>
               {
-                  services.map(({ _id, name, description, cost,category}, index) => {
-                    return (
-                      <tr key={index}>
-                        <Aservice
-                          name={name}
-                          description={description}
-                          cost={cost}
-                          category={category}
-                        ></Aservice>
-                        <td>
-                          <Link to={`/../dashboard/updateAService/${_id}`}>
-                            <i className="fa-solid fa-pen-to-square button"></i>
-                          </Link>
-                          <i onClick={()=>deleteService(_id)}className="fa sharp fa-solid fa-trash button"></i>
-                        </td>
-                      </tr>
-                    )
-                  })
-                } 
-							</tbody>
-						</table>
-				  
-		</main>
-	</section>	
-        </>
-	
-    )
+                services.map(({ _id, name, description, cost, category }, index) => {
+                  return (
+                    <tr key={index}>
+                      <Aservice
+                        name={name}
+                        description={description}
+                        cost={cost}
+                        category={category}
+                      ></Aservice>
+
+                      {
+                        show ? (
+                          <>
+                            <td>
+                              <Link to={`/../dashboard/updateAService/${_id}`}>
+                                <i className="fa-solid fa-pen-to-square button"></i>
+                              </Link>
+                              <i onClick={() => deleteService(_id)} className="fa sharp fa-solid fa-trash button"></i>
+                            </td>
+                          </>
+                        ) : (<></>)
+                        }
+                    </tr>
+                  )
+                })
+              }
+            </tbody>
+          </table>
+
+        </main>
+      </section>
+    </>
+
+  )
 }
