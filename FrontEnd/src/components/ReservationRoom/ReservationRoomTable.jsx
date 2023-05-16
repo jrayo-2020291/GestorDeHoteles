@@ -8,12 +8,25 @@ import Swal from 'sweetalert2';
 export const ReservationRoomTable = () => {
   const navigate = useNavigate()
   const [reservation, setReservation] = useState([{}])
-  const [loading, setLoading] = useState(true)
   const token = localStorage.getItem('token')
+  const [hotels, setHotels] = useState([{}])
 
   const LogOut = () => {
     localStorage.clear()
     navigate('/')
+  }
+
+  const getHotels = async () => {
+    try {
+      const { data } = await axios(`http://localhost:3100/hotel/get`, {
+        headers: {
+          'Authorization': token
+        }
+      })
+      setHotels(data.hotels)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   const getReservation = async () => {
@@ -30,7 +43,36 @@ export const ReservationRoomTable = () => {
         element.dateEnd = date2.toLocaleDateString()
       })
       setReservation(data.reservations)
-      setLoading(false)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  const getReservationByHotel = async (e) => {
+    try {
+      e.preventDefault()
+      let form = {
+        id: document.getElementById('inputHotel').value
+      }
+      if (form.id === 'ALL') {
+        return getReservation()
+
+      }
+      console.log(form.id)
+      const { data } = await axios.post(`http://localhost:3100/reservationRoom/getByHotel`, form, {
+        headers: {
+          'Authorization': token
+        }
+      })
+      data.reservations.forEach(element => {
+        let date1 = new Date(element.dateStart)
+        let date2 = new Date(element.dateEnd)
+        element.dateStart = date1.toLocaleDateString()
+        element.dateEnd = date2.toLocaleDateString()
+      })
+      if (data) {
+        setReservation(data.reservations)
+      }
     } catch (err) {
       console.error(err)
     }
@@ -51,7 +93,8 @@ export const ReservationRoomTable = () => {
           icon: 'success'
         }).then(() => {
           getReservation()
-        })      }
+        })
+      }
     } catch (err) {
       console.error(err)
       alert(err.response.data.message)
@@ -60,7 +103,7 @@ export const ReservationRoomTable = () => {
 
 
   useEffect(() => getReservation, [])
-
+  useEffect(() => getHotels, [])
 
   return (
     <>
@@ -70,6 +113,24 @@ export const ReservationRoomTable = () => {
           <i className="fa-solid fa-plus add"></i>
         </Link>
         <main>
+          <form action="#">
+            <div className="form-group">
+              <i className="fa-solid fa-user-shield icon side">Hotels</i>
+              <select className="form-control" id="inputHotel" required>
+                {
+                  hotels.map(({ _id, name }, i) => {
+                    return (
+                      <option key={i} value={_id}>{name}</option>
+                    )
+                  })
+                }
+                <option value="ALL">Todos</option>
+              </select>
+              <button onClick={(e) => getReservationByHotel(e)}>Buscar</button>
+            </div>
+          </form>
+          <br />
+          <br />
           <table>
             <thead>
               <tr>

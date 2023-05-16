@@ -187,10 +187,10 @@ exports.getOwnReservations = async(req, res)=>{
 
 exports.getReservationsByHotel = async(req, res)=>{
     try{
-        let hotelId = req.params.id;
-        let hotelExist = await Hotel.findOne({_id: hotelId});
+        let hotelId = req.body;
+        let hotelExist = await Hotel.findOne({_id: hotelId.id});
         if(!hotelExist) return res.status(404).send({message: 'This hotel does not exist'});
-        let reservations = await Reservation.find({hotel: hotelId}).populate('user').populate('hotel').populate('additionalServices.service').populate('rooms.room');
+        let reservations = await Reservation.find({hotel: hotelId.id}).populate('user').populate('hotel').populate('additionalServices.service').populate('rooms.room');
         if(!reservations) return res.status(404).send({message: 'This hotel has no reservations'});
         return res.send({reservations});
     }catch(err){
