@@ -38,6 +38,18 @@ exports.getServices = async(req, res)=>{
     }
 }
 
+exports.getByCategory=async(req,res)=>{
+    try{
+        let data = req.body;
+        let categories = data.category;
+        let services = await Services.find({category:categories})
+        return res.send({services})
+    }catch(err){
+        console.log(err);
+        return res.status(500).send({message:'Error getting categories'})
+    }
+}
+
 exports.getServiceById = async(req, res)=>{
     try{
         let serviceId = req.params.id;
@@ -86,8 +98,7 @@ exports.update = async(req, res) =>{
         if(services && services._id.toString() !== serviceId) { 
           return res.send({message: 'This Service already exists'});
         }
-  
-        let updatedService = await Services.findOneAndUpdate({_id: serviceId}, params, {new: true});
+          let updatedService = await Services.findOneAndUpdate({_id: serviceId}, params, {new: true});
         if(!updatedService) return res.status(404).send({message: 'Service not found and not updated'});
         return res.send({message: 'Service updated:', updatedService});
     }catch(err){

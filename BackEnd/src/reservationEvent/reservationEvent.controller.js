@@ -20,9 +20,9 @@ exports.add =async (req, res)=>{
         console.log(findEvent)
         let findHotel = await Hotel.findOne({_id: data.hotel});
         if(!findHotel) return res.status(404).send({message: 'Hotel not found'});
-        let eventAllowed = await Hotel.findOne({_id: data.hotel, events: {$all: [data.event]}});
+        /*let eventAllowed = await Hotel.findOne({_id: data.hotel, events: {$all: [data.event]}});
         if(!eventAllowed) return res.status(404).send({message: 'This event is not allowed in this hotel'});
-        let reservationOnThisDate = await ReservationEvent.findOne({hotel: data.hotel, dateEvent: data.dateEvent});
+       */ let reservationOnThisDate = await ReservationEvent.findOne({hotel: data.hotel, dateEvent: data.dateEvent});
         if(reservationOnThisDate) return res.send({message: 'There is already a reservation for this day'});
         let costEvent = findEvent.costPerHour * data.hoursEvent;
         let params = {
