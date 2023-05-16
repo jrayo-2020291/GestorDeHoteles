@@ -91,7 +91,7 @@ export const ReservationEventTable = () => {
                         </td>
                         <td>
                         <Link to={`/../addService/${_id}`}>
-                          <i className="fa-solid fa-pen-to-square button"></i>
+                          <i className="fa-solid fa-plus-circle button"></i>
                         </Link>
                         </td>
                       </tr>
