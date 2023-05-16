@@ -9,18 +9,6 @@ export const AddReservationRoom = () => {
     const [hotels, setHotels] = useState([{}])
     const token = localStorage.getItem('token')
 
-    const getUsers = async () => {
-        try {
-            const { data } = await axios(`http://localhost:3100/user/get`, {
-                headers: {
-                    'Authorization': token
-                }
-            })
-            setUsers(data.users)
-        } catch (err) {
-            console.error(err)
-        }
-    }
     
     const getHotels = async () => {
         try {
@@ -41,7 +29,6 @@ export const AddReservationRoom = () => {
             let form = {
                 dateStart: document.getElementById('inputDateStart').value,
                 dateEnd: document.getElementById('inputDateEnd').value,
-                user: document.getElementById('inputUser').value,
                 hotel: document.getElementById('inputHotel').value,
             }
             const { data } = await axios.post('http://localhost:3100/reservationRoom/add', form, {
@@ -56,7 +43,6 @@ export const AddReservationRoom = () => {
         }
     }
 
-    useEffect(() =>getUsers, [])
     useEffect(() =>getHotels, [])
     return (
         <div className="container">
@@ -73,19 +59,6 @@ export const AddReservationRoom = () => {
                     <input   type="date"   className="form-control" id="inputDateEnd"  required/>
                 </div>
                 <br/>
-                <div>
-                    <i className="fa-solid fa-user-shield icon side">User</i>
-                    <select  className="form-control" id="inputUser"  required>
-                    {
-                           users.map(({_id, name }, i)=>{
-                            return (
-                                <option key={i} value={_id}>{name}</option>
-                            )
-                           }) 
-                        }
-                    </select>
-                </div>
-                <br />
                 <div>
                     <i className="fa-solid fa-user-shield icon side">Hotels</i>
                     <select  className="form-control" id="inputHotel" name='hotel' required>

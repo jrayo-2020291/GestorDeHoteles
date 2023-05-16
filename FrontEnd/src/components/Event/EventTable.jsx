@@ -28,19 +28,18 @@ export const EventTable = () => {
     const getByHotel = async (e) => {
         try {
             e.preventDefault()
-
             let hotel = document.getElementById('inputHotel').value
-            if (form.hotel === 'ALL') {
+            if (hotel === 'ALL') {
                 return getEvents()
 
             }
-            const { data } = await axios.post(`http://localhost:3100/hotel/getById${hotel}`,{
+            const { data } = await axios(`http://localhost:3100/hotel/getById/${hotel}`,{
                 headers: {
                     'Authorization': token
                 }
             })
-            if (data.rooms) {
-                setRoom(data.rooms)
+            if (data) {
+                setEvent(data.events)
             }
 
         } catch (err) {

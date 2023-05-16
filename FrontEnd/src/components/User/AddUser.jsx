@@ -37,6 +37,7 @@ export const AddUser = () => {
             alert(err.response.data.message)
         }
     }
+    console.log(form)
 
     return (
         <div className="container">
@@ -74,8 +75,12 @@ export const AddUser = () => {
                 </div>
                 <br/>
                 <div>
-                    <i className="fa-solid fa-tag"></i>
-                    <input  onChange={handleChange} type="text" name='role'  className="form-control"  placeholder='role' required/>
+                    <i className="fa-solid fa-tag">Role</i>
+                    <select onChange={handleChange} name="role">
+                        <option value="CLIENT">Cliente</option>
+                        <option value="ADMIN">Administrador</option>
+                        <option value="MANAGER">Manager</option>
+                    </select>
                 </div>
                 <br/>
                 <button onClick={(e)=>  addUser(e)} type="submit" className="btn btn-outline-primary">Add</button>

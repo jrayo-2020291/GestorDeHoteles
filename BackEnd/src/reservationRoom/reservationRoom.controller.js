@@ -11,9 +11,8 @@ exports.addReservation = async(req, res)=>{
     try{
         let data = req.body;
         let userId = req.user.sub;
-        console.log(userId);
         let userExist = await User.findOne({_id: userId});
-        if(userExist.role !== 'CLIENT') return res.send({message: 'Only clients can have a reservation'});
+         // if(userExist.role !== 'CLIENT') return res.send({message: 'Only clients can have a reservation'});
         let hotelExist = await Hotel.findOne({_id: data.hotel});
         if(!hotelExist) return res.status(404).send({message: 'This hotel does not exist'});
         let params = {

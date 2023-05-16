@@ -9,6 +9,7 @@ export const UserTable = () => {
   const [user, setUser] = useState([{}])
   const token = localStorage.getItem('token')
   const [show, setShow] = useState(false)
+  const role = localStorage.getItem('role')
 
   const restringir = () => {
     if (role === 'ADMIN' || role === 'MANAGER') {
@@ -30,7 +31,12 @@ export const UserTable = () => {
             'Authorization': token
           }
         })
-        getUser()
+        if(role === 'CLIENT'){
+          LogOut()
+        } else {
+          getUser()
+        }
+        
       }
     } catch (err) {
       console.error(err)
@@ -45,7 +51,11 @@ export const UserTable = () => {
           'Authorization': token
         }
       })
-      setUser(data.users)
+      if (role === 'ADMIN' || role === 'MANAGER') {
+        setUser(data.users)
+      } else {
+        setUser(data.user2)
+      }
     } catch (err) {
       console.error(err)
     }
@@ -95,18 +105,13 @@ export const UserTable = () => {
                         phone={phone}
                         role={role}
                       ></User>
-                      {
-                        show ? (
-                          <>
-                            <td>
-                              <Link to={`../updateUser/${_id}`}>
-                                <i className="fa-solid fa-pen-to-square button"></i>
-                              </Link>
-                              <i onClick={() => deleteUser(_id)} className="fa sharp fa-solid fa-trash button"></i>
-                            </td>
-                          </>
-                        ) : (<></>)
-                      }
+                      <td>
+                        <Link to={`../updateUser/${_id}`}>
+                          <i className="fa-solid fa-pen-to-square button"></i>
+                        </Link>
+                        <i onClick={() => deleteUser(_id)} className="fa sharp fa-solid fa-trash button"></i>
+                      </td>
+
                     </tr>
                   )
                 })
