@@ -200,6 +200,27 @@ exports.getReservationsByHotel = async(req, res)=>{
     }
 }
 
+exports.getReservationsGeneral = async(req, res)=>{
+    try {
+        let userId = req.user.sub;
+        let findUser = await User.findOne({_id: userId});
+        if(findUser.role == 'ADMIN' || findUser.role == 'MANAGER'){
+            let reservations = await Reservation.find().populate('user').populate('hotel').populate('additionalServices.service').populate('rooms.room');
+            if(!reservations) return res.status(404).send({message: 'Reservations not found'});
+            return res.send({reservations});
+        }
+        if(findUser.role == 'CLIENT'){
+            let reservations = await Reservation.find({user: userId}).populate('user').populate('hotel').populate('additionalServices.service').populate('rooms.room');
+            if(!reservations) return res.status(404).send({message: 'Reservations not found'});
+            return res.send({reservations});
+        }
+        return res.status(404).send({message: 'User not found'});
+    } catch (error) {
+        console.error(error)
+        return res.status(500).send({message: 'Error getting reservations'});
+    }
+}
+
 exports.updateReservation = async(req, res) =>{
     try{
         let reservationId = req.params.id;
