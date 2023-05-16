@@ -89,14 +89,14 @@ exports.deleteEvent = async(req,res)=>{
 exports.getByName = async(req,res)=>{
     try {
         let data = req.body;
-        if(data.name==='') return res.send({message:'You must enter a name'});
+        if(data.name==='') return res.send({message:'You must enter a searching'});
         let hotels = await Hotel.find({
-            name:{
-                $regex: data.name, 
-                $options: 'i'
-            }
-        },{__v:0}).populate('events',['name']);
-        return res.send(hotels);
+            $or: [
+                { name: { $regex: data.name, $options: 'i' } },
+                { locationH: { $regex: data.name, $options: 'i' } }
+            ]
+          }, { __v: 0 }).populate('events', ['name']);
+        return res.send({hotels});
     } catch (err) {
         console.error(err);
         return res.status(500).send({message:'Error get hotels'})
