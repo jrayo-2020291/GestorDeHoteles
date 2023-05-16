@@ -18,7 +18,7 @@ export const ReservationEventTable = () => {
       })
       Swal.fire({
         title: 'Deleted!',
-        text: 'Your file has been deleted.',
+        text: 'Your Reservation has been deleted.',
         icon: 'success'
       }).then(() => {
         getReservations()

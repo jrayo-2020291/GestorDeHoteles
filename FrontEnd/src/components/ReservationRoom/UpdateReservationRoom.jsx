@@ -2,6 +2,8 @@ import React from 'react'
 import axios from "axios"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect} from "react"
+import Swal from 'sweetalert2';
+
 
 export const UpdateReservationRoom = () => {
     const navigate = useNavigate()
@@ -51,8 +53,12 @@ export const UpdateReservationRoom = () => {
                     'Authorization': token
                 }
             })
-            alert(data.message)
-            navigate('/dashboard/reservationRoom')
+            Swal.fire({
+                title: data.message || 'Reservation Updated',
+                icon: 'success',
+                timer: 2000
+              });
+                          navigate('/dashboard/reservationRoom')
         } catch (err) {
             alert(err.response.data.message)
         }

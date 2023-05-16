@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import { Room } from '../Room/Room'
+import Swal from 'sweetalert2';
+
 
 export const AddRoomReservationRoom = () => {
     const [rooms, setRooms] = useState([{}])
@@ -53,8 +55,12 @@ export const AddRoomReservationRoom = () => {
                         'Authorization': token
                     }
                 })
-            alert(`${data.message}`)
-            navigate('../reservationRoom')
+                Swal.fire({
+                    title: 'Added!',
+                    text: 'Room added Succesfully.',
+                    icon: 'success'
+                  }),
+                    navigate('../reservationRoom')
         } catch (err) {
             console.error(err)
         }

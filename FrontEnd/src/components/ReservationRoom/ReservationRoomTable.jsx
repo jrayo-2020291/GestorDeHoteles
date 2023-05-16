@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ReservationRoom } from './ReservationRoom'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
 
 
 export const ReservationRoomTable = () => {
@@ -44,8 +45,13 @@ export const ReservationRoomTable = () => {
             'Authorization': token
           }
         })
-        getReservation()
-      }
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Your Reservation has been deleted.',
+          icon: 'success'
+        }).then(() => {
+          getReservation()
+        })      }
     } catch (err) {
       console.error(err)
       alert(err.response.data.message)

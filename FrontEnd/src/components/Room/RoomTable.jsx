@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Room } from './Room'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
 
 
 export const RoomTable = () => {
@@ -69,6 +70,11 @@ export const RoomTable = () => {
             'Authorization': token
           }
         })
+        Swal.fire({
+          title: 'Added!',
+          text: 'Room deleted Succesfully.',
+          icon: 'success'
+        }),
         getRoom()
       }
     } catch (err) {
