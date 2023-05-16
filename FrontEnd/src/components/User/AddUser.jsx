@@ -10,6 +10,7 @@ export const AddUser = () => {
         name: '',
         surname: '',
         username: '',
+        password: '',
         email: '',
         phone: '',
         role: ''
@@ -55,6 +56,11 @@ export const AddUser = () => {
                 <div>
                     <i className="fa-solid fa-tag"></i>
                     <input  onChange={handleChange} type="text" name='username'  className="form-control"  placeholder='username' required/>
+                </div>
+                <br/>
+                <div>
+                    <i className="fa-solid fa-pencil"></i>
+                    <input  onChange={handleChange} type="text" name='password'  className="form-control"  placeholder='password' required/>
                 </div>
                 <br/>
                 <div>

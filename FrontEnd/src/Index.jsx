@@ -31,13 +31,7 @@ import {EventForHotel} from './components/Hotel/EventsForHotel.jsx'
 export const AuthContext = createContext();
 
 export const Index = () => {
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [dataUser, setDataUser] = useState({
-      name: '',
-      username: '',
-      role: ''
-    })
-
+    const [loggedIn, setLoggedIn] = useState(false)
 
     useEffect(()=>{
         let token = localStorage.getItem('token')
@@ -170,7 +164,7 @@ export const Index = () => {
         }
     ])
     return (
-        <AuthContext.Provider value={{}}>
+        <AuthContext.Provider value={{loggedIn, setLoggedIn}}>
             <RouterProvider router={routes} />
         </AuthContext.Provider>
     )
