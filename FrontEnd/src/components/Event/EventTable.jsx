@@ -62,7 +62,6 @@ export const EventTable = () => {
                 }
             })
             setEvent(data.events)
-            setLoading(false)
         } catch (err) {
             console.error(err)
         }
@@ -93,23 +92,6 @@ export const EventTable = () => {
         <>
             <section id="content">
                 <main>
-                    <form action="#">
-                        <div className="form-group">
-                            <i className="fa-solid fa-user-shield icon side">Hotels</i>
-                            <select className="form-control" id="inputHotel" required>
-                                {
-                                    hotels.map(({ _id, name }, i) => {
-                                        return (
-                                            <option key={i} value={_id}>{name}</option>
-                                        )
-                                    })
-                                }
-                                <option value="ALL">Todos</option>
-                            </select>
-                            <button onClick={(e) => getByHotel(e)}>Buscar</button>
-                        </div>
-                    </form>
-                    <br />
                     <h1 className="title">Eventos</h1>
                         <ul className="breadcrumbs">
                             {
@@ -135,6 +117,23 @@ export const EventTable = () => {
                             }
                             <br/>
                             <br/>
+                            <form action="#">
+                        <div className="form-group">
+                            <i className="fa-solid fa-user-shield icon side">Hotels</i>
+                            <select className="form-control" id="inputHotel" required>
+                                {
+                                    hotels.map(({ _id, name }, i) => {
+                                        return (
+                                            <option key={i} value={_id}>{name}</option>
+                                        )
+                                    })
+                                }
+                                <option value="ALL">Todos</option>
+                            </select>
+                            <button onClick={(e) => getByHotel(e)}>Buscar</button>
+                        </div>
+                    </form>
+                    <br />
                             <table>
                                 <thead>
                                     <tr>
