@@ -32,6 +32,7 @@ export const LoginPage = () => {
           timer: 2000
         })
         navigate('/dashboard')
+        window.location.reload()
         
       }
     }catch(err){

@@ -16,7 +16,7 @@ api.get('/getReservation/:id', ensureAuth, reservationController.getReservation)
 api.get('/getReservationByUser/:id', [ensureAuth, isAdmin], reservationController.getReservationByUser);
 api.get('/getOwnReservation', [ensureAuth], reservationController.getOwnReservations);
 api.get('/get', ensureAuth, reservationController.getReservations);
-api.get('/getReservarionGeneral', ensureAuth, reservationController.getReservationsGeneral);
+api.get('/getReservationGeneral', ensureAuth, reservationController.getReservationsGeneral);
 api.put('/updateReservation/:id' , ensureAuth, reservationController.updateReservation);
 api.delete('/deleteReservation/:id', ensureAuth, reservationController.deleteReservation);
 module.exports = api;
