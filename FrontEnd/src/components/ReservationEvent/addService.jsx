@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import { Aservice } from '../AServices/Aservice'
+import Swal from 'sweetalert2';
 
 export const AddService = () => {
     const [services, setServices] = useState([{}])
@@ -13,7 +14,7 @@ export const AddService = () => {
     const getServices = async () => {
       try {
         let form = {
-          category: 'ROOM'
+          category: 'EVENT'
       }
         const { data } = await axios.post('http://localhost:3100/services/getCategory', form,{
           headers: {
@@ -43,6 +44,29 @@ export const AddService = () => {
           console.error(err)
       }
   }
+
+  const deleteService = async (idService) => {
+    try {
+      let confirmDelete = confirm('Estás seguro de eliminar este evento?')
+      if (confirmDelete) {
+        const { data } = await axios.put(`http://localhost:3100/reservationEvent/removeService/${id}`, {service:idService},{
+          headers: {
+              'Authorization': token
+          }
+      })
+        getReservation();
+        Swal.fire({
+            title: data.message || 'Deleting sucessfully',
+            icon: 'success',
+            timer: 2000
+          })
+      }
+    } catch (err) {
+      console.error(err)
+      alert(err.response.data.message)
+    }
+}
+
   const updateReservation = async (e) => {
     try {
         e.preventDefault()
@@ -55,9 +79,20 @@ export const AddService = () => {
                     'Authorization': token
                 }
             })
-        alert(`${data.message}`)
-        getServices()
-    } catch (err) {
+            Swal.fire({
+              title: data.message || 'Service Added',
+              icon: 'success',
+              timer: 2000
+            })
+            if (data.message == 'Service already contrated') {
+              Swal.fire({
+                  title: data.message,
+                  icon: 'warning',
+                  timer: 2000
+              })
+          }
+            getReservation();
+          } catch (err) {
         console.error(err)
     }
 }
@@ -88,6 +123,9 @@ export const AddService = () => {
                           description={description}
                           cost={cost}
                         ></Aservice>
+                        <td>
+                           <i onClick={()=>deleteService(_id)} className="fa-solid fa-trash-can button"></i>   
+       </td>
                       </tr>
                     )
                   })
@@ -109,8 +147,8 @@ export const AddService = () => {
                         </div>
                         <br />
                         <button onClick={(e) => updateReservation(e)} type="submit" className="btn btn-primary">Add</button>
-                        <Link to='/dashboard/Lease'>
-                            <button type="submit" className="btn btn-primary">Cancel</button>
+                        <Link to='/dashboard/reservationEvent'>
+                            <button type="submit" className="btn btn-outline-primary">Back</button>
                         </Link>
 
                     </form>
