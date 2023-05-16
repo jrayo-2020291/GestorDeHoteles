@@ -583,7 +583,18 @@ table{
 	transform: scale(0.98);
 }
 
-.button {
+.button{
+	padding: 10px 17px;
+    background: #f1f0f6;
+    color: #5e5e5e;
+    border: none;
+    border-radius: 30px;
+    font-weight: 200;
+    text-align: center;
+	margin-right: 15px;
+	box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
+}
+.btn {
   width: 140px;
   height: 45px;
   font-family: 'Roboto', sans-serif;
@@ -602,12 +613,13 @@ table{
   outline: none;
   }
 
-.button:hover {
+.btn:hover {
   background-color: #2e8de5;
   box-shadow: 0px 15px 20px #2e8de5;
   color: #fff;
   transform: translateY(-7px);
 }
+
 /* .button:hover{
 	box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
 } */

@@ -71,9 +71,9 @@ export const AddAService = () => {
                             </select>
                         </div>
                         <br />
-                        <button onClick={(e) => addService(e)} type="submit" className="button">Add</button>
+                        <button onClick={(e) => addService(e)} type="submit" className="btn">Add</button>
                         <Link to='/dashboard/aService'>
-                            <button type="submit" className="button">Cancel</button>
+                            <button type="submit" className="btn">Cancel</button>
                         </Link>
                     </form>
                 </div>
