@@ -1,7 +1,8 @@
 import axios from 'axios'
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
+
 
 
 export const LoginPage = () => {
@@ -31,6 +32,7 @@ export const LoginPage = () => {
           timer: 2000
         })
         navigate('/dashboard')
+        window.location.reload()
         
       }
     }catch(err){

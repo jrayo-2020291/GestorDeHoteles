@@ -28,17 +28,13 @@ import { LoginPage } from './pages/LoginPage.jsx'
 import { HomePage } from './pages/HomePage.jsx'
 import { DashBoardPage } from './pages/DashBoardPage.jsx'
 import {EventForHotel} from './components/Hotel/EventsForHotel.jsx'
+import { AddRoomReservationRoom } from './components/ReservationRoom/AddRoomReservationRoom.jsx'
+import { AddServiceReservationRoom } from './components/ReservationRoom/AddServiceReservationRoom.jsx'
 
 export const AuthContext = createContext();
 
 export const Index = () => {
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [dataUser, setDataUser] = useState({
-      name: '',
-      username: '',
-      role: ''
-    })
-
+    const [loggedIn, setLoggedIn] = useState(false)
 
     useEffect(()=>{
         let token = localStorage.getItem('token')
@@ -75,67 +71,75 @@ export const Index = () => {
                 },
                 {
                     path: '/dashboard',
-                    element: <DashBoardPage></DashBoardPage>,
+                    element: loggedIn ? <DashBoardPage></DashBoardPage> : <LoginPage></LoginPage>,
                     children: [
                         {
                             path: 'aService',
-                            element: <AServiceTable></AServiceTable>
+                            element: loggedIn ? <AServiceTable></AServiceTable> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'addAService',
-                            element: <AddAService></AddAService>
+                            element: loggedIn ? <AddAService></AddAService> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'updateAService/:id',
-                            element: <UpdateAService></UpdateAService>
+                            element: loggedIn ? <UpdateAService></UpdateAService> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'event',
-                            element: <EventTable></EventTable>
+                            element: loggedIn ? <EventTable></EventTable> :<LoginPage></LoginPage>
                         },
                         {
                             path: 'addEvent',
-                            element: <AddEvent></AddEvent>
+                            element: loggedIn ? <AddEvent></AddEvent> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'updateEvent/:id',
-                            element: <UpdateEvent></UpdateEvent>
+                            element: loggedIn ? <UpdateEvent></UpdateEvent>: <LoginPage></LoginPage>
                         },
                         {
                             path: 'hotel',
-                            element: <HotelTable></HotelTable>
+                            element: loggedIn ? <HotelTable></HotelTable> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'addHotel',
-                            element: <AddHotel></AddHotel>
+                            element: loggedIn ? <AddHotel></AddHotel> : <LoginPage></LoginPage> 
                         },
                         {
                             path: 'updateHotel/:id',
-                            element: <UpdateHotel></UpdateHotel>
+                            element: loggedIn ? <UpdateHotel></UpdateHotel> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'hotel/event/:id',
-                            element: <EventForHotel></EventForHotel>
+                            element: loggedIn ? <EventForHotel></EventForHotel> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'reservationRoom',
-                            element: <ReservationRoomTable></ReservationRoomTable>
+                            element: loggedIn ? <ReservationRoomTable></ReservationRoomTable> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'addReservationRoom',
-                            element: <AddReservationRoom></AddReservationRoom>
+                            element: loggedIn ? <AddReservationRoom></AddReservationRoom> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'updateReservationRoom/:id',
-                            element: <UpdateReservationRoom></UpdateReservationRoom>
+                            element: loggedIn ? <UpdateReservationRoom></UpdateReservationRoom> : <LoginPage></LoginPage>
+                        },
+                        {
+                            path: 'addServiceReservationRoom/:id',
+                            element: loggedIn ? <AddServiceReservationRoom></AddServiceReservationRoom> : <LoginPage></LoginPage>
+                        },
+                        {
+                            path: 'addRoomReservationRoom/:id',
+                            element: loggedIn ? <AddRoomReservationRoom></AddRoomReservationRoom> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'reservationEvent',
-                            element: <ReservationEventTable></ReservationEventTable>
+                            element: loggedIn ? <ReservationEventTable></ReservationEventTable> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'addReservationEvent',
-                            element: <AddReservationEvent></AddReservationEvent>
+                            element: loggedIn ? <AddReservationEvent></AddReservationEvent> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'addService/:id',
@@ -143,31 +147,31 @@ export const Index = () => {
                         },
                         {
                             path: 'updateReservationEvent/:id',
-                            element: <UpdateReservationEvent></UpdateReservationEvent>
+                            element: loggedIn ? <UpdateReservationEvent></UpdateReservationEvent> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'room',
-                            element: <RoomTable></RoomTable>
+                            element: loggedIn ? <RoomTable></RoomTable> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'addRoom',
-                            element: <AddRoom></AddRoom>
+                            element: loggedIn ? <AddRoom></AddRoom> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'updateRoom/:id',
-                            element: <UpdateRoom></UpdateRoom>
+                            element: loggedIn ? <UpdateRoom></UpdateRoom> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'user',
-                            element: <UserTable></UserTable>
+                            element: loggedIn ? <UserTable></UserTable> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'addUser',
-                            element: <AddUser></AddUser>
+                            element: loggedIn ? <AddUser></AddUser> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'updateUser/:id',
-                            element: <UpdateUser></UpdateUser>
+                            element: loggedIn ? <UpdateUser></UpdateUser> : <LoginPage></LoginPage>
                         },
                     ]
                 }
@@ -175,7 +179,7 @@ export const Index = () => {
         }
     ])
     return (
-        <AuthContext.Provider value={{}}>
+        <AuthContext.Provider value={{loggedIn, setLoggedIn}}>
             <RouterProvider router={routes} />
         </AuthContext.Provider>
     )

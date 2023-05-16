@@ -5,10 +5,18 @@ import {Event} from './Event'
 
 export const EventTable = () => {
 
+    const role = localStorage.getItem('role')
     const [event,setEvent] = useState([{}])
     const [loading, setLoading] = useState(true)
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
+    const [show, setShow] = useState(false)
+
+    const restringir = () => {
+        if (role === 'ADMIN' ) {
+          setShow(true)
+        }
+    }
 
     const getEvents = async () => {
         try {
@@ -41,6 +49,7 @@ export const EventTable = () => {
         }
     }
     useEffect(() => getEvents, [])
+    useEffect(() => restringir, [])
     return (
 
         <>
@@ -48,7 +57,11 @@ export const EventTable = () => {
                 <main>
                     <h1 className="title">Eventos</h1>
                         <ul className="breadcrumbs">
-                            <li><a href="#">Administrador</a></li>
+                            {
+                                show ? (
+                                    <li><a href="#">Administrador</a></li>
+                                ):(<li><a href="#">User</a></li>)
+                            }
                             <li className="divider">/</li>
                             <li><a href="#" className="active">Gestor de Hoteles</a></li>
                         </ul>
@@ -58,9 +71,13 @@ export const EventTable = () => {
                             <div className="sub-menu">
                             </div>
                             <br/>
-                            <Link to ='../addEvent'>
-                                <i className="fa-solid fa-plus add"></i>
-                            </Link>
+                            {
+                                show ? (
+                                    <Link to ='../addEvent'>
+                                        <i className="fa-solid fa-plus add"></i>
+                                    </Link>
+                                ):(<></>)
+                            }
                             <br/>
                             <br/>
                             <table>
@@ -69,7 +86,11 @@ export const EventTable = () => {
                                         <th>Nombre</th>
                                         <th>Descripción</th>
                                         <th>Costo por hora</th>
-                                        <th>Acciones</th>
+                                        {
+                                            show ? (
+                                                <th>Acciones</th>
+                                            ):(<></>)
+                                        }
                                     </tr>
                                 </thead>
                                     <tbody>
@@ -82,12 +103,16 @@ export const EventTable = () => {
                                                             description={description}
                                                             costPerHour={costPerHour}
                                                         ></Event>
-                                                        <td>
-                                                            <Link to={`../updateEvent/${_id}`}>
-                                                                <i className="fa-solid fa-pen button"></i>
-                                                            </Link>
-                                                            <i onClick={()=>deleteEvent(_id)} className="fa-solid fa-trash-can button"></i>   
-                                                        </td>
+                                                        {
+                                                            show ? (
+                                                                <td>
+                                                                    <Link to={`../updateEvent/${_id}`}>
+                                                                        <i className="fa-solid fa-pen button"></i>
+                                                                    </Link>
+                                                                    <i onClick={()=>deleteEvent(_id)} className="fa-solid fa-trash-can button"></i>   
+                                                                </td>
+                                                            ):(<></>)
+                                                        }
                                                     </tr>
                                                 )
                                             })

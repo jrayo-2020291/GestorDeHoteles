@@ -8,33 +8,7 @@ export const UpdateReservationRoom = () => {
     const { id } = useParams()
     const [users, setUsers] = useState([{}])
     const [hotels, setHotels] = useState([{}])
-    const [reservation, setReservation] = useState([{}])
     const token = localStorage.getItem('token')
-    const [form, setForm] = useState({
-        dateStart: '',
-        dateEnd: '',
-        cost: '',
-    })
-
-    const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const getReservation = async () => {
-        try {
-            const { data } = await axios(`http://localhost:3100/reservationRoom/getReservation/${id}`, {
-                headers: {
-                    'Authorization': token
-                }
-            })
-            setReservation(data.reservation)
-        } catch (err) {
-            console.error(err)
-        }
-    }
 
     const getUsers = async () => {
         try {
@@ -66,10 +40,12 @@ export const UpdateReservationRoom = () => {
     const updateReservationRoom = async (e) => {
         try {
             e.preventDefault()
-            setForm({
-                user: document.getElementById('inputUser'),
-                hotel: document.getElementById('inputHotel')
-            })
+            let form = {
+                dateStart: document.getElementById('inputDateStart').value,
+                dateEnd: document.getElementById('inputDateEnd').value,
+                user: document.getElementById('inputUser').value,
+                hotel: document.getElementById('inputHotel').value
+            }
             const { data } = await axios.put(`http://localhost:3100/reservationRoom/updateReservation/${id}`, form, {
                 headers: {
                     'Authorization': token
@@ -84,7 +60,6 @@ export const UpdateReservationRoom = () => {
 
     useEffect(() =>getUsers, [])
     useEffect(() =>getHotels, [])
-    useEffect(() =>getReservation, [])
     return (
         <div className="container">
         <div className="box">
@@ -92,22 +67,17 @@ export const UpdateReservationRoom = () => {
             <form>
                 <div>
                     <i className="fa-solid fa-user"></i>
-                    <input  onChange={handleChange} type="date" name='dateStart' defaultValue={reservation.dateStart} className="form-control"  id="inputdateStart" required/>
+                    <input   type="date"  className="form-control"   id="inputDateStart" required/>
                 </div>
                 <br/>
                 <div>
                     <i className="fa-solid fa-pencil"></i>
-                    <input  onChange={handleChange} type="date" name='dateEnd' defaultValue={reservation.dateEnd} className="form-control" id="inputdateEnd" required/>
-                </div>
-                <br/>
-                <div>
-                    <i className="fa-solid fa-tag"></i>
-                    <input  onChange={handleChange} type="number" name='cost' defaultValue={reservation.cost} className="form-control" id="inputCost" required/>
+                    <input   type="date"  className="form-control"  id="inputDateEnd" required/>
                 </div>
                 <br/>
                 <div>
                     <i className="fa-solid fa-user-shield icon side">User</i>
-                    <select onChange={handleChange} className="form-control" id="inputUser" name='user' required>
+                    <select  className="form-control" id="inputUser"  required>
                     {
                            users.map(({_id, name }, i)=>{
                             return (
@@ -120,7 +90,7 @@ export const UpdateReservationRoom = () => {
                 <br />
                 <div>
                     <i className="fa-solid fa-user-shield icon side">Hotels</i>
-                    <select onChange={handleChange} className="form-control" id="inputHotels" name='hotel' required>
+                    <select  className="form-control" id="inputHotel"  required>
                     {
                            hotels.map(({_id, name }, i)=>{
                             return (

@@ -17,7 +17,7 @@ export const ReservationRoomTable = () => {
 
   const getReservation = async () => {
     try {
-      const { data } = await axios('http://localhost:3100/reservationRoom/get', {
+      const { data } = await axios('http://localhost:3100/reservationRoom/getReservationGeneral', {
         headers: {
           'Authorization': token
         }
@@ -35,6 +35,23 @@ export const ReservationRoomTable = () => {
     }
   }
 
+  const deleteReservationRoom = async (id) => {
+    try {
+      let confirmDelete = confirm('¿Estás seguro de eliminar este usuario?')
+      if (confirmDelete) {
+        const { data } = await axios.delete(`http://localhost:3100/reservationRoom/deleteReservation/${id}`, {
+          headers: {
+            'Authorization': token
+          }
+        })
+        getReservation()
+      }
+    } catch (err) {
+      console.error(err)
+      alert(err.response.data.message)
+    }
+  }
+
 
   useEffect(() => getReservation, [])
 
@@ -46,8 +63,6 @@ export const ReservationRoomTable = () => {
         <Link to='../addReservationRoom'>
           <i className="fa-solid fa-plus add"></i>
         </Link>
-        <br />
-        <br />
         <main>
           <table>
             <thead>
@@ -75,10 +90,13 @@ export const ReservationRoomTable = () => {
                         <Link to={`../updateReservationRoom/${_id}`}>
                           <i className="fa-solid fa-pen-to-square button"></i>
                         </Link>
-                        <i onClick={() => deleteLease(_id)} className="fa sharp fa-solid fa-trash button"></i>
-                        {/* <Link to={`../addAService/${_id}`}>
+                        <i onClick={() => deleteReservationRoom(_id)} className="fa sharp fa-solid fa-trash button"></i>
+                        <Link to={`../addServiceReservationRoom/${_id}`}>
                           <i className='fa-solid fa-clipboard button'></i>
-                        </Link>  */}
+                        </Link>
+                        <Link to={`../addRoomReservationRoom/${_id}`}>
+                          <i className='fa-solid fa-clipboard button'></i>
+                        </Link>
                       </td>
                     </tr>
                   )
@@ -86,7 +104,6 @@ export const ReservationRoomTable = () => {
               }
             </tbody>
           </table>
-
         </main>
       </section>
     </>
