@@ -5,6 +5,8 @@ const User = require('../users/user.model')
 const Event = require('../events/events.model');
 const {validateData} = require('../utils/validate')
 const mongoose = require('mongoose');
+const {jsPDF} = require('jspdf');
+require('jspdf-autotable');
 
 exports.test = (req, res)=>{
     res.send({message: 'Test function is running'});
@@ -169,5 +171,43 @@ exports.delete = async(req, res)=>{
     }catch(err){
         console.error(err);
         return res.status(500).send({message: 'Error deleting Hotel'});
+    }
+}
+
+exports.convertPDF = async(req, res)=>{
+    try {
+        let doc = new jsPDF('portrait', 'px', 'letter');
+        let col = ["Index","name", "Location", "Qualification"];
+        let col2 = ["Index", "Name","Manager"];
+        let rows = []; let rows2 = [];
+
+        let hotels = await Hotel.find({}).sort({counter:-1});
+        let rowItem = [];
+        let rowItem2 = [];
+        for(let i = 0; i < hotels.length; i++) {
+            let id = (hotels[i].manager);
+            let managers =await User.findOne({_id: id});
+            rowItem.push({index: i, name: hotels[i].name, location: hotels[i].locationH, qualification: hotels[i].qualification, manager: managers.name + " " + managers.surname});
+        }
+        doc.setFont('Helvetica', 'bold');
+        doc.text("Report - Hotels", 185, 35)
+        rowItem.forEach(element =>{
+            let temp = [element.index,element.name,element.location, element.qualification];
+            let temp2 = [element.index,element.name,element.manager]
+            rows.push(temp)
+            rows2.push(temp2);
+            doc.setFont('Helvetica', 'normal');
+            doc.autoTable(col, rows, {startY: 60});
+            doc.autoTable(col2, rows2, {startY: 130});
+            doc.addPage('letter', 'portrait')
+            rows = [];
+            rows2 = [];
+        })
+        let date = new Date().toDateString()
+        doc.save(`Report Hotel-${date}.pdf`);
+        return res.send({message:'Report Created'})
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({message: 'Error creating report'});
     }
 }
