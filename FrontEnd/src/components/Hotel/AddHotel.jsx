@@ -83,8 +83,14 @@ export const AddHotel = () => {
                         </div>
                         <br/>
                         <div>
-                            <i className="fa-solid fa-id-card"></i>
-                            <input type="number" placeholder="qualification" id='qualification'/>
+                            <i className="fa-solid fa-id-card">Qualification</i>
+                            <select type="select" placeholder="qualification" id='qualification'>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                         </div>
                         <br/>
                         <div>
