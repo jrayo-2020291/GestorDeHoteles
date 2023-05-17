@@ -71,7 +71,7 @@ export const RoomTable = () => {
           }
         })
         Swal.fire({
-          title: 'Added!',
+          title: 'Deleted!',
           text: 'Room deleted Succesfully.',
           icon: 'success'
         }),
