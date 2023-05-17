@@ -36,8 +36,13 @@ export const UserTable = () => {
           title: 'Deleted!',
           text: data.message,
           icon: 'success'
-        }),
-        getUser()
+        })
+
+        if (role === 'CLIENT') {
+          LogOut()
+        } else {
+          getUser()
+        }
       }
     } catch (err) {
       console.error(err)
@@ -52,7 +57,11 @@ export const UserTable = () => {
           'Authorization': token
         }
       })
-      setUser(data.users)
+      if (role === 'ADMIN' || role === 'MANAGER') {
+        setUser(data.users)
+      } else {
+        setUser(data.user2)
+      }
     } catch (err) {
       console.error(err)
     }
@@ -65,62 +74,75 @@ export const UserTable = () => {
   return (
     <>
       <section id="content">
-        {
-          show ? (
-            <>
-              <br />
-              <Link to='../addUser'>
-                <i className="fa-solid fa-plus add"></i>
-              </Link>
-              <br />
-              <br />
-            </>
-          ) : (<></>)
-        }
         <main>
-          <table>
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>usuario</th>
-                <th>email</th>
-                <th>phone</th>
-                <th>role</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                user.map(({ _id, name, surname, username, email, phone, role }, index) => {
-                  return (
-                    <tr key={index}>
-                      <User
-                        name={name}
-                        surname={surname}
-                        username={username}
-                        email={email}
-                        phone={phone}
-                        role={role}
-                      ></User>
-                      {
-                        show ? (
-                          <>
-                            <td>
-                              <Link to={`../updateUser/${_id}`}>
-                                <i className="fa-solid fa-pen-to-square button"></i>
-                              </Link>
-                              <i onClick={() => deleteUser(_id)} className="fa sharp fa-solid fa-trash button"></i>
-                            </td>
-                          </>
-                        ) : (<></>)
-                      }
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </table>
+          <h1 className="title">Usuarios</h1>
+          <ul className="breadcrumbs">
+            {
+              show ? (
+                <li><a href="#">Administrador</a></li>
+              ) : (<li><a href="#">User</a></li>)
+            }
+            <li className="divider">/</li>
+            <li><a href="#" className="active">Gestor de Hoteles</a></li>
+          </ul>
+          <br />
+          {
+            show ? (
+              <>
+                <br />
+                <Link to='../addUser'>
+                  <i className="fa-solid fa-plus add"></i>
+                </Link>
+                <br />
+                <br />
+              </>
+            ) : (<></>)
+          }
+          <div className="info-data">
+            <div className="menu">
+              <div className="sub-menu">
+              </div>
+              <br />
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>usuario</th>
+                    <th>email</th>
+                    <th>phone</th>
+                    <th>role</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    user.map(({ _id, name, surname, username, email, phone, role }, index) => {
+                      return (
+                        <tr key={index}>
+                          <User
+                            name={name}
+                            surname={surname}
+                            username={username}
+                            email={email}
+                            phone={phone}
+                            role={role}
+                          ></User>
+                          <td>
+                            <Link to={`../updateUser/${_id}`}>
+                              <i className="fa-solid fa-pen-to-square button"></i>
+                            </Link>
+                            <i onClick={() => deleteUser(_id)} className="fa sharp fa-solid fa-trash button"></i>
+                          </td>
 
+                        </tr>
+                      )
+                    })
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
         </main>
       </section>
     </>

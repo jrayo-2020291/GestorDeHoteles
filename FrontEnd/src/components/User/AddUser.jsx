@@ -2,8 +2,6 @@ import React from 'react'
 import axios from "axios"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState } from "react"
-import Swal from 'sweetalert2';
-
 
 export const AddUser = () => {
     const navigate = useNavigate()
@@ -33,21 +31,18 @@ export const AddUser = () => {
                     'Authorization': token
                 }
             })
-            Swal.fire({
-                title: 'Added!',
-                text: data.message,
-                icon: 'success'
-              }),
-                          navigate('/dashboard/user')
+            alert(data.message)
+            navigate('/dashboard/user')
         } catch (err) {
             alert(err.response.data.message)
         }
     }
+    console.log(form)
 
     return (
         <div className="container">
         <div className="box">
-            <h1>Servicio</h1>
+            <h1>Agregar Usuario</h1>
             <form>
                 <div>
                     <i className="fa-solid fa-user"></i>
@@ -80,8 +75,12 @@ export const AddUser = () => {
                 </div>
                 <br/>
                 <div>
-                    <i className="fa-solid fa-tag"></i>
-                    <input  onChange={handleChange} type="text" name='role'  className="form-control"  placeholder='role' required/>
+                    <i className="fa-solid fa-tag">Role</i>
+                    <select onChange={handleChange} name="role">
+                        <option value="CLIENT">Cliente</option>
+                        <option value="ADMIN">Administrador</option>
+                        <option value="MANAGER">Manager</option>
+                    </select>
                 </div>
                 <br/>
                 <button onClick={(e)=>  addUser(e)} type="submit" className="btn btn-outline-primary">Add</button>

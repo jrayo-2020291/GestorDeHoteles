@@ -74,7 +74,7 @@ export const AddRoomReservationRoom = () => {
         <>
             <div className="container">
                 <div className="box">
-                    <h1>Arrendamiento</h1>
+                    <h1>Agregar Habitaciones</h1>
                     <table>
                         <thead>
                             <tr>

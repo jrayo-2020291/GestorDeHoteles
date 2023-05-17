@@ -131,11 +131,18 @@ exports.delete = async(req,res)=>{
 
 exports.get = async(req,res)=>{
     try {
+        let userId = req.user.sub;
+        let findUser = await User.find({_id: userId});
+        let user2 = await User.find({_id: userId})
+        let user = findUser.pop()
+        if(user.role === 'ADMIN' || user.role === 'MANAGER'){
         let users = await User.find({},{__v:0});
         return res.send({users})
+        } 
+        return res.send({user2})
     } catch (err) {
         console.error(err);
-        return res.status(500).send({message:'Error geting users'})
+        return res.status(500).send({message:'Error getting users'})
     }
 }
 
@@ -201,7 +208,6 @@ exports.updateAccount = async(req,res)=>{
         let data = req.body;
         let validate = validateData(data);
         if(validate) return res.status(400).send(validate);
-        data.password = await encrypt(data.password);
         let userExist = await User.findOne({_id:userId})
         if(!userExist) return res.send({message:'User not found'})
         if(userExist.role==='ADMIN') return res.send({message:'Cant upgrade admins'})
@@ -215,8 +221,7 @@ exports.updateAccount = async(req,res)=>{
             name:data.name,
             surname: data.surname,
             username:data.username,
-            phone:data.phone,
-            password: data.password
+            phone:data.phone
             },
             {new:true});
         return res.send({message:'User updated sucessfully', updateOwnUser});

@@ -13,7 +13,6 @@ export const AddRoom = () => {
         category: '',
         peopleCapacity: '',
         price: '',
-        availability: '',
         hotel: ''
     })
 
@@ -24,16 +23,16 @@ export const AddRoom = () => {
         })
     }
 
-    const getHotel = async()=>{
-        try{
-            const { data } = await axios(`http://localhost:3100/hotel/get/` ,{
+    const getHotel = async () => {
+        try {
+            const { data } = await axios(`http://localhost:3100/hotel/get/`, {
                 headers: {
                     'Authorization': token
                 }
             })
             console.log(data)
             setHotels(data.hotels)
-        }catch(err){
+        } catch (err) {
             console.error(err)
         }
     }
@@ -41,9 +40,6 @@ export const AddRoom = () => {
     const addUser = async (e) => {
         try {
             e.preventDefault()
-            setForm({
-                hotel: document.getElementById('inputHotel').value
-            })
             console.log(form)
             const { data } = await axios.post('http://localhost:3100/room/add', form, {
                 headers: {
@@ -54,19 +50,19 @@ export const AddRoom = () => {
                 title: 'Added!',
                 text: 'Room added Succesfully.',
                 icon: 'success'
-              }),
-                          navigate('/dashboard/Room')
+            }),
+                navigate('/dashboard/Room')
         } catch (err) {
             alert(err.response.data.message)
         }
     }
 
-    useEffect(()=>getHotel, [])
+    useEffect(() => getHotel, [])
 
     return (
         <div className="container">
             <div className="box">
-                <h1>Servicio</h1>
+                <h1>Agregar Habitación</h1>
                 <form>
                     <div>
                         <i className="fa-solid fa-user"></i>
@@ -89,13 +85,8 @@ export const AddRoom = () => {
                     </div>
                     <br />
                     <div>
-                        <i className="fa-solid fa-tag"></i>
-                        <input onChange={handleChange} type="text" name='availability' className="form-control" placeholder='availability' required />
-                    </div>
-                    <br />
-                    <div>
                         <i className="fa-solid fa-user-shield icon side">Hotel</i>
-                        <select className="form-control" id="inputHotel" required>
+                        <select onChange={handleChange} className="form-control" name="hotel" required>
                             {
                                 hotels.map(({ _id, name }, i) => {
                                     return (

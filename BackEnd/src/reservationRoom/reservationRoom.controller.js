@@ -13,9 +13,8 @@ exports.addReservation = async(req, res)=>{
     try{
         let data = req.body;
         let userId = req.user.sub;
-        console.log(userId);
         let userExist = await User.findOne({_id: userId});
-        if(userExist.role !== 'CLIENT') return res.send({message: 'Only clients can have a reservation'});
+         // if(userExist.role !== 'CLIENT') return res.send({message: 'Only clients can have a reservation'});
         let hotelExist = await Hotel.findOne({_id: data.hotel});
         if(!hotelExist) return res.status(404).send({message: 'This hotel does not exist'});
         let params = {
@@ -65,6 +64,8 @@ exports.addRoom = async(req, res)=> {
         let newCost = (reservationExist.cost + roomExist.price)* days;
         if(roomAlready) return res.send({message: 'You have already reserved this room'});
         let updatedReservation = await Reservation.findOneAndUpdate({_id: reservationId}, {$push:{'rooms': params}, cost: newCost}, {new: true});
+        console.log(params)
+        let updatedRoom = await Room.findOneAndUpdate({_id: params.room}, {availability: 'NOT AVAILABLE'}, {new: true});
         return res.send({message: 'New room agregated', updatedReservation});
     }catch(err){
         console.error(err);
@@ -190,10 +191,10 @@ exports.getOwnReservations = async(req, res)=>{
 
 exports.getReservationsByHotel = async(req, res)=>{
     try{
-        let hotelId = req.params.id;
-        let hotelExist = await Hotel.findOne({_id: hotelId});
+        let hotelId = req.body;
+        let hotelExist = await Hotel.findOne({_id: hotelId.id});
         if(!hotelExist) return res.status(404).send({message: 'This hotel does not exist'});
-        let reservations = await Reservation.find({hotel: hotelId}).populate('user').populate('hotel').populate('additionalServices.service').populate('rooms.room');
+        let reservations = await Reservation.find({hotel: hotelId.id}).populate('user').populate('hotel').populate('additionalServices.service').populate('rooms.room');
         if(!reservations) return res.status(404).send({message: 'This hotel has no reservations'});
         return res.send({reservations});
     }catch(err){

@@ -137,13 +137,13 @@ exports.getById = async(req,res)=>{
 };
 exports.topHotel = async(req,res)=>{
     try {
-        let hotels = await Hotel.find({},{manager:0}).sort({counter:-1});
+        let hotels = await Hotel.find({},{manager:0}).sort({counter:-1}).limit(5);
             return res.send({message:'Top Hotels',hotels});
     } catch (err) {
         console.error(err);
         return res.status(500).send({message:'Error searching'});
     }
-  }
+}
   exports.update = async(req,res)=>{
     try{
         let hotelId = req.params.id;

@@ -21,7 +21,7 @@ const hotelsSchema = mongoose.Schema({
     },
     availability:{
         type:String,
-        require:true,
+       // require:true,
         default:'AVAILABLE',
         enum:['AVAILABLE','NOT AVAILABLE']
     },

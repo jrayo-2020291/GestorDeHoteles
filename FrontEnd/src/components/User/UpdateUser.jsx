@@ -32,8 +32,7 @@ export const UpdateUser = () => {
                 surname: document.getElementById('inputSurname').value,
                 username: document.getElementById('inputUsername').value,
                 email: document.getElementById('inputEmail').value,
-                phone: document.getElementById('inputPhone').value,
-                role: document.getElementById('inputRole').value,
+                phone: document.getElementById('inputPhone').value
             }
             const { data } = await axios.put(`http://localhost:3100/user/updateAccount/${id}`, update, {
                 headers: {
@@ -56,7 +55,7 @@ export const UpdateUser = () => {
     return (
         <div className="container">
             <div className="box">
-                <h1>Servicio</h1>
+                <h1>Actualizar Usuario</h1>
                 <form>
                     <div>
                         <i className="fa-solid fa-user"></i>
@@ -81,11 +80,6 @@ export const UpdateUser = () => {
                     <div>
                         <i className="fa-solid fa-tag"></i>
                         <input  type="text"  id='inputPhone' className="form-control" defaultValue={user.phone} required />
-                    </div>
-                    <br />
-                    <div>
-                        <i className="fa-solid fa-tag"></i>
-                        <input  type="text" id='inputRole' className="form-control" defaultValue={user.role} required />
                     </div>
                     <br />
                     <button onClick={(e) => updateUser(e)} type="submit" className="btn btn-outline-primary">update</button>
