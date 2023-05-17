@@ -36,6 +36,8 @@ exports.add =async (req, res)=>{
             event: data.event,
             state: 'DISABLED'
         };
+        let newCounter = findHotel.counter + 1;
+        let updatedHotel = await Hotel.findOneAndUpdate({_id: data.hotel}, {counter: newCounter}, {new:true});
         let newReservation = new ReservationEvent(params);
         await newReservation.save();
         return res.send({message: 'New Reservation created successfully', newReservation});

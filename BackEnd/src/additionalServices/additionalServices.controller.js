@@ -2,6 +2,8 @@
 const Services = require('./additionalService.model');
 const {validateData} = require('../utils/validate')
 const mongoose = require('mongoose');
+const ReservationEvent = require('../reservationEvent/reservationEvent.model')
+const ReservationRoom = require('../reservationRoom/reservationRoom.model')
 
 
 exports.test = (req, res)=>{
@@ -110,9 +112,25 @@ exports.update = async(req, res) =>{
 exports.delete = async(req, res)=>{
     try{
         let serviceId = req.params.id;
-        let deletedService = await Services.findOneAndDelete({_id: serviceId});
-        if(!deletedService) return res.status(404).send({message: 'Service not found and not deleted'});
-        return res.send({message: 'Service deleted', deletedService});
+        let service = await Services.findOne({_id: serviceId});
+        if(service.category == "EVENT"){
+            let serviceUsed = await ReservationEvent.findOne({
+                'additionalServices.service': serviceId
+            })
+            if(serviceUsed) return res.send({message: 'This service is being used and cannot be deleted'});
+            let deletedService = await Services.findOneAndDelete({_id: serviceId});
+            if(!deletedService) return res.status(404).send({message: 'Service not found and not deleted'});
+            return res.send({message: 'Service deleted', deletedService});
+        }
+        if(service.category == "ROOM"){
+            let serviceUsed = await ReservationRoom.findOne({
+                'additionalServices.service': serviceId
+            })
+            if(serviceUsed) return res.send({message: 'This service is being used and cannot be deleted'});
+            let deletedService = await Services.findOneAndDelete({_id: serviceId});
+            if(!deletedService) return res.status(404).send({message: 'Service not found and not deleted'});
+            return res.send({message: 'Service deleted', deletedService});            
+        }
     }catch(err){
         console.error(err);
         return res.status(500).send({message: 'Error deleting service'});
