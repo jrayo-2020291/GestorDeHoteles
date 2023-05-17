@@ -144,7 +144,8 @@ exports.topHotel = async(req,res)=>{
         return res.status(500).send({message:'Error searching'});
     }
 }
-  exports.update = async(req,res)=>{
+
+exports.update = async(req,res)=>{
     try{
         let hotelId = req.params.id;
         let data=req.body;
@@ -161,7 +162,8 @@ exports.topHotel = async(req,res)=>{
         console.error(err);
         return res.status(500).send({message: 'Error updating hotel'})
     }
-  }
+}
+
 exports.delete = async(req, res)=>{
     try{
         let hotelId = req.params.id;
@@ -209,5 +211,17 @@ exports.convertPDF = async(req, res)=>{
     } catch (error) {
         console.error(error);
         return res.status(500).send({message: 'Error creating report'});
+    }
+}
+
+exports.qualify = async(req,res)=>{
+    try {
+        let hotel = await Hotel.findOne({_id: req.params.id});
+        let average = (parseInt(hotel.qualification) + parseInt(req.body.qualification))/2;
+        let qualifyHotel = await Hotel.findOneAndUpdate({_id: req.params.id}, {qualification:average}, {new: true});
+        return res.send({message: 'Hotel qulifing sucessfully', qualifyHotel});
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({message:'Error qulifing Hotel'})
     }
 }

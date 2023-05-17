@@ -16,6 +16,7 @@ api.post('/getbyLocation',ensureAuth,hotelsController.getByLocation)
 api.put('/addEvent/:id',[ensureAuth,isAdmin], hotelsController.addEvent)
 api.put('/deleteEvent/:id',[ensureAuth,isAdmin], hotelsController.deleteEvent)
 api.put('/update/:id',[ensureAuth,isAdmin],hotelsController.update)
+api.put('/qualification/:id',ensureAuth,hotelsController.qualify)
 api.delete('/delete/:id',[ensureAuth,isAdmin],hotelsController.delete)
 api.get('/createReport', hotelsController.convertPDF);
 

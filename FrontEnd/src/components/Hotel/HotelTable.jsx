@@ -8,6 +8,7 @@ export const HotelTable = () => {
     const role = localStorage.getItem('role')
     const [hotel,setHotel] = useState([{}])
     const [show, setShow] = useState(false)
+    const[showUser,setShowUser] = useState(false)
     const [loading, setLoading] = useState(true)
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
@@ -18,6 +19,9 @@ export const HotelTable = () => {
     const restringir = () => {
         if (role === 'ADMIN' ) {
           setShow(true)
+        }
+        if(role==='USER'){
+          setShowUser(true)
         }
     }
 
@@ -60,6 +64,21 @@ export const HotelTable = () => {
           console.error(err)
         }
       };
+    
+    const qualifyHotel = async(id)=>{
+      try {
+
+        const { data } = await axios.put(`http://localhost:3100/hotel/qualification/${id}`,{qualification:document.getElementById('calificacion').value}, {
+            headers: {
+                'Authorization': token
+            }
+        })
+        getHotels()
+      } catch (err) {
+        console.error(err);
+        alert(err.response.data.message)
+      }
+    }
 
       const deleteHotel = async (id) => {
         try {
@@ -131,6 +150,11 @@ export const HotelTable = () => {
                                                 <th>Acciones</th>
                                             ):(<></>)
                                         }
+                                        {
+                                          showUser?(
+                                            <th>Calificar</th>
+                                          ):(<></>)
+                                        }
                                         
                                     </tr>
                                 </thead>
@@ -163,6 +187,14 @@ export const HotelTable = () => {
                                                             </>
                                                             ):(<></>)
                                                         }
+                                                        {
+                                                          showUser ? (
+                                                            <td>
+                                                              <input onChange={handleChange} id='calificacion' type="range" min="1" max="5" step="any"></input>
+                                                              <i onClick={() => qualifyHotel(_id)} className="fa sharp fa-solid fa-check button"></i> 
+                                                            </td>
+                                                          ):(<></>)
+                                                        }
                                                         
                                                     </tr>
                                                 )
@@ -173,7 +205,6 @@ export const HotelTable = () => {
                                 </table>
                         </div> 
                     </div>
-                    <input onChange={handleChange} id='calificacion' type="range" min="1" max="5" step="any"></input>
                     <br />
                     <br />
                     <br />
