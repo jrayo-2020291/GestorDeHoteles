@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Hotel } from './Hotel'
+import Swal from 'sweetalert2';
 
 export const HotelTable = () => {
   const role = localStorage.getItem('role')
@@ -81,15 +82,30 @@ export const HotelTable = () => {
 
   const deleteHotel = async (id) => {
     try {
-      let confirmDelete = confirm('Estás seguro de eliminar este evento?')
-      if (confirmDelete) {
-        const { data } = await axios.delete(`http://localhost:3100/hotel/delete/${id}`, {
-          headers: {
-            'Authorization': token
-          }
+      const result = await Swal.fire({
+        title: 'you are sure?',
+        text: 'Delete Hotel',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'YES',
+        cancelButtonText: 'CANCEL',
+      });
+        if (result.isConfirmed) {
+          const { data } = await axios.delete(`http://localhost:3100/hotel/delete/${id}`, {
+           headers: {
+             'Authorization': token
+           }
+         })
+         getHotels()
+         Swal.fire({
+          title: data.message,
+          icon: 'success',
+          timer: 2000
         })
-        getHotels()
-      }
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire('CANCEL', 'The hotel was not deleted', 'error');
+        }
+      
     } catch (err) {
       console.error(err)
       alert(err.response.data.message)
