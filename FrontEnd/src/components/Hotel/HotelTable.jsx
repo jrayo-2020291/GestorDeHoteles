@@ -98,11 +98,11 @@ export const HotelTable = () => {
                     <br/>
                     <form action="#">
                         <div className="form-group">
-                        <input name='name' onChange={handleChange} type="text" placeholder="Buscar..."/>
+                        <input className='select' name='name' onChange={handleChange} type="text" placeholder="Buscar..."/>
                         <i className="fa-solid fa-magnifying-glass icon"></i>
                         </div>
                     </form>
-                    <br /> 
+                    <br />
                     <div className="info-data">
                         <div className="menu">
                             <div className="sub-menu">
@@ -124,13 +124,12 @@ export const HotelTable = () => {
                                         <th>Ubicación</th>
                                         <th>Calificación</th>
                                         <th>Habitaciones</th>
+                                        <th>Manager</th>
+                                        <th>Eventos</th>
                                         {
                                             show ?(
-                                                <>
-                                                    <th>Eventos</th>
-                                                    <th>Acciones</th>
-                                                </>
-                                            ):(<th>Descripción</th>)
+                                                <th>Acciones</th>
+                                            ):(<></>)
                                         }
                                         
                                     </tr>
@@ -138,7 +137,7 @@ export const HotelTable = () => {
                                     
                                     <tbody>
                                         {
-                                            hotel.map(({_id, name, locationH,qualification,numberRooms},index)=>{
+                                            hotel.map(({_id, name, locationH,qualification,numberRooms,manager},index)=>{
                                                 return(
                                                     <tr key={index}>
                                                         <Hotel
@@ -146,15 +145,15 @@ export const HotelTable = () => {
                                                             locationH={locationH}
                                                             qualification={qualification}
                                                             numberRooms={numberRooms}
+                                                            manager={manager.name}
                                                         ></Hotel>
-                                                        
+                                                        <td>
+                                                            <Link to={`../hotel/event/${_id}`}>
+                                                                <i className="fa-solid fa-clipboard button"></i>
+                                                            </Link>
+                                                        </td>
                                                         {show ?(
                                                             <>
-                                                                <td>
-                                                                <Link to={`../hotel/event/${_id}`}>
-                                                                    <i className="fa-solid fa-clipboard button"></i>
-                                                                </Link>
-                                                                </td>
                                                                 <td>
                                                                     <Link to={`../updateHotel/${_id}`}>
                                                                         <i className="fa-solid fa-pen button"></i>
@@ -162,14 +161,9 @@ export const HotelTable = () => {
                                                                     <i onClick={() => deleteHotel(_id)} className="fa sharp fa-solid fa-trash button"></i> 
                                                                 </td>
                                                             </>
-                                                            ):(
-                                                                <td>
-                                                                    <Link to={`../hotel/event/${_id}`}>
-                                                                        <i className="fa-solid fa-clipboard button"></i>
-                                                                    </Link>
-                                                                </td>
-                                                            )
+                                                            ):(<></>)
                                                         }
+                                                        
                                                     </tr>
                                                 )
                                             })

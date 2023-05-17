@@ -4,6 +4,8 @@ const User = require('../users/user.model');
 const Room = require('../rooms/rooms.model');
 const Hotel = require('../hotels/hotels.model');
 const Service = require('../additionalServices/additionalService.model')
+const {jsPDF} = require('jspdf');
+require('jspdf-autotable');
 
 exports.test = (req, res)=> res.send({message: 'Test function for reservation is running'});
 
@@ -22,6 +24,8 @@ exports.addReservation = async(req, res)=>{
             hotel: data.hotel,
             state: 'DISABLED'
         };
+        let newCounter = hotelExist.counter + 1;
+        let updatedHotel = await Hotel.findOneAndUpdate({_id: data.hotel}, {counter: newCounter}, {new:true})
         let reservationExist = await Reservation.findOne({user: params.user, dateStart: params.dateStart, dateEnd: params.dateEnd}) ;
         if(reservationExist) return res.send({message: 'You cannot create another reservation with this user in this date'});
         let newReservation = new Reservation(params);
@@ -322,5 +326,73 @@ exports.deleteReservation = async(req, res) => {
     }catch(err){
         console.error(err);
         return res.status(500).send({message: 'Error deleting reservation'});
+    }
+}
+
+exports.createReport = async(req, res)=>{
+    try {
+        let doc = new jsPDF('portrait', 'px', 'letter');
+        let col = ["Index","Date", "Date-End", "Cost","User"];
+        let col2 = ["Index", "Hotel","Location"];
+        let col3 = ["Index", "Room", "Cost x Night"]
+        let col4 = ["Index", "Service", "Cost"];
+        let rows = []; let rows2 = []; let rows3 = []; let rows4 = [];
+        let rowItem = []; let rowItem2 = []; let rowItem3 =[];
+
+        let reservations = await Reservation.find();
+        for(let i=0; i<reservations.length; i++){
+            let userId = reservations[i].user;
+            let hotel = reservations[i].hotel;
+            let findUser = await User.findOne({_id: userId});
+            let findHotel = await Hotel.findOne({_id: hotel});
+
+            for(let a = 0; a < reservations[i].rooms.length; a++){
+                let idRoom = reservations[i].rooms[a].room;
+                let room = await Room.findOne({_id: idRoom});
+                rowItem2.push({index: i, room: room.noRoom, cost: room.price});
+            } 
+            for(let e = 0; e < reservations[i].additionalServices.length; e++) {
+                let idService = reservations[i].additionalServices[e].service;
+                let service = await Service.findOne({_id: idService});
+                rowItem3.push({index: i, service: service.name, cost: service.cost});
+            }
+            let dateReservationI = new Date(reservations[i].dateStart).toLocaleDateString();
+            let dateReservationE = new Date(reservations[i].dateEnd).toLocaleDateString();
+            rowItem.push({index: i, date: dateReservationI, dateE: dateReservationE, cost: reservations[i].cost,
+            user: findUser.name + " " + findUser.surname, hotel: findHotel.name, location: findHotel.locationH});
+        }
+        doc.setFont('Helvetica', 'bold');
+        doc.text("Report - Reservations Rooms", 147, 35)
+
+        rowItem2.forEach(element =>{
+            let temp3 = [element.index, element.room, element.cost]
+            rows3.push(temp3);
+        });
+        rowItem3.forEach(element=>{
+            let temp4 =[element.index, element.service, element.cost];
+            rows4.push(temp4);
+        });
+        rowItem.forEach(element=>{
+            let temp = [element.index, element.date, element.dateE, element.cost, element.user];
+            let temp2 = [element.index, element.hotel, element.location];
+            rows.push(temp);
+            rows2.push(temp2);
+            doc.setFont('Helvetica', 'normal');
+            doc.autoTable(col, rows, {startY: 60});
+            doc.autoTable(col2, rows2, {startY: 100});
+            doc.autoTable(col3, rows3, {startY: 140});
+            doc.autoTable(col4, rows4, {startY: 240});
+            doc.addPage('letter', 'portrait')
+            rows = [];
+            rows2 = [];
+            rows3 = [];
+            rows4 = [];
+        });
+        let date = new Date().toDateString();
+        doc.save(`Report Reservations Rooms-${date}.pdf`);
+        return res.send({message:'Report Created'})        
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({message: 'Error creating report'});
     }
 }

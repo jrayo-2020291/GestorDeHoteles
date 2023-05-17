@@ -4,6 +4,8 @@ const User = require('../users/user.model');
 const Event = require('../events/events.model');
 const Hotel = require('../hotels/hotels.model');
 const Services = require('../additionalServices/additionalService.model');
+const {jsPDF} = require('jspdf');
+require('jspdf-autotable');
 
 exports.test = (req, res)=>{
     return res.send({message: 'Test funtion for reservation event is running'});
@@ -34,6 +36,8 @@ exports.add =async (req, res)=>{
             event: data.event,
             state: 'DISABLED'
         };
+        let newCounter = findHotel.counter + 1;
+        let updatedHotel = await Hotel.findOneAndUpdate({_id: data.hotel}, {counter: newCounter}, {new:true});
         let newReservation = new ReservationEvent(params);
         await newReservation.save();
         return res.send({message: 'New Reservation created successfully', newReservation});
@@ -216,5 +220,67 @@ exports.setState = async (req, res)=>{
         }
     } catch (error) {
         return console.error(error);
+    }
+}
+
+exports.createReport = async(req, res)=>{
+    try {
+        let doc = new jsPDF('portrait', 'px', 'letter');
+        let col = ["Index","Date", "Hours", "Cost","User"];
+        let col2 = ["Index", "Hotel","Location"];
+        let col3 = ["Index", "Event", "Cost x Hour"];
+        let col4 = ["Index", "Service", "Cost"]
+        let rows = []; let rows2 = []; let rows3 = []; let rows4 = [];
+        let rowItem = []; let rowItem2 = [];
+
+        let reservations = await ReservationEvent.find();
+        for(let i=0; i<reservations.length; i++) {
+            let id = reservations[i].user;
+            let event = reservations[i].event;
+            let hotel = reservations[i].hotel;
+            let findUser = await User.findOne({_id: id});
+            let findHotel = await Hotel.findOne({_id: hotel});
+            let findEvent = await Event.findOne({_id: event});
+            for(let a = 0; a < reservations[i].additionalServices.length; a++) {
+                let idService = reservations[i].additionalServices[a].service;
+                let service = await Services.findOne({_id: idService});
+                rowItem2.push({index: i, service: service.name, cost: service.cost});
+            }
+            let dateReservation = new Date(reservations[i].dateEvent).toLocaleDateString();
+            rowItem.push({index: i, date: dateReservation, hours: reservations[i].hoursEvent, 
+                cost: reservations[i].cost, user: findUser.name + " " + findUser.surname, hotel: findHotel.name, 
+                location: findHotel.locationH, event: findEvent.name, costPerHour: findEvent.costPerHour});
+        }
+        doc.setFont('Helvetica', 'bold');
+        doc.text("Report - Reservations Events", 147, 35)
+
+        rowItem2.forEach(element =>{
+            let temp4 = [element.index, element.service, element.cost]
+            rows4.push(temp4);
+        })
+        rowItem.forEach(element =>{
+            let temp = [element.index, element.date, element.hours, element.cost, element.user];
+            let temp2 = [element.index, element.hotel, element.location];
+            let temp3 = [element.index,element.event, element.costPerHour]
+            rows.push(temp);
+            rows2.push(temp2);
+            rows3.push(temp3);
+            doc.setFont('Helvetica', 'normal');
+            doc.autoTable(col, rows, {startY: 60});
+            doc.autoTable(col2, rows2, {startY: 100});
+            doc.autoTable(col3, rows3, {startY: 140});
+            doc.autoTable(col4, rows4, {startY: 180});
+            doc.addPage('letter', 'portrait')
+            rows = [];
+            rows2 = [];
+            rows3 = [];
+            rows4 = [];
+        })
+        let date = new Date().toDateString()
+        doc.save(`Report Reservations Event-${date}.pdf`);
+        return res.send({message:'Report Created'})
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({message: 'Error creating report'});
     }
 }

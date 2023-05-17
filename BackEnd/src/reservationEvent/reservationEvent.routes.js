@@ -17,4 +17,5 @@ api.get('/getReservationsByHotel/:id',[ensureAuth, isAdmin], reservationEventCon
 api.get('/getResevationsGeneral', ensureAuth, reservationEventController.getReservationsGeneral);
 api.put('/updateReservation/:id', ensureAuth,reservationEventController.updatedReservation);
 api.delete('/deleteReservation/:id', [ensureAuth, isAdmin], reservationEventController.deleteReservation);
+api.get('/createReport', reservationEventController.createReport);
 module.exports = api;
