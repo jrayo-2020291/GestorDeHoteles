@@ -101,100 +101,104 @@ export const RoomTable = () => {
 
   return (
     <>
-      <section id="content">
-        <main>
-          <h1 className="title">Habitaciones</h1>
-          <ul className="breadcrumbs">
-            {
-              show ? (
-                <li><a href="#">Administrador</a></li>
-              ) : (<li><a href="#">User</a></li>)
-            }
-            <li className="divider">/</li>
-            <li><a href="#" className="active">Gestor de Hoteles</a></li>
-          </ul>
-          <br />
+      {/* <section id="content"> */}
+      <br />
+      <br />
+      <br />
+      <br />
+      <main>
+        <h1 className="title">Habitaciones</h1>
+        <ul className="breadcrumbs">
           {
             show ? (
-              <>
-                <br />
-                <Link to='../addRoom'>
-                  <i className="fa-solid fa-plus add"></i>
-                </Link>
-                <br />
-                <br />
-              </>
-            ) : (<></>)
+              <li><a href="#">Administrador</a></li>
+            ) : (<li><a href="#">User</a></li>)
           }
-          <div className="info-data">
-            <div className="menu">
-              <div className="sub-menu">
-              </div>
+          <li className="divider">/</li>
+          <li><a href="#" className="active">Gestor de Hoteles</a></li>
+        </ul>
+        <br />
+        {
+          show ? (
+            <>
               <br />
-              <form action="#">
-                <div className="form-group">
-                  <i className="fa-solid fa-user-shield icon side">Hotels</i>
-                  <select className="form-control" id="inputHotel" required>
-                    {
-                      hotels.map(({ _id, name }, i) => {
-                        return (
-                          <option key={i} value={_id}>{name}</option>
-                        )
-                      })
-                    }
-                    <option value="ALL">Todos</option>
-                  </select>
-                  <button onClick={(e) => getByHotel(e)}>Buscar</button>
-                </div>
-              </form>
+              <Link to='../addRoom'>
+                <i className="fa-solid fa-plus add"></i>
+              </Link>
               <br />
-              <table>
-                <thead>
-                  <tr>
-                    <th>No.Habitación</th>
-                    <th>Category</th>
-                    <th>Capacidad</th>
-                    <th>precio</th>
-                    <th>Disponibilidad</th>
-                    <th>Hotel</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
+              <br />
+            </>
+          ) : (<></>)
+        }
+        <div className="info-data">
+          <div className="menu">
+            <div className="sub-menu">
+            </div>
+            <br />
+            <form action="#">
+              <div className="form-group">
+                <i className="fa-solid fa-user-shield icon side">Hotels</i>
+                <select className="form-control" id="inputHotel" required>
                   {
-                    room.map(({ _id, noRoom, category, peopleCapacity, price, availability, hotel }, index) => {
+                    hotels.map(({ _id, name }, i) => {
                       return (
-                        <tr key={index}>
-                          <Room
-                            noRoom={noRoom}
-                            category={category}
-                            peopleCapacity={peopleCapacity}
-                            price={price}
-                            availability={availability}
-                            hotel={hotel?.name}
-                          ></Room>
-                          {
-                            show ? (
-                              <td>
-                                <Link to={`../updateRoom/${_id}`}>
-                                  <i className="fa-solid fa-pen-to-square button"></i>
-                                </Link>
-                                <i onClick={() => deleteRoom(_id)} className="fa sharp fa-solid fa-trash button"></i>
-                              </td>
-                            ) : (<td></td>)
-                          }
-
-
-                        </tr>
+                        <option key={i} value={_id}>{name}</option>
                       )
                     })
                   }
-                </tbody>
-              </table>
-            </div>
+                  <option value="ALL">Todos</option>
+                </select>
+                <button onClick={(e) => getByHotel(e)}>Buscar</button>
+              </div>
+            </form>
+            <br />
+            <table>
+              <thead>
+                <tr>
+                  <th>No.Habitación</th>
+                  <th>Category</th>
+                  <th>Capacidad</th>
+                  <th>precio</th>
+                  <th>Disponibilidad</th>
+                  <th>Hotel</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  room.map(({ _id, noRoom, category, peopleCapacity, price, availability, hotel }, index) => {
+                    return (
+                      <tr key={index}>
+                        <Room
+                          noRoom={noRoom}
+                          category={category}
+                          peopleCapacity={peopleCapacity}
+                          price={price}
+                          availability={availability}
+                          hotel={hotel?.name}
+                        ></Room>
+                        {
+                          show ? (
+                            <td>
+                              <Link to={`../updateRoom/${_id}`}>
+                                <i className="fa-solid fa-pen-to-square button"></i>
+                              </Link>
+                              <i onClick={() => deleteRoom(_id)} className="fa sharp fa-solid fa-trash button"></i>
+                            </td>
+                          ) : (<td></td>)
+                        }
+
+
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </table>
           </div>
-        </main>
-      </section>
+        </div>
+      </main>
+      {/* </section> */}
     </>
   )
 }

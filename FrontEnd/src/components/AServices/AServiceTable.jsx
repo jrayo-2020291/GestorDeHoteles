@@ -56,62 +56,77 @@ export const AServiceTable = () => {
   useEffect(() => restringir, [])
   return (
     <>
-      <section id="content">
-        <main>
-          {
-            show ? (
-              <>
-                <Link to='/../dashboard/addAService'>
-                  <i className="fa-solid fa-plus add"></i>
-                </Link>
-                <br />
-                <br />
-              </>
-            ) : (<></>)
-          }
-          <table>
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Costo</th>
-                <th>Category</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                services.map(({ _id, name, description, cost, category }, index) => {
-                  return (
-                    <tr key={index}>
-                      <Aservice
-                        name={name}
-                        description={description}
-                        cost={cost}
-                        category={category}
-                      ></Aservice>
+      {/* <section id="content"> */}
+      <br />
+      <br />
+      <br />
+      <br />
+      <main>
+      <h1 className="title">Servicios Adicionales</h1>
+          <ul className="breadcrumbs">
+            {
+              show ? (
+                <li><a href="#">Administrador</a></li>
+              ) : (<li><a href="#">User</a></li>)
+            }
+            <li className="divider">/</li>
+            <li><a href="#" className="active">Gestor de Hoteles</a></li>
+          </ul>
+          <br />
+        {
+          show ? (
+            <>
+              <Link to='/../dashboard/addAService'>
+                <i className="fa-solid fa-plus add"></i>
+              </Link>
+              <br />
+              <br />
+            </>
+          ) : (<></>)
+        }
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Costo</th>
+              <th>Category</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              services.map(({ _id, name, description, cost, category }, index) => {
+                return (
+                  <tr key={index}>
+                    <Aservice
+                      name={name}
+                      description={description}
+                      cost={cost}
+                      category={category}
+                    ></Aservice>
 
-                      {
-                        show ? (
-                          <>
-                            <td>
-                              <Link to={`/../dashboard/updateAService/${_id}`}>
-                                <i className="fa-solid fa-pen-to-square button"></i>
-                              </Link>
-                              <i onClick={() => deleteService(_id)} className="fa sharp fa-solid fa-trash button"></i>
-                            </td>
-                          </>
-                        ) : (<></>)
-                        }
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </table>
+                    {
+                      show ? (
+                        <>
+                          <td>
+                            <Link to={`/../dashboard/updateAService/${_id}`}>
+                              <i className="fa-solid fa-pen-to-square button"></i>
+                            </Link>
+                            <i onClick={() => deleteService(_id)} className="fa sharp fa-solid fa-trash button"></i>
+                          </td>
+                        </>
+                      ) : (<></>)
+                    }
+                  </tr>
+                )
+              })
+            }
+          </tbody>
+        </table>
 
-        </main>
-      </section>
+      </main>
+      {/* </section> */}
     </>
 
   )

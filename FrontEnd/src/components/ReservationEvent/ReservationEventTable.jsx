@@ -36,7 +36,7 @@ export const ReservationEventTable = () => {
           'Authorization': token
         }
       })
-      data.reservations.forEach(element=>{
+      data.reservations.forEach(element => {
         let date = new Date(element.dateEvent)
         element.dateEvent = date.toLocaleDateString()
       })
@@ -49,61 +49,72 @@ export const ReservationEventTable = () => {
   useEffect(() => getReservations, [])
   return (
     <>
-      <section id="content">
-        <main>
+      {/* <section id="content"> */}
+      <br />
+      <br />
+      <br />
+      <br />
+      <main>
+      <h1 className="title">Reservación de Eventos</h1>
+          <ul className="breadcrumbs">
+            <li><a href="#">User</a></li>
+            <li className="divider">/</li>
+            <li><a href="#" className="active">Gestor de Hoteles</a></li>
+          </ul>
+          <br />
         <Link to='/../dashboard/addReservationEvent'>
           <i className="fa-solid fa-plus add"></i>
-          </Link>
-          <br />
-          <br />
-          <table>
-            <thead>
-              <tr>
-                <th>Fecha</th>
-                <th>Horas</th>
-                <th>Costo</th>
-                <th>Usuario</th>
-                <th>Hotel</th>
-                <th>Evento</th>
-                <th>Acciones</th>
-                <th>Servicios</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                  reservations.map(({ _id, dateEvent, hoursEvent, cost,user,hotel,event}, index) => {
-                    return (
-                      <tr key={index}>
-                        <ReservationEvent
-                          dateEvent={dateEvent}
-                          cost={cost}
-                          hoursEvent={hoursEvent}
-                          user={user?.name}
-                          hotel={hotel?.name}
-                          event={event?.name}
-                        ></ReservationEvent>
-                        <td>
-                          <Link to={`/../dashboard/updateReservationEvent/${_id}`}>
-                            <i className="fa-solid fa-pen-to-square button"></i>
-                          </Link>
-                          <i onClick={()=>deleteReservation(_id)}className="fa sharp fa-solid fa-trash button"></i>
-                         
-                        </td>
-                        <td>
-                        <Link to={`/../dashboard/addService/${_id}`}>
-                          <i className="fa-solid fa-plus-circle button"></i>
-                        </Link>
-                        </td>
-                      </tr>
-                    )
-                  })
-                } 
-							</tbody>
-						</table>
-				  
-		</main>
-	</section>	
-        </>
-	
-    )
+        </Link>
+        <br />
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Horas</th>
+              <th>Costo</th>
+              <th>Usuario</th>
+              <th>Hotel</th>
+              <th>Evento</th>
+              <th>Acciones</th>
+              <th>Servicios</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              reservations.map(({ _id, dateEvent, hoursEvent, cost, user, hotel, event }, index) => {
+                return (
+                  <tr key={index}>
+                    <ReservationEvent
+                      dateEvent={dateEvent}
+                      cost={cost}
+                      hoursEvent={hoursEvent}
+                      user={user?.name}
+                      hotel={hotel?.name}
+                      event={event?.name}
+                    ></ReservationEvent>
+                    <td>
+                      <Link to={`/../dashboard/updateReservationEvent/${_id}`}>
+                        <i className="fa-solid fa-pen-to-square button"></i>
+                      </Link>
+                      <i onClick={() => deleteReservation(_id)} className="fa sharp fa-solid fa-trash button"></i>
+
+                    </td>
+                    <td>
+                      <Link to={`/../dashboard/addService/${_id}`}>
+                        <i className="fa-solid fa-plus-circle button"></i>
+                      </Link>
+                    </td>
+                  </tr>
+                )
+              })
+            }
+          </tbody>
+        </table>
+
+      </main>
+      {/* </section>	 */}
+    </>
+
+  )
 }

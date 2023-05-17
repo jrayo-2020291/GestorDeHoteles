@@ -89,93 +89,97 @@ export const EventTable = () => {
     return (
 
         <>
-            <section id="content">
-                <main>
-                    <h1 className="title">Eventos</h1>
-                    <ul className="breadcrumbs">
+            {/* <section id="content"> */}
+            <br />
+            <br />
+            <br />
+            <br />
+            <main>
+                <h1 className="title">Eventos</h1>
+                <ul className="breadcrumbs">
+                    {
+                        show ? (
+                            <li><a href="#">Administrador</a></li>
+                        ) : (<li><a href="#">User</a></li>)
+                    }
+                    <li className="divider">/</li>
+                    <li><a href="#" className="active">Gestor de Hoteles</a></li>
+                </ul>
+                <br />
+                <div className="info-data">
+                    <div className="menu">
+                        <div className="sub-menu">
+                        </div>
+                        <br />
                         {
                             show ? (
-                                <li><a href="#">Administrador</a></li>
-                            ) : (<li><a href="#">User</a></li>)
+                                <Link to='../addEvent'>
+                                    <i className="fa-solid fa-plus add"></i>
+                                </Link>
+                            ) : (<></>)
                         }
-                        <li className="divider">/</li>
-                        <li><a href="#" className="active">Gestor de Hoteles</a></li>
-                    </ul>
-                    <br />
-                    <div className="info-data">
-                        <div className="menu">
-                            <div className="sub-menu">
-                            </div>
-                            <br />
-                            {
-                                show ? (
-                                    <Link to='../addEvent'>
-                                        <i className="fa-solid fa-plus add"></i>
-                                    </Link>
-                                ) : (<></>)
-                            }
-                            <br />
-                            <br />
-                            <form action="#">
-                                <div className="form-group">
-                                    <i className="fa-solid fa-user-shield icon side">Hotels</i>
-                                    <select className="form-control" id="inputHotel" required>
-                                        {
-                                            hotels.map(({ _id, name }, i) => {
-                                                return (
-                                                    <option key={i} value={_id}>{name}</option>
-                                                )
-                                            })
-                                        }
-                                        <option value="ALL">Todos</option>
-                                    </select>
-                                    <button onClick={(e) => getByHotel(e)}>Buscar</button>
-                                </div>
-                            </form>
-                            <br />
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Descripción</th>
-                                        <th>Costo por hora</th>
-                                        {
-                                            show ? (
-                                                <th>Acciones</th>
-                                            ) : (<></>)
-                                        }
-                                    </tr>
-                                </thead>
-                                <tbody>
+                        <br />
+                        <br />
+                        <form action="#">
+                            <div className="form-group">
+                                <i className="fa-solid fa-user-shield icon side">Hotels</i>
+                                <select className="form-control" id="inputHotel" required>
                                     {
-                                        event.map(({ _id, name, description, costPerHour }, index) => {
+                                        hotels.map(({ _id, name }, i) => {
                                             return (
-                                                <tr key={index}>
-                                                    <Event
-                                                        name={name}
-                                                        description={description}
-                                                        costPerHour={costPerHour}
-                                                    ></Event>
-                                                    {
-                                                        show ? (
-                                                            <td>
-                                                                <Link to={`../updateEvent/${_id}`}>
-                                                                    <i className="fa-solid fa-pen button"></i>
-                                                                </Link>
-                                                                <i onClick={() => deleteEvent(_id)} className="fa-solid fa-trash-can button"></i>
-                                                            </td>
-                                                        ) : (<></>)
-                                                    }
-                                                </tr>
+                                                <option key={i} value={_id}>{name}</option>
                                             )
                                         })
                                     }
-                                </tbody>
-                            </table>
-                        </div>
+                                    <option value="ALL">Todos</option>
+                                </select>
+                                <button onClick={(e) => getByHotel(e)}>Buscar</button>
+                            </div>
+                        </form>
+                        <br />
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                    <th>Costo por hora</th>
+                                    {
+                                        show ? (
+                                            <th>Acciones</th>
+                                        ) : (<></>)
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    event.map(({ _id, name, description, costPerHour }, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <Event
+                                                    name={name}
+                                                    description={description}
+                                                    costPerHour={costPerHour}
+                                                ></Event>
+                                                {
+                                                    show ? (
+                                                        <td>
+                                                            <Link to={`../updateEvent/${_id}`}>
+                                                                <i className="fa-solid fa-pen button"></i>
+                                                            </Link>
+                                                            <i onClick={() => deleteEvent(_id)} className="fa-solid fa-trash-can button"></i>
+                                                        </td>
+                                                    ) : (<></>)
+                                                }
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
                     </div>
-                </main>
-            </section>
+                </div>
+            </main>
+            {/* </section> */}
         </>
     )
 }
