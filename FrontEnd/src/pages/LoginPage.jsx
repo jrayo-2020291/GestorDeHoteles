@@ -45,18 +45,26 @@ export const LoginPage = () => {
   return (
     <>
     <div className='container'>
-    <h2 className='text-center'>Log In</h2>
+    <div className="box">
+
+    <h1>Login</h1>
       <form className='m-5 text-center'>
         <div className='mb-3'>
-          <label className='form-label' htmlFor="">Username</label>
-          <input onChange={handleChange} name='username' className='form-control' type="text" />
+          <input onChange={handleChange} placeholder='USERNAME' name='username' className='form-control' type="text" />
         </div>
+        <br />
         <div className='mb-3'>
-          <label className='form-label' htmlFor="">Password</label>
-          <input onChange={handleChange} name='password' className='form-control' type="password" />
+          <input onChange={handleChange} placeholder='PASSWORD' name='password' className='form-control' type="password" />
         </div>
-          <button onClick={(e)=> login(e)} className='btn btn-success'>Login</button>
+        <br />
+          <button onClick={(e)=> login(e)} className='btn '>Login</button>
+          <br />
+          <br />
+          <p className='text--center'>Not a member? <a className='link' href="/dashboard/addUser">Sign up now</a></p>
       </form>
+      
+
+      </div>
     </div>
     </>
   )

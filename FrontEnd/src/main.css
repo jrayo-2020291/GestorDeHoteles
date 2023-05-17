@@ -582,6 +582,18 @@ table{
 .add:active{
 	transform: scale(0.98);
 }
+.text--center {
+  text-align: center;
+	font-size: 13px;
+}
+
+.link{
+	color: rgb(88, 83, 83);
+}
+
+.link:hover{
+	color: #000;
+}
 
 .button{
 	padding: 10px 17px;
