@@ -7,10 +7,18 @@ import Swal from 'sweetalert2';
 export const EventForHotel = () => {
     const [events,setEvents] = useState([{}])
     const [event,setEvent] = useState([{}])
+    const role = localStorage.getItem('role')
+    const [show, setShow] = useState(false)
     const [loading, setLoading] = useState(true)
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
     const {id} = useParams();
+
+    const restringir = () => {
+        if (role === 'ADMIN' ) {
+          setShow(true)
+        }
+    }
 
     const getEvents = async () => {
         try {
@@ -88,6 +96,7 @@ export const EventForHotel = () => {
 
     useEffect(() => getEventsForHotel, [])
     useEffect(() => getEvents, [])
+    useEffect(() => restringir, [])
 
     return(
         <>
@@ -95,7 +104,11 @@ export const EventForHotel = () => {
                 <main>
                     <h1 className="title">Eventos</h1>
                         <ul className="breadcrumbs">
-                            <li><a href="#">Administrador</a></li>
+                            {
+                                show ?(
+                                    <li><a href="#">Administrador</a></li>
+                                ):(<></>)
+                            }
                             <li className="divider">/</li>
                             <li><a href="#" className="active">Gestor de Hoteles</a></li>
                         </ul>
@@ -112,7 +125,11 @@ export const EventForHotel = () => {
                                         <th>Nombre</th>
                                         <th>Descripción</th>
                                         <th>Costo por hora</th>
-                                        <th>Acciones</th>
+                                        {
+                                            show ? (
+                                                <th>Acciones</th>
+                                            ):(<></>)
+                                        }
                                     </tr>
                                 </thead>
                                     <tbody>
@@ -125,9 +142,13 @@ export const EventForHotel = () => {
                                                             description={description}
                                                             costPerHour={costPerHour}
                                                         ></Event>
-                                                        <td>
-                                                            <i onClick={()=>deleteEvent(_id)} className="fa-solid fa-trash-can button"></i>   
-                                                        </td>
+                                                        {
+                                                            show ? (
+                                                                <td>
+                                                                    <i onClick={()=>deleteEvent(_id)} className="fa-solid fa-trash-can button"></i>   
+                                                                </td>
+                                                            ):(<></>)
+                                                        }
                                                     </tr>
                                                     
                                                 )
@@ -139,20 +160,26 @@ export const EventForHotel = () => {
                             <br />
                             <br />
                             <form>
-                                <div>
-                                    <i className="fa-solid fa-user-shield icon side">Eventos</i>
-                                    <select className="form-control" id="event" required>
-                                        {
-                                            events.map(({ _id, name }, i) => {
-                                                return (
-                                                    <option key={i} value={_id}>{name}</option>
-                                                )
-                                            })
-                                        }
-                                    </select>
-                                </div>
-                                <br />
-                                <button onClick={(e) => addEvent(e)} type="submit" className="btn btn-primary">Add</button>
+                                {
+                                    show ? (
+                                        <>
+                                            <div>
+                                                <i className="fa-solid fa-user-shield icon side">Eventos</i>
+                                                <select className="form-control" id="event" required>
+                                                    {
+                                                        events.map(({ _id, name }, i) => {
+                                                            return (
+                                                                <option key={i} value={_id}>{name}</option>
+                                                            )
+                                                        })
+                                                    }
+                                                </select>
+                                            </div>
+                                            <br />
+                                            <button onClick={(e) => addEvent(e)} type="submit" className="btn btn-primary">Add</button>
+                                        </>
+                                    ):(<></>)
+                                }
                                 <Link to='/dashboard/hotel'>
                                     <button  type="submit" className="btn btn-primary">Volver</button>
                                 </Link>

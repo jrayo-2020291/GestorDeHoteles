@@ -124,13 +124,12 @@ export const HotelTable = () => {
                                         <th>Ubicación</th>
                                         <th>Calificación</th>
                                         <th>Habitaciones</th>
+                                        <th>Manager</th>
+                                        <th>Eventos</th>
                                         {
                                             show ?(
-                                                <>
-                                                    <th>Eventos</th>
-                                                    <th>Acciones</th>
-                                                </>
-                                            ):(<th>Descripción</th>)
+                                                <th>Acciones</th>
+                                            ):(<></>)
                                         }
                                         
                                     </tr>
@@ -138,7 +137,7 @@ export const HotelTable = () => {
                                     
                                     <tbody>
                                         {
-                                            hotel.map(({_id, name, locationH,qualification,numberRooms},index)=>{
+                                            hotel.map(({_id, name, locationH,qualification,numberRooms,manager},index)=>{
                                                 return(
                                                     <tr key={index}>
                                                         <Hotel
@@ -146,6 +145,7 @@ export const HotelTable = () => {
                                                             locationH={locationH}
                                                             qualification={qualification}
                                                             numberRooms={numberRooms}
+                                                            manager={manager.name}
                                                         ></Hotel>
                                                         <td>
                                                             <Link to={`../hotel/event/${_id}`}>
@@ -154,7 +154,6 @@ export const HotelTable = () => {
                                                         </td>
                                                         {show ?(
                                                             <>
-                                                                
                                                                 <td>
                                                                     <Link to={`../updateHotel/${_id}`}>
                                                                         <i className="fa-solid fa-pen button"></i>
@@ -162,9 +161,7 @@ export const HotelTable = () => {
                                                                     <i onClick={() => deleteHotel(_id)} className="fa sharp fa-solid fa-trash button"></i> 
                                                                 </td>
                                                             </>
-                                                            ):(
-                                                                <></>
-                                                            )
+                                                            ):(<></>)
                                                         }
                                                         
                                                     </tr>
