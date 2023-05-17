@@ -54,7 +54,7 @@ export const UpdateRoom = () => {
                 }
             })
             Swal.fire({
-                title: 'Added!',
+                title: 'Updated!',
                 text: 'Room updated Succesfully.',
                 icon: 'success'
               }),            navigate('/dashboard/room')
