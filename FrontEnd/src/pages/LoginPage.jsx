@@ -60,10 +60,11 @@ export const LoginPage = () => {
           <button onClick={(e)=> login(e)} className='btn '>Login</button>
           <br />
           <br />
-          <p className='text--center'>Not a member? <a className='link' href="/dashboard/addUser">Sign up now</a></p>
+          
+            <p className='text--center'>Not a member?
+              <Link to='/register'><a className='link'>Sign up now</a></Link>
+            </p>
       </form>
-      
-
       </div>
     </div>
     </>

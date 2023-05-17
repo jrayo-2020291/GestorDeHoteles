@@ -31,7 +31,7 @@ export const DashBoardPage = () => {
                                         <li><a >Hoteles</a></li>
                                     </Link>
                                     <Link to='graphTopHotels'>
-                                        <li><a >Grafica Gloabl</a></li>
+                                        <li><a >Grafica Top</a></li>
                                     </Link>
                                 </ul>
                             </li>

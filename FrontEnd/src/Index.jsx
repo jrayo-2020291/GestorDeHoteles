@@ -31,6 +31,7 @@ import {EventForHotel} from './components/Hotel/EventsForHotel.jsx'
 import { AddRoomReservationRoom } from './components/ReservationRoom/AddRoomReservationRoom.jsx'
 import { AddServiceReservationRoom } from './components/ReservationRoom/AddServiceReservationRoom.jsx'
 import { GraphTopHotels } from './components/Hotel/GraphTopHotels.jsx'
+import {Register} from './pages/Register.jsx'
 
 export const AuthContext = createContext();
 
@@ -69,6 +70,10 @@ export const Index = () => {
                 {
                     path: '/login',
                     element: <LoginPage></LoginPage>
+                },
+                {
+                    path: '/register',
+                    element: <Register></Register>
                 },
                 {
                     path: '/dashboard',

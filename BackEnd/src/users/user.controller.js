@@ -37,7 +37,7 @@ exports.registerUser = async(req, res)=>{
         data.password = await encrypt(data.password);
         data.role = 'CLIENT';
         let existUsername =await User.findOne({username: data.username})
-        if(existUsername) return res.send({message:'username is already taken'})
+        if(existUsername) return res.send({message:'Username is already taken'})
         let existEmail = await User.findOne({email: data.email})
         if(existEmail) return res.send({message:'Email is already taken'});
         let account = new User(data);
