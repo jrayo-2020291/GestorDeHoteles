@@ -104,7 +104,7 @@ export const AddService = () => {
         <>
             <div className="container">
                 <div className="box">
-                    <h1>Arrendamiento</h1>
+                    <h1>Agregar Servicio Adicional</h1>
                     <table>
               <thead>
                 <tr>

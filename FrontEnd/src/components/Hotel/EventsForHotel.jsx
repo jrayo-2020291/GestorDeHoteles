@@ -100,9 +100,10 @@ export const EventForHotel = () => {
 
     return(
         <>
-            <section id="content">
+            {/* <section id="content"> */}
+            <br /><br /><br /><br />
                 <main>
-                    <h1 className="title">Eventos</h1>
+                    <h1 className="title">Agregar evento</h1>
                         <ul className="breadcrumbs">
                             {
                                 show ?(
@@ -187,7 +188,7 @@ export const EventForHotel = () => {
                         </div>
                     </div>
                 </main>
-            </section>
+            {/* </section> */}
         </>
     )
 }

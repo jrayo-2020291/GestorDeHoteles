@@ -80,7 +80,7 @@ export const AddReservationEvent = () => {
     <>
     <div className="container">
         <div className="box">
-            <h1>Servicio</h1>
+            <h1>Agregar Reservación</h1>
             <form>
                 <div>
                     <i className="fa-solid fa-user"></i>

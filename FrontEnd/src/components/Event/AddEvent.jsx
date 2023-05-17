@@ -44,7 +44,7 @@ export const AddEvent = () => {
         <>
             <div className="container">
                 <div className="box">
-                    <h1>Event</h1>
+                    <h1>Agregar Evento</h1>
                     <form>
                         <div>
                             <i className="fa-solid fa-user"></i>
