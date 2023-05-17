@@ -24,6 +24,8 @@ exports.addReservation = async(req, res)=>{
             hotel: data.hotel,
             state: 'DISABLED'
         };
+        let newCounter = hotelExist.counter + 1;
+        let updatedHotel = await Hotel.findOneAndUpdate({_id: data.hotel}, {counter: newCounter}, {new:true})
         let reservationExist = await Reservation.findOne({user: params.user, dateStart: params.dateStart, dateEnd: params.dateEnd}) ;
         if(reservationExist) return res.send({message: 'You cannot create another reservation with this user in this date'});
         let newReservation = new Reservation(params);
