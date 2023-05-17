@@ -30,6 +30,7 @@ import { DashBoardPage } from './pages/DashBoardPage.jsx'
 import {EventForHotel} from './components/Hotel/EventsForHotel.jsx'
 import { AddRoomReservationRoom } from './components/ReservationRoom/AddRoomReservationRoom.jsx'
 import { AddServiceReservationRoom } from './components/ReservationRoom/AddServiceReservationRoom.jsx'
+import { GraphTopHotels } from './components/Hotel/GraphTopHotels.jsx'
 
 export const AuthContext = createContext();
 
@@ -100,6 +101,10 @@ export const Index = () => {
                         {
                             path: 'hotel',
                             element: loggedIn ? <HotelTable></HotelTable> : <LoginPage></LoginPage>
+                        },
+                        {
+                            path: 'graphTopHotels',
+                            element: loggedIn ? <GraphTopHotels></GraphTopHotels> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'addHotel',

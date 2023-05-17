@@ -24,14 +24,17 @@ export const DashBoardPage = () => {
                             <Link to='event'>
                                 <li><a >Eventos</a></li>
                             </Link>
-                            <Link to='hotel'>
-                                <li>
-                                    <a className="desktop-link">Hoteles</a>
-                                    <ul>
-                                        <li><a >Grafica global</a></li>
-                                    </ul>
-                                </li>
-                            </Link>
+                            <li>
+                                <a className="desktop-link">Hoteles</a>
+                                <ul>
+                                    <Link to='hotel'>
+                                        <li><a >Hoteles</a></li>
+                                    </Link>
+                                    <Link to='graphTopHotels'>
+                                        <li><a >Grafica Gloabl</a></li>
+                                    </Link>
+                                </ul>
+                            </li>
                             <Link to='room'>
                                 <li><a >Habitaciones</a></li>
                             </Link>
