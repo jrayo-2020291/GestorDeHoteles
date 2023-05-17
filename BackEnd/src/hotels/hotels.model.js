@@ -13,7 +13,7 @@ const hotelsSchema = mongoose.Schema({
     },
     qualification:{
         type: Number,
-        required: true
+        default:0
     },
     numberRooms:{
         type:Number,
