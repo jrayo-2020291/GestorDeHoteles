@@ -19,7 +19,6 @@ export const GraphTopHotels = () => {
               'Authorization': token
             }
           })
-          console.log(data.hotels)
           for(let i=0; i<data.hotels.length ;i++){
             nombres.push(data.hotels[i].name)
             datos.push(data.hotels[i].counter)
@@ -44,9 +43,11 @@ export const GraphTopHotels = () => {
                 {
                     label: 'Presiona para ver',
                     data: datos,
-                    backgroundColor: 'rgba(75,192,192,1)',
-                    borderColor: 'rgba(0,0,0,1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
                     borderWidth: 1,
+                    hoverBackgroundColor:'#339FFF',
+                    borderRadius:2
                 },
             ],
         };
@@ -64,7 +65,7 @@ export const GraphTopHotels = () => {
                 type: 'bar',
                 data: data,
                 options: {
-                    // Opciones vaicas
+                    
                 },
             });
         }
