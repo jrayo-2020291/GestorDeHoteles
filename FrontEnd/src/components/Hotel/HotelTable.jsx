@@ -43,6 +43,7 @@ export const HotelTable = () => {
           ...search,
           [e.target.name]: e.target.value
         })
+        console.log(document.getElementById('calificacion').value)
         searching()
     }
 
@@ -55,7 +56,6 @@ export const HotelTable = () => {
           })
           setHotel(data.hotels)
           setLoading(false)
-          
         } catch (err) {
           console.error(err)
         }
@@ -145,7 +145,7 @@ export const HotelTable = () => {
                                                             locationH={locationH}
                                                             qualification={qualification}
                                                             numberRooms={numberRooms}
-                                                            manager={manager.name}
+                                                            manager={manager?.name}
                                                         ></Hotel>
                                                         <td>
                                                             <Link to={`../hotel/event/${_id}`}>
@@ -173,6 +173,7 @@ export const HotelTable = () => {
                                 </table>
                         </div> 
                     </div>
+                    <input onChange={handleChange} id='calificacion' type="range" min="1" max="5" step="any"></input>
                     <br />
                     <br />
                     <br />

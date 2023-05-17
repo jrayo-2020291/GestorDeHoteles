@@ -40,7 +40,7 @@ exports.add = async(req,res)=>{
 
 exports.get = async(req,res)=>{
     try {
-        let hotels = await Hotel.find({});
+        let hotels = await Hotel.find({}).populate('manager');
         return res.send({hotels});
     } catch (err) {
         console.error(err);
