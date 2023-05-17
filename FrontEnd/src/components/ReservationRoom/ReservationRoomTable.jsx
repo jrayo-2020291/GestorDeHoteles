@@ -108,11 +108,19 @@ export const ReservationRoomTable = () => {
   return (
     <>
       <section id="content">
-        <br />
-        <Link to='../addReservationRoom'>
-          <i className="fa-solid fa-plus add"></i>
-        </Link>
         <main>
+          <h1 className="title">Reservación de Habitación</h1>
+          <ul className="breadcrumbs">
+          <li><a href="#">Usuarios</a></li>
+            <li className="divider">/</li>
+            <li><a href="#" className="active">Gestor de Hoteles</a></li>
+          </ul>
+          <br />
+          <Link to='../addReservationRoom'>
+            <i className="fa-solid fa-plus add"></i>
+          </Link>
+          <br />
+          <br />
           <form action="#">
             <div className="form-group">
               <i className="fa-solid fa-user-shield icon side">Hotels</i>
@@ -130,47 +138,56 @@ export const ReservationRoomTable = () => {
             </div>
           </form>
           <br />
-          <br />
-          <table>
-            <thead>
-              <tr>
-                <th>dateStart</th>
-                <th>dateEnd</th>
-                <th>cost</th>
-                <th>user</th>
-                <th>hotel</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                reservation.map(({ _id, dateStart, dateEnd, cost, user, hotel }, index) => {
-                  return (
-                    <tr key={index}>
-                      <ReservationRoom
-                        dateStart={dateStart}
-                        dateEnd={dateEnd}
-                        cost={cost}
-                        user={user?.name}
-                        hotel={hotel?.name}
-                      ></ReservationRoom>
-                      <td>
-                        <Link to={`../updateReservationRoom/${_id}`}>
-                          <i className="fa-solid fa-pen-to-square button"></i>
-                        </Link>
-                        <i onClick={() => deleteReservationRoom(_id)} className="fa sharp fa-solid fa-trash button"></i>
-                        <Link to={`../addServiceReservationRoom/${_id}`}>
-                          <i className='fa-solid fa-clipboard button'></i>
-                        </Link>
-                        <Link to={`../addRoomReservationRoom/${_id}`}>
-                          <i className='fa-solid fa-clipboard button'></i>
-                        </Link>
-                      </td>
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </table>
+          <div className="info-data">
+            <div className="menu">
+              <div className="sub-menu">
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>dateStart</th>
+                    <th>dateEnd</th>
+                    <th>cost</th>
+                    <th>user</th>
+                    <th>hotel</th>
+                    <th>Acciones</th>
+                    <th>Eventos</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    reservation.map(({ _id, dateStart, dateEnd, cost, user, hotel }, index) => {
+                      return (
+                        <tr key={index}>
+                          <ReservationRoom
+                            dateStart={dateStart}
+                            dateEnd={dateEnd}
+                            cost={cost}
+                            user={user?.name}
+                            hotel={hotel?.name}
+                          ></ReservationRoom>
+                          <td>
+                            <Link to={`../updateReservationRoom/${_id}`}>
+                              <i className="fa-solid fa-pen-to-square button"></i>
+                            </Link>
+                            <i onClick={() => deleteReservationRoom(_id)} className="fa sharp fa-solid fa-trash button"></i>
+                          </td>
+                          <td>
+                          <Link to={`../addServiceReservationRoom/${_id}`}>
+                              <i className='fa-solid fa-clipboard button'></i>
+                            </Link>
+                            <Link to={`../addRoomReservationRoom/${_id}`}>
+                              <i className='fa-solid fa-clipboard button'></i>
+                            </Link>
+                          </td>
+                        </tr>
+                      )
+                    })
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
         </main>
       </section>
     </>

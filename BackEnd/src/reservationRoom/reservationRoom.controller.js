@@ -62,6 +62,8 @@ exports.addRoom = async(req, res)=> {
         let newCost = (reservationExist.cost + roomExist.price)* days;
         if(roomAlready) return res.send({message: 'You have already reserved this room'});
         let updatedReservation = await Reservation.findOneAndUpdate({_id: reservationId}, {$push:{'rooms': params}, cost: newCost}, {new: true});
+        console.log(params)
+        let updatedRoom = await Room.findOneAndUpdate({_id: params.room}, {availability: 'NOT AVAILABLE'}, {new: true});
         return res.send({message: 'New room agregated', updatedReservation});
     }catch(err){
         console.error(err);

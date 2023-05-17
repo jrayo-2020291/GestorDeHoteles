@@ -46,10 +46,8 @@ export const UpdateRoom = () => {
                 category: document.getElementById('inputCategory').value,
                 capacity: document.getElementById('inputCapacity').value,
                 price: document.getElementById('inputPrice').value,
-                availability: document.getElementById('inputAvailability').value,
-                hotel: document.getElementById('inputHotel').value,
+                hotel: document.getElementById('inputHotel').value
             }
-            console.log(update)
             const { data } = await axios.put(`http://localhost:3100/room/update/${id}`, update, {
                 headers: {
                     'Authorization': token
@@ -71,7 +69,7 @@ export const UpdateRoom = () => {
     return (
         <div className="container">
             <div className="box">
-                <h1>Servicio</h1>
+                <h1>Actualizar Habitación</h1>
                 <form>
                     <div>
                         <i className="fa-solid fa-user"></i>
@@ -91,11 +89,6 @@ export const UpdateRoom = () => {
                     <div>
                         <i className="fa-solid fa-tag"></i>
                         <input  type="text"  id='inputPrice' className="form-control" defaultValue={room.price} required />
-                    </div>
-                    <br />
-                    <div>
-                        <i className="fa-solid fa-tag"></i>
-                        <input  type="text"  id='inputAvailability' className="form-control" defaultValue={room.availability} required />
                     </div>
                     <br />
                     <div>

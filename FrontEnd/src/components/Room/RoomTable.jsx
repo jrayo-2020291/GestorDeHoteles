@@ -103,7 +103,7 @@ export const RoomTable = () => {
     <>
       <section id="content">
         <main>
-          <h1 className="title">Usuarios</h1>
+          <h1 className="title">Habitaciones</h1>
           <ul className="breadcrumbs">
             {
               show ? (
@@ -118,7 +118,7 @@ export const RoomTable = () => {
             show ? (
               <>
                 <br />
-                <Link to='../addReservationRoom'>
+                <Link to='../addRoom'>
                   <i className="fa-solid fa-plus add"></i>
                 </Link>
                 <br />
@@ -157,6 +157,7 @@ export const RoomTable = () => {
                     <th>precio</th>
                     <th>Disponibilidad</th>
                     <th>Hotel</th>
+                    <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>

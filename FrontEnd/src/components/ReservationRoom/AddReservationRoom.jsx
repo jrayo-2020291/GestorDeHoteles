@@ -7,7 +7,6 @@ import Swal from 'sweetalert2';
 
 export const AddReservationRoom = () => {
     const navigate = useNavigate()
-    const [users, setUsers] = useState([{}])
     const [hotels, setHotels] = useState([{}])
     const token = localStorage.getItem('token')
 
@@ -60,7 +59,7 @@ export const AddReservationRoom = () => {
     return (
         <div className="container">
         <div className="box">
-            <h1>Servicio</h1>
+            <h1>Agregar Reservación</h1>
             <form>
                 <div>
                     <i className="fa-solid fa-user">Start-Date</i>
