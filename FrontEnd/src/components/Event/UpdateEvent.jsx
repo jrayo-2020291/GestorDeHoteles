@@ -54,7 +54,7 @@ export const UpdateEvent = () => {
         <>
             <div className="container">
                 <div className="box">
-                    <h1>Evento</h1>
+                    <h1>Actualizar Evento</h1>
                     <form>
                         <div>
                             <i className="fa-solid fa-user"></i>

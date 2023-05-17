@@ -70,7 +70,7 @@ export const AddHotel = () => {
         <>
             <div className="container">
                 <div className="box">
-                    <h1>Hotel</h1>
+                    <h1>Agregar hotel</h1>
                     <form>
                         <div>
                             <i className="fa-solid fa-user"></i>
