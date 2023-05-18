@@ -154,7 +154,7 @@ export const EventTable = () => {
                                     }
                                     <option value="ALL">Todos</option>
                                 </select>
-                                <button onClick={(e) => getByHotel(e)}>Buscar</button>
+                                <button className='button' onClick={(e) => getByHotel(e)}>Buscar</button>
                             </div>
                         </form>
                         <br />

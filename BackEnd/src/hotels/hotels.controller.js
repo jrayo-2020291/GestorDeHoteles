@@ -18,7 +18,15 @@ exports.test = (req, res)=>{
 exports.add = async(req,res)=>{
     try {
         let data = req.body;
-        let validate = validateData(data);
+        let params={
+            name:data.name,
+            locationH:data.locationH,
+            qualification:data.qualification,
+            numberRooms:data.numberRooms,
+            manager:data.manager
+        }
+        let msg = validateData(params);
+        if(msg) return res.status(400).send({message: msg});
         let existUser = await User.findOne({ _id: data.manager });  
         if(validate) return res.status(400).send({validate})
     if (!existUser) {
@@ -152,8 +160,14 @@ exports.update = async(req,res)=>{
     try{
         let hotelId = req.params.id;
         let data=req.body;
-        if(data.name=='') return res.send({message:'You have to add a valid name'})
-  
+        let params={
+            name:data.name,
+            locationH:data.locationH,
+            numberRooms:data.numberRooms,
+            manager:data.manager
+        }
+        let msg = validateData(params);
+        if(msg) return res.status(400).send({message: msg}); 
         let hotel = await Hotel.findOne({name: data.name});
         if(hotel && hotel._id.toString() !== hotelId) { 
           return res.send({message: 'This Hotel already exists'});
