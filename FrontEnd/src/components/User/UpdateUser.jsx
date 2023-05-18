@@ -39,14 +39,26 @@ export const UpdateUser = () => {
                     'Authorization': token
                 }
             })
-            Swal.fire({
-                title: 'Updated!',
-                text: data.message,
-                icon: 'success'
-              }),
-                          navigate('/dashboard/user')
+            if(data.message== 'User updated sucessfully'){ 
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'success',
+                      timer: 2000
+                })
+            }else{
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'warning',
+                      timer: 2000
+                })
+            }
+            navigate('/dashboard/user')
         } catch (err) {
-            alert(err.response.data.message)
+            Swal.fire({
+                title: err.response.data.message,
+                icon: 'error',
+                timer: 2000
+              })
         }
     }
 

@@ -25,25 +25,44 @@ export const UserTable = () => {
 
   const deleteUser = async (id) => {
     try {
-      let confirmDelete = confirm('¿Estás seguro de eliminar este usuario?')
-      if (confirmDelete) {
-        const { data } = await axios.delete(`http://localhost:3100/user/delete/${id}`, {
+      const result = await Swal.fire({
+        title: 'you are sure?',
+        text: 'Delete Hotel',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'YES',
+        cancelButtonText: 'CANCEL',
+      });
+        if (result.isConfirmed) {
+          const { data } = await axios.delete(`http://localhost:3100/user/delete/${id}`, {
           headers: {
             'Authorization': token
           }
+          
         })
+        if(data.message== 'Account created sucessfully'){ 
+          Swal.fire({
+              title: data.message ,
+                icon: 'success',
+                timer: 2000
+          })
+      }else{
         Swal.fire({
-          title: 'Deleted!',
-          text: data.message,
-          icon: 'success'
+            title: data.message ,
+              icon: 'warning',
+              timer: 2000
         })
-
+    }
         if (role === 'CLIENT') {
           LogOut()
         } else {
           getUser()
         }
-      }
+         
+         
+        } 
+      //
+      
     } catch (err) {
       console.error(err)
       alert(err.response.data.message)

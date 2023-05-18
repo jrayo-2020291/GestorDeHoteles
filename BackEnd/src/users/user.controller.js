@@ -37,7 +37,7 @@ exports.registerUser = async(req, res)=>{
         data.password = await encrypt(data.password);
         data.role = 'CLIENT';
         let existUsername =await User.findOne({username: data.username})
-        if(existUsername) return res.send({message:'Username is already taken'})
+        if(existUsername) return res.send({message:'username is already taken'})
         let existEmail = await User.findOne({email: data.email})
         if(existEmail) return res.send({message:'Email is already taken'});
         let account = new User(data);
@@ -120,6 +120,8 @@ exports.deleteOwnUser = async(req,res)=>{
 exports.delete = async(req,res)=>{
     try {
         let userId = req.params.id;
+        let user = await User.findOne({_id:userId})
+        if(user.role==='ADMIN') return res.send({message:'Cannot delete admin'})
         let deleteUser = await User.findOneAndDelete({_id:userId});
         if(!deleteUser) return res.send({message:'User not found'})
         return res.send({message:`Account with username ${deleteUser.username} delete sucessfully`})
@@ -186,8 +188,17 @@ exports.getByName = async(req,res)=>{
 exports.addAccount = async(req,res)=>{
     try {
         let data = req.body;
-        let validate = validateData(data);
-        if(validate) return res.status(400).send(validate);
+        let params = {
+            name:data.name,
+            surname:data.surname,
+            username:data.username,
+            password:data.password,
+            email:data.email,
+            phone:data.phone,
+            role:data.role
+        }
+        let msg = validateData(params);
+        if(msg) return res.status(400).send({message: msg});
         data.password = await encrypt(data.password);
         let existUsername =await User.findOne({username: data.username});
         if(existUsername) return res.send({message:'username is already taken'});
@@ -195,7 +206,7 @@ exports.addAccount = async(req,res)=>{
         if(existEmail) return res.send({message:'Email is already taken'});
         let account = new User(data);
         await account.save();
-        return res.send({message: `${data.role} created sucessfully`});
+        return res.send({message: `Account created sucessfully`});
     } catch (err) {
         console.error(err)
         return res.status(500).send({message:'Error adding manager'})
@@ -206,14 +217,29 @@ exports.updateAccount = async(req,res)=>{
     try {
         let userId = req.params.id
         let data = req.body;
-        let validate = validateData(data);
-        if(validate) return res.status(400).send(validate);
+        let params = {
+            name:data.name,
+            surname:data.surname,
+            username:data.username,
+            email:data.email,
+            phone:data.phone
+        }
+        let msg = validateData(params);
+        if(msg) return res.status(400).send({message: msg});
         let userExist = await User.findOne({_id:userId})
         if(!userExist) return res.send({message:'User not found'})
         if(userExist.role==='ADMIN') return res.send({message:'Cant upgrade admins'})
         if(data.username !== userExist.username){
             let user= await User.findOne({username:data.username});
             if(user) return res.send({message:'Username is in use and can not be updated'})
+        }
+        if(data.username!==userExist.username){
+            let usernameUser = await User.findOne({username:data.username})
+            if(usernameUser) return res.send({message:'This username is already in use'})
+        }
+        if(data.email !== userExist.email){
+            let emailUser = await User.findOne({email:data.email})
+            if(emailUser) return res.send({message:'This email is already in use'})
         }
         let updateOwnUser = await User.findOneAndUpdate(
             {_id:userId},
@@ -231,8 +257,3 @@ exports.updateAccount = async(req,res)=>{
         return res.status(500).send({message:'Error updating Account'})
     }
 }
-
-/*
-    editar user y manager
-
- */
