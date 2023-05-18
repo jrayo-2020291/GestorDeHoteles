@@ -5,6 +5,7 @@ const Room = require('../rooms/rooms.model');
 const Hotel = require('../hotels/hotels.model');
 const Service = require('../additionalServices/additionalService.model')
 const { jsPDF } = require('jspdf');
+const { validateData } = require('../utils/validate');
 require('jspdf-autotable');
 
 exports.test = (req, res) => res.send({ message: 'Test function for reservation is running' });
@@ -13,10 +14,10 @@ exports.addReservation = async (req, res) => {
     try {
         let data = req.body;
         let userId = req.user.sub;
-        let userExist = await User.findOne({ _id: userId });
-        // if(userExist.role !== 'CLIENT') return res.send({message: 'Only clients can have a reservation'});
-        let hotelExist = await Hotel.findOne({ _id: data.hotel });
-        if (!hotelExist) return res.status(404).send({ message: 'This hotel does not exist' });
+        let userExist = await User.findOne({_id: userId});
+        if(userExist.role !== 'CLIENT') return res.send({message: 'Only clients can have a reservation'});
+        let hotelExist = await Hotel.findOne({_id: data.hotel});
+        if(!hotelExist) return res.status(404).send({message: 'This hotel does not exist'});
         let params = {
             dateStart: data.dateStart,
             dateEnd: data.dateEnd,
@@ -24,6 +25,8 @@ exports.addReservation = async (req, res) => {
             hotel: data.hotel,
             state: 'RESERVED'
         };
+        let msg = validateData(params);
+        if(msg) return res.status(400).send({message: msg});
         let newCounter = hotelExist.counter + 1;
         let updatedHotel = await Hotel.findOneAndUpdate({ _id: data.hotel }, { counter: newCounter }, { new: true })
         let reservationExist = await Reservation.findOne({ user: params.user, dateStart: params.dateStart, dateEnd: params.dateEnd });
@@ -283,6 +286,8 @@ exports.updateReservation = async (req, res) => {
             dateStart: data.dateStart,
             dateEnd: data.dateEnd
         }
+        let msg = validateData(params);
+        if(msg) return res.status(400).send({message: msg});
         let updatedReservation = await Reservation.findOneAndUpdate({ _id: reservationExist._id }, params, { new: true });
         return res.send({ message: 'Updated Date', updatedReservation });
     } catch (err) {

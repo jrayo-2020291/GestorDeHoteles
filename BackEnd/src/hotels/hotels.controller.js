@@ -237,7 +237,9 @@ exports.convertPDF = async(req, res)=>{
             rows2 = [];
         })
         let date = new Date().toDateString()
+        let name = `Report Hotel-${date}.pdf`;
         doc.save(`Report Hotel-${date}.pdf`);
+        doc.output('dataurlnewwindow', {filename: name});
         return res.send({message:'Report Created'})
     } catch (error) {
         console.error(error);
