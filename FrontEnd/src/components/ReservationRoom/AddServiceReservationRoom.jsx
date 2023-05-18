@@ -88,20 +88,12 @@ export const AddServiceReservationRoom = () => {
             if (data.message == 'Service already contrated') {
                 Swal.fire({
                     title: data.message,
-<<<<<<< HEAD
-                    icon: 'warning',
-                    timer: 2000
-                })
-            }
-            getReservation();
-=======
                     icon: 'success',
                     timer: 2000
                   })
                   
                   getReservation();
->>>>>>> adb58c0f14c6194d3072e669efcf9539fd1e3043
-        } catch (err) {
+        }} catch (err) {
             console.error(err)
         }
     }
