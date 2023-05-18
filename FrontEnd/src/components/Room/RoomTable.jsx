@@ -178,7 +178,11 @@ export const RoomTable = () => {
                   <th>precio</th>
                   <th>Disponibilidad</th>
                   <th>Hotel</th>
-                  <th>Acciones</th>
+                  {
+                    show ? (
+                      <th>Acciones</th>
+                    ):(<></>)
+                  }
                 </tr>
               </thead>
               <tbody>
