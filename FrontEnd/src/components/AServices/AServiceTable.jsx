@@ -110,7 +110,11 @@ export const AServiceTable = () => {
               <th>Descripción</th>
               <th>Costo</th>
               <th>Category</th>
-              <th>Acciones</th>
+              {
+                show ?(
+                  <th>Acciones</th>
+                ):(<></>)
+              }
             </tr>
           </thead>
           <tbody>
