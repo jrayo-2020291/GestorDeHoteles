@@ -46,7 +46,6 @@ export const AServiceTable = () => {
         }
       })
       setServices(data.services)
-      console.log(services)
     } catch (err) {
       console.error(err)
     }

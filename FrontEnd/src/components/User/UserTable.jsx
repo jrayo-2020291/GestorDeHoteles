@@ -58,8 +58,6 @@ export const UserTable = () => {
         } else {
           getUser()
         }
-         
-         
         } 
       //
       

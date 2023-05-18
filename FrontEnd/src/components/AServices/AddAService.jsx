@@ -39,7 +39,11 @@ export const AddAService = () => {
 
             navigate('/dashboard/aService')
         } catch (err) {
-            alert(err.response.data.message)
+            Swal.fire({
+                title: err.response.data.message ,
+                icon: 'error',
+                timer: 2000
+              })
         }
     }
     return (

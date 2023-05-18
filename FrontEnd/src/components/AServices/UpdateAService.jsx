@@ -53,7 +53,11 @@ const updateService = async(e)=>{
           }
        navigate('/dashboard/aService')
     }catch(err){
-        console.error(err)
+        Swal.fire({
+            title: err.response.data.message ,
+            icon: 'error',
+            timer: 2000
+          })
     }
 }
 useEffect(()=> getService, [])
