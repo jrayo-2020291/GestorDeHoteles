@@ -27,7 +27,7 @@ export const UserTable = () => {
     try {
       const result = await Swal.fire({
         title: 'you are sure?',
-        text: 'Delete Hotel',
+        text: 'Delete User',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'YES',
@@ -40,7 +40,7 @@ export const UserTable = () => {
           }
           
         })
-        if(data.message== 'Account created sucessfully'){ 
+        if(data.message=== 'Account delete sucessfully'){ 
           Swal.fire({
               title: data.message ,
                 icon: 'success',

@@ -124,7 +124,7 @@ exports.delete = async(req,res)=>{
         if(user.role==='ADMIN') return res.send({message:'Cannot delete admin'})
         let deleteUser = await User.findOneAndDelete({_id:userId});
         if(!deleteUser) return res.send({message:'User not found'})
-        return res.send({message:`Account with username ${deleteUser.username} delete sucessfully`})
+        return res.send({message:'Account delete sucessfully'})
     } catch (err) {
         console.error(err);
         return res.status(500).send({message:'Error delete User'})

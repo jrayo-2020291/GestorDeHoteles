@@ -25,7 +25,7 @@ exports.addService = async(req, res)=>{
         if(existService) return res.send({message: 'This service already exist'});
         let newService = new Services(data);
         await newService.save();
-        return res.status(201).send({message: 'New service created;', newService});
+        return res.status(201).send({message: 'New service created', newService});
     }catch(err){
         console.error(err);
         return res.status(500).send({message: 'Error creating service'});
@@ -106,7 +106,7 @@ exports.update = async(req, res) =>{
         }
           let updatedService = await Services.findOneAndUpdate({_id: serviceId}, data, {new: true});
         if(!updatedService) return res.status(404).send({message: 'Service not found and not updated'});
-        return res.send({message: 'Service updated:', updatedService});
+        return res.send({message: 'Service updated', updatedService});
     }catch(err){
         console.error(err);
         return res.status(500).send({message: 'Error updating service'});

@@ -19,7 +19,6 @@ export const UpdateAService = () => {
                 'Authorization': token
             }
         })
-        console.log(data)
         setService(data.service)
     }catch(err){
         console.error(err)

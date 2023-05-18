@@ -24,7 +24,7 @@ export const AddAService = () => {
                 }
             })
             Swal.fire({
-                title: data.message || 'Service created',
+                title: data.message || 'New service created',
                 icon: 'success',
                 timer: 2000
             })
