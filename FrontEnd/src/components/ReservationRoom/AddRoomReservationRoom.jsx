@@ -62,7 +62,11 @@ export const AddRoomReservationRoom = () => {
             })
             setReservation(array)
         } catch (err) {
-            console.error(err)
+            Swal.fire({
+                title: err.response.data.message,
+                icon: 'error',
+                timer: 2000
+              })
         }
     }
 
@@ -78,14 +82,27 @@ export const AddRoomReservationRoom = () => {
                         'Authorization': token
                     }
                 })
-            Swal.fire({
-                title: 'Added!',
-                text: 'Room added Succesfully.',
-                icon: 'success'
-            }),
-                navigate('../reservationRoom')
+                if(data.message=== 'New room agregated'){ 
+                    Swal.fire({
+                        title: data.message ,
+                          icon: 'success',
+                          timer: 2000
+                    })
+                }else{
+                  Swal.fire({
+                      title: data.message ,
+                        icon: 'warning',
+                        timer: 2000
+                  })
+              }
+                  
+                    navigate('../reservationRoom')
         } catch (err) {
-            console.error(err)
+            Swal.fire({
+                title: err.response.data.message,
+                icon: 'error',
+                timer: 2000
+              })
         }
     }
 
