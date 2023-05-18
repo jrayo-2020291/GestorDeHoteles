@@ -5,6 +5,7 @@ const Room = require('../rooms/rooms.model');
 const Hotel = require('../hotels/hotels.model');
 const Service = require('../additionalServices/additionalService.model')
 const { jsPDF } = require('jspdf');
+const { validateData } = require('../utils/validate');
 require('jspdf-autotable');
 
 exports.test = (req, res) => res.send({ message: 'Test function for reservation is running' });
@@ -24,7 +25,7 @@ exports.addReservation = async (req, res) => {
             hotel: data.hotel,
             state: 'RESERVED'
         };
-        let msg = validateData(credentials);
+        let msg = validateData(params);
         if(msg) return res.status(400).send({message: msg});
         let newCounter = hotelExist.counter + 1;
         let updatedHotel = await Hotel.findOneAndUpdate({ _id: data.hotel }, { counter: newCounter }, { new: true })
@@ -285,6 +286,8 @@ exports.updateReservation = async (req, res) => {
             dateStart: data.dateStart,
             dateEnd: data.dateEnd
         }
+        let msg = validateData(params);
+        if(msg) return res.status(400).send({message: msg});
         let updatedReservation = await Reservation.findOneAndUpdate({ _id: reservationExist._id }, params, { new: true });
         return res.send({ message: 'Updated Date', updatedReservation });
     } catch (err) {

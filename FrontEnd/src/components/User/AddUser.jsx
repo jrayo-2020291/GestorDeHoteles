@@ -41,7 +41,6 @@ export const AddUser = () => {
             }
             navigate('/dashboard/user')
         } catch (err) {
-            console.error(err)
             Swal.fire({
                 title: err.response.data.message ,
                 icon: 'error',

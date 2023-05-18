@@ -38,14 +38,26 @@ export const UpdateReservationRoom = () => {
                     'Authorization': token
                 }
             })
-            Swal.fire({
-                title: data.message || 'Reservation Updated',
-                icon: 'success',
-                timer: 2000
-            });
+            if(data.message== 'Updated Date'){ 
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'success',
+                      timer: 2000
+                })
+            }else{
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'warning',
+                      timer: 2000
+                })
+            }
             navigate('/dashboard/reservationRoom')
         } catch (err) {
-            alert(err.response.data.message)
+            Swal.fire({
+                title: err.response.data.message,
+                icon: 'error',
+                timer: 2000
+              })
         }
     }
 
