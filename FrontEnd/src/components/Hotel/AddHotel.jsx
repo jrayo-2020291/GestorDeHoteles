@@ -26,27 +26,26 @@ export const AddHotel = () => {
                     'Authorization': token
                 }
             })
-            Swal.fire({
-                title: data.message || 'hotel created sucessfully',
-                icon: 'success',
-                timer: 2000
-              })
-              if(data.message== 'Hotel already created'){ 
+            if(data.message== 'Hotel created sucessfully'){ 
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'success',
+                      timer: 2000
+                })
+            }else{
                 Swal.fire({
                     title: data.message ,
                       icon: 'warning',
                       timer: 2000
-                    })
-              }else if(data.message=='User already has an hotel'){
-                Swal.fire({
-                    title: data.message ,
-                      icon: 'warning',
-                      timer: 2000
-                    })
-              }
+                })
+            }
             navigate('/dashboard/hotel')
         } catch (err) {
-            alert(err.response.data.message)
+            Swal.fire({
+                title: err.response.data.message ,
+                icon: 'error',
+                timer: 2000
+              })
         }
     };
 
@@ -83,8 +82,14 @@ export const AddHotel = () => {
                         </div>
                         <br/>
                         <div>
-                            <i className="fa-solid fa-id-card"></i>
-                            <input type="number" placeholder="qualification" id='qualification'/>
+                            <i className="fa-solid fa-id-card">Qualification</i>
+                            <select type="select" placeholder="qualification" id='qualification'>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                         </div>
                         <br/>
                         <div>

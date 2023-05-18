@@ -19,7 +19,6 @@ export const UpdateAService = () => {
                 'Authorization': token
             }
         })
-        console.log(data)
         setService(data.service)
     }catch(err){
         console.error(err)
@@ -53,7 +52,11 @@ const updateService = async(e)=>{
           }
        navigate('/dashboard/aService')
     }catch(err){
-        console.error(err)
+        Swal.fire({
+            title: err.response.data.message ,
+            icon: 'error',
+            timer: 2000
+          })
     }
 }
 useEffect(()=> getService, [])

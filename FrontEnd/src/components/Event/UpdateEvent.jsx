@@ -36,14 +36,26 @@ export const UpdateEvent = () => {
                   'Authorization': token
               }
             });
-            Swal.fire({
-                title: data.message || 'Event updated',
-                icon: 'success',
-                timer: 2000
-              })
+            if(data.message== 'Event updated'){ 
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'success',
+                      timer: 2000
+                })
+            }else{
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'warning',
+                      timer: 2000
+                })
+            }
             navigate('/dashboard/event')
         } catch (err) {
-            console.error(err)
+            Swal.fire({
+                title: err.response.data.message,
+                icon: 'error',
+                timer: 2000
+              })
         }
     }
 

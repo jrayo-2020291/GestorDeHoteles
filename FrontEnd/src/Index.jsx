@@ -35,6 +35,8 @@ import { BillRoomTable } from './components/Bill/BillRoomTable.jsx'
 import { BillRoom } from './components/Bill/BillRoom.jsx' 
 import { BillService } from './components/Bill/BillService.jsx'
 import { EventService } from './components/Bill/EventService.jsx'
+import { GraphTopHotels } from './components/Hotel/GraphTopHotels.jsx'
+import {Register} from './pages/Register.jsx'
 
 export const AuthContext = createContext();
 
@@ -75,6 +77,10 @@ export const Index = () => {
                     element: <LoginPage></LoginPage>
                 },
                 {
+                    path: '/register',
+                    element: <Register></Register>
+                },
+                {
                     path: '/dashboard',
                     element: loggedIn ? <DashBoardPage></DashBoardPage> : <LoginPage></LoginPage>,
                     children: [
@@ -105,6 +111,10 @@ export const Index = () => {
                         {
                             path: 'hotel',
                             element: loggedIn ? <HotelTable></HotelTable> : <LoginPage></LoginPage>
+                        },
+                        {
+                            path: 'graphTopHotels',
+                            element: loggedIn ? <GraphTopHotels></GraphTopHotels> : <LoginPage></LoginPage>
                         },
                         {
                             path: 'addHotel',

@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Hotel } from './Hotel'
-import { GraphTopHotels } from './GraphTopHotels'
+import Swal from 'sweetalert2';
 
 export const HotelTable = () => {
   const role = localStorage.getItem('role')
@@ -82,15 +82,38 @@ export const HotelTable = () => {
 
   const deleteHotel = async (id) => {
     try {
-      let confirmDelete = confirm('Estás seguro de eliminar este evento?')
-      if (confirmDelete) {
-        const { data } = await axios.delete(`http://localhost:3100/hotel/delete/${id}`, {
-          headers: {
-            'Authorization': token
-          }
+      const result = await Swal.fire({
+        title: 'you are sure?',
+        text: 'Delete Hotel',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'YES',
+        cancelButtonText: 'CANCEL',
+      });
+        if (result.isConfirmed) {
+          const { data } = await axios.delete(`http://localhost:3100/hotel/delete/${id}`, {
+           headers: {
+             'Authorization': token
+           }
+         })
+         getHotels()
+         if(data.message=== 'Hotel deleted'){ 
+          Swal.fire({
+              title: data.message ,
+                icon: 'success',
+                timer: 2000
+          })
+      }else{
+        Swal.fire({
+            title: data.message ,
+              icon: 'warning',
+              timer: 2000
         })
-        getHotels()
-      }
+    }
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire('CANCEL', 'The hotel was not deleted', 'error');
+        }
+      
     } catch (err) {
       console.error(err)
       alert(err.response.data.message)
@@ -132,7 +155,7 @@ export const HotelTable = () => {
         }
         <form action="#">
           <div className="form-group">
-            <input className='select' name='name' onChange={handleChange} type="text" placeholder="Buscar..." />
+            <input className='barra-busqueda' name='name' onChange={handleChange} type="text" placeholder="Buscar..." />
             <i className="fa-solid fa-magnifying-glass icon"></i>
           </div>
         </form>
@@ -212,14 +235,6 @@ export const HotelTable = () => {
             </table>
           </div>
         </div>
-        <br />
-        <br />
-        <br />
-        <GraphTopHotels></GraphTopHotels>
-        <br />
-        <br />
-        <br />
-        <br />
       </main>
       {/* </section> */}
     </>

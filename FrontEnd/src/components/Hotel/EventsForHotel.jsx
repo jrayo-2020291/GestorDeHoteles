@@ -50,20 +50,37 @@ export const EventForHotel = () => {
 
     const deleteEvent = async (idEvent) => {
         try {
-          let confirmDelete = confirm('Estás seguro de eliminar este evento?')
-          if (confirmDelete) {
-            const { data } = await axios.put(`http://localhost:3100/hotel/deleteEvent/${id}`, {event:idEvent},{
-              headers: {
-                  'Authorization': token
-              }
-          })
-            getEventsForHotel();
-            Swal.fire({
-                title: data.message || 'Deleting sucessfully',
-                icon: 'success',
-                timer: 2000
-              })
-          }
+            const result = await Swal.fire({
+                title: 'you are sure?',
+                text: 'Delete Hotel',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'YES',
+                cancelButtonText: 'CANCEL',
+              });
+                if (result.isConfirmed) {
+                    const { data } = await axios.put(`http://localhost:3100/hotel/deleteEvent/${id}`, {event:idEvent},{
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
+                      getEventsForHotel();
+                      if(data.message=== 'Deleting sucessfully'){ 
+                        Swal.fire({
+                            title: data.message ,
+                              icon: 'success',
+                              timer: 2000
+                        })
+                    }else{
+                      Swal.fire({
+                          title: data.message ,
+                            icon: 'warning',
+                            timer: 2000
+                      })
+                  }
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                  Swal.fire('CANCEL', 'The event was not deleted', 'error');
+                }
         } catch (err) {
           console.error(err)
           alert(err.response.data.message)

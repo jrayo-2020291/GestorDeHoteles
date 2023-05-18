@@ -73,8 +73,12 @@ export const GraphTopHotels = () => {
 
     return (
         <>
-        <h1 className='title'>Top hoteles más solicitados</h1>
+        <main>
+          <div style={{ margin: '5% 20% 0 20%' }}>
+            <h1 className='title'>Top hoteles más solicitados</h1>
             <canvas ref={chartRef}></canvas>
+          </div>
+        </main>
         </>
     );
 };

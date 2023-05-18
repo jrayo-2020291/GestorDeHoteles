@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { Event } from './Event'
+import Swal from 'sweetalert2';
 
 export const EventTable = () => {
 
@@ -68,15 +69,37 @@ export const EventTable = () => {
 
     const deleteEvent = async (id) => {
         try {
-            let confirmDelete = confirm('Estás seguro de eliminar este evento?')
-            if (confirmDelete) {
-                const { data } = await axios.delete(`http://localhost:3100/events/delete/${id}`, {
-                    headers: {
-                        'Authorization': token
-                    }
+            const result = await Swal.fire({
+                title: 'you are sure?',
+                text: 'Delete Event',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'YES',
+                cancelButtonText: 'CANCEL',
+              });
+                if (result.isConfirmed) {
+                    const { data } = await axios.delete(`http://localhost:3100/events/delete/${id}`, {
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
+                    getEvents()
+                if(data.message=== 'Event deleted'){ 
+                  Swal.fire({
+                      title: data.message ,
+                        icon: 'success',
+                        timer: 2000
+                  })
+              }else{
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'warning',
+                      timer: 2000
                 })
-                getEvents()
             }
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire('CANCEL', 'The event was not deleted', 'error');
+                  }
         } catch (err) {
             console.error(err)
             alert(err.response.data.message)
@@ -133,7 +156,7 @@ export const EventTable = () => {
                                     }
                                     <option value="ALL">Todos</option>
                                 </select>
-                                <button onClick={(e) => getByHotel(e)}>Buscar</button>
+                                <button className='button' onClick={(e) => getByHotel(e)}>Buscar</button>
                             </div>
                         </form>
                         <br />

@@ -24,7 +24,7 @@ export const AddAService = () => {
                 }
             })
             Swal.fire({
-                title: data.message || 'Service created',
+                title: data.message || 'New service created',
                 icon: 'success',
                 timer: 2000
             })
@@ -39,7 +39,11 @@ export const AddAService = () => {
 
             navigate('/dashboard/aService')
         } catch (err) {
-            alert(err.response.data.message)
+            Swal.fire({
+                title: err.response.data.message ,
+                icon: 'error',
+                timer: 2000
+              })
         }
     }
     return (

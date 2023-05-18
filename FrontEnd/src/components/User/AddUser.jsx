@@ -2,6 +2,7 @@ import React from 'react'
 import axios from "axios"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState } from "react"
+import Swal from 'sweetalert2'
 
 export const AddUser = () => {
     const navigate = useNavigate()
@@ -31,18 +32,34 @@ export const AddUser = () => {
                     'Authorization': token
                 }
             })
-            alert(data.message)
+            if(data.message== 'Account created sucessfully'){ 
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'success',
+                      timer: 2000
+                })
+            }else{
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'warning',
+                      timer: 2000
+                })
+            }
             navigate('/dashboard/user')
         } catch (err) {
-            alert(err.response.data.message)
+            Swal.fire({
+                title: err.response.data.message ,
+                icon: 'error',
+                timer: 2000
+              })
+            
         }
     }
-    console.log(form)
+    
 
     return (
         <>
-        <br /><br /><br /><br /><br /><br />
-            <div className="container">
+            <div className="container" >
                 <div className="box">
                     <h1>Agregar Usuario</h1>
                     <form>

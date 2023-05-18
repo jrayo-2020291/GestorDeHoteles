@@ -63,20 +63,40 @@ export const RoomTable = () => {
 
   const deleteRoom = async (id) => {
     try {
-      let confirmDelete = confirm('¿Estás seguro de eliminar este usuario?')
-      if (confirmDelete) {
-        const { data } = await axios.delete(`http://localhost:3100/room/delete/${id}`, {
+      const result = await Swal.fire({
+        title: 'you are sure?',
+        text: 'Delete Room',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'YES',
+        cancelButtonText: 'CANCEL',
+      });
+      
+        if (result.isConfirmed) {
+          const { data } = await axios.delete(`http://localhost:3100/room/delete/${id}`, {
           headers: {
             'Authorization': token
           }
         })
+        getRoom()
+        if(data.message=== 'Room deleted'){ 
+          Swal.fire({
+              title: data.message ,
+                icon: 'success',
+                timer: 2000
+          })
+      }else{
         Swal.fire({
-          title: 'Deleted!',
-          text: 'Room deleted Succesfully.',
-          icon: 'success'
-        }),
-          getRoom()
-      }
+            title: data.message ,
+              icon: 'warning',
+              timer: 2000
+        })
+    }
+    
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire('CANCEL', 'The Room was not deleted', 'error');
+        }
+      //
     } catch (err) {
       console.error(err)
       alert(err.response.data.message)
@@ -148,7 +168,7 @@ export const RoomTable = () => {
                   }
                   <option value="ALL">Todos</option>
                 </select>
-                <button onClick={(e) => getByHotel(e)}>Buscar</button>
+                <button className='button' onClick={(e) => getByHotel(e)}>Buscar</button>
               </div>
             </form>
             <br />

@@ -20,18 +20,42 @@ export const AServiceTable = () => {
 
   const deleteService = async (id) => {
     try {
-      const { data } = await axios.delete(`http://localhost:3100/services/delete/${id}`, {
+      const result = await Swal.fire({
+        title: 'you are sure?',
+        text: 'Delete Servicio aditional',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'YES',
+        cancelButtonText: 'CANCEL',
+      });
+        if (result.isConfirmed) {
+         
+          const { data } = await axios.delete(`http://localhost:3100/services/delete/${id}`, {
         headers: {
           'Authorization': token
         }
       })
+      if(data.message=== 'Service deleted'){ 
+        Swal.fire({
+            title: data.message ,
+              icon: 'success',
+              timer: 2000
+        })
+    }else{
       Swal.fire({
-        title: 'Deleted!',
-        text: 'Your file has been deleted.',
-        icon: 'success'
-      }).then(() => {
-        getServices()
+          title: data.message ,
+            icon: 'warning',
+            timer: 2000
       })
+  }
+    
+     getServices()
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire('CANCEL', 'The service aditional was not deleted', 'error');
+        }
+        //
+      
+      
     } catch (err) {
       console.error(err)
       alert(err.response.data.message)
@@ -46,7 +70,6 @@ export const AServiceTable = () => {
         }
       })
       setServices(data.services)
-      console.log(services)
     } catch (err) {
       console.error(err)
     }
