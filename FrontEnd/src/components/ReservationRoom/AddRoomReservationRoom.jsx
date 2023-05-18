@@ -25,6 +25,29 @@ export const AddRoomReservationRoom = () => {
         }
     }
 
+    const deleteRoom = async (idRoom) => {
+        try {
+          let confirmDelete = confirm('Estás seguro de eliminar este evento?')
+          if (confirmDelete) {
+            const { data } = await axios.put(`http://localhost:3100/reservationRoom/removeRoom/${id}`, { roomId: idRoom }, {
+              headers: {
+                'Authorization': token
+              }
+            })
+            getReservation();
+            getRooms();
+            Swal.fire({
+              title: data.message || 'Deleting sucessfully',
+              icon: 'success',
+              timer: 2000
+            })
+          }
+        } catch (err) {
+          console.error(err)
+          alert(err.response.data.message)
+        }
+      }
+
     const getReservation = async () => {
         try {
             const { data } = await axios(`http://localhost:3100/reservationRoom/getReservation/${id}`, {
@@ -34,7 +57,7 @@ export const AddRoomReservationRoom = () => {
             })
             let array = []
             let room = data.reservation.rooms
-            room.forEach(element=>{
+            room.forEach(element => {
                 array.push(element.room)
             })
             setReservation(array)
@@ -103,7 +126,7 @@ export const AddRoomReservationRoom = () => {
                         </thead>
                         <tbody>
                             {
-                                reservation.map(({ _id, noRoom, category, peopleCapacity, price}, index) => {
+                                reservation.map(({ _id, noRoom, category, peopleCapacity, price }, index) => {
                                     return (
                                         <tr key={index}>
                                             <Room
@@ -112,6 +135,9 @@ export const AddRoomReservationRoom = () => {
                                                 peopleCapacity={peopleCapacity}
                                                 price={price}
                                             ></Room>
+                                            <td>
+                                                <i onClick={() => deleteRoom(_id)} className="fa-solid fa-trash-can button"></i>
+                                            </td>
                                         </tr>
                                     )
                                 })

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import { Aservice } from '../AServices/Aservice'
@@ -28,6 +28,28 @@ export const AddServiceReservationRoom = () => {
         }
     }
 
+    const deleteService = async (idService) => {
+        try {
+            let confirmDelete = confirm('Estás seguro de eliminar este evento?')
+            if (confirmDelete) {
+                const { data } = await axios.put(`http://localhost:3100/reservationRoom/removeService/${id}`, { service: idService }, {
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                getReservation();
+                Swal.fire({
+                    title: data.message || 'Deleting sucessfully',
+                    icon: 'success',
+                    timer: 2000
+                })
+            }
+        } catch (err) {
+            console.error(err)
+            alert(err.response.data.message)
+        }
+    }
+
     const getReservation = async () => {
         try {
             const { data } = await axios(`http://localhost:3100/reservationRoom/getReservation/${id}`, {
@@ -37,7 +59,7 @@ export const AddServiceReservationRoom = () => {
             })
             let array = []
             let service = data.reservation.additionalServices
-            service.forEach(element=>{
+            service.forEach(element => {
                 array.push(element.service)
             })
             setReservation(array)
@@ -58,13 +80,19 @@ export const AddServiceReservationRoom = () => {
                         'Authorization': token
                     }
                 })
+            getReservation();
+            Swal.fire({
+                title: data.message || 'Service Added',
+                icon: 'success',
+                timer: 2000
+            })
+            if (data.message == 'Service already contrated') {
                 Swal.fire({
                     title: data.message,
                     icon: 'success',
                     timer: 2000
-                  })
-                  
-                  getReservation();
+                })
+            }
         } catch (err) {
             Swal.fire({
                 title: err.response.data.message,
@@ -90,11 +118,12 @@ export const AddServiceReservationRoom = () => {
                                 <th>Descripción</th>
                                 <th>Costo</th>
                                 <th>Categoria</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                reservation.map(({ _id, name, description, cost, category}, index) => {
+                                reservation.map(({ _id, name, description, cost, category }, index) => {
                                     return (
                                         <tr key={index}>
                                             <Aservice
@@ -103,10 +132,14 @@ export const AddServiceReservationRoom = () => {
                                                 cost={cost}
                                                 category={category}
                                             ></Aservice>
+                                            <td>
+                                                <i onClick={() => deleteService(_id)} className="fa-solid fa-trash-can button"></i>
+                                            </td>
                                         </tr>
                                     )
                                 })
                             }
+
                         </tbody>
                     </table>
                     <form>
