@@ -31,10 +31,6 @@ export const BillEventTable = () => {
   return (
     <>
       {/* <section id="content"> */}
-      <br />
-      <br />
-      <br />
-      <br />
       <main>
       <h1 className="title">Facturas por Eventos</h1>
           <ul className="breadcrumbs">

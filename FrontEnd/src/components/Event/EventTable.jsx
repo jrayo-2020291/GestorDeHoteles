@@ -113,10 +113,6 @@ export const EventTable = () => {
 
         <>
             {/* <section id="content"> */}
-            <br />
-            <br />
-            <br />
-            <br />
             <main>
                 <h1 className="title">Eventos</h1>
                 <ul className="breadcrumbs">

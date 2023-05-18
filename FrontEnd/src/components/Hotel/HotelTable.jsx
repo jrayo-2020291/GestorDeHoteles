@@ -126,10 +126,6 @@ export const HotelTable = () => {
   return (
     <>
       {/* <section id="content"> */}
-      <br />
-      <br />
-      <br />
-      <br />
       <main>
         <h1 className="title">Hoteles</h1>
         <ul className="breadcrumbs">
@@ -164,7 +160,6 @@ export const HotelTable = () => {
           <div className="menu">
             <div className="sub-menu">
             </div>
-            <br />
             <br />
             <table>
               <thead>

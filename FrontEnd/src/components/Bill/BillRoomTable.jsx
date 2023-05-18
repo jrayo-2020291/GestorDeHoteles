@@ -52,10 +52,6 @@ export const BillRoomTable = () => {
   return (
     <>
       {/* <section id="content"> */}
-      <br />
-      <br />
-      <br />
-      <br />
       <main>
         <h1 className="title">Facturas por Hospedaje</h1>
         <ul className="breadcrumbs">

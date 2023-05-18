@@ -167,10 +167,6 @@ export const ReservationRoomTable = () => {
   return (
     <>
       {/* <section id="content"> */}
-      <br />
-      <br />
-      <br />
-      <br />
       <main>
         <h1 className="title">Reservación de Habitación</h1>
         <ul className="breadcrumbs">
