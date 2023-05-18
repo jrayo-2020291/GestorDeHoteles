@@ -22,21 +22,26 @@ export const AddEvent = () => {
                     'Authorization': token
                 }
             })
-            Swal.fire({
-                title: data.message || 'New Event Created',
-                icon: 'success',
-                timer: 2000
-              })
-              if(data.message== 'This event already exist'){ 
+            if(data.message== 'New Event Created'){ 
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'success',
+                      timer: 2000
+                })
+            }else{
                 Swal.fire({
                     title: data.message ,
                       icon: 'warning',
                       timer: 2000
-                    })
-              }
+                })
+            }
             navigate('/dashboard/event')
         } catch (err) {
-            alert(err.response.data.message)
+            Swal.fire({
+                title: err.response.data.message ,
+                icon: 'error',
+                timer: 2000
+              })
         }
     }
 
