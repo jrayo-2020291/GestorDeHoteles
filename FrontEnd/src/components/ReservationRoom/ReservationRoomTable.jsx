@@ -16,6 +16,24 @@ export const ReservationRoomTable = () => {
     navigate('/')
   }
 
+  const setState = async (id) => {
+    try {
+
+      let confirmDelete = confirm('Desea efectuar el pago pertinente por reservación actual? (esto concretara su reservación oficialmente)')
+      if (confirmDelete) {
+        const { data } = await axios.put(`http://localhost:3100/reservationRoom/setState/${id}`, {
+          headers: {
+            'Authorization': token
+          }
+        })
+        alert(data.message)
+        getReservation()
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   const getHotels = async () => {
     try {
       const { data } = await axios(`http://localhost:3100/hotel/get`, {
@@ -43,6 +61,7 @@ export const ReservationRoomTable = () => {
         element.dateEnd = date2.toLocaleDateString()
       })
       setReservation(data.reservations)
+      console.log(data)
     } catch (err) {
       console.error(err)
     }
@@ -155,7 +174,8 @@ export const ReservationRoomTable = () => {
                   <th>user</th>
                   <th>hotel</th>
                   <th>Acciones</th>
-                  <th>Eventos</th>
+                  <th>+ Habitaciones/Servicios</th>
+                  <th>Facturar</th>
                 </tr>
               </thead>
               <tbody>
@@ -183,6 +203,9 @@ export const ReservationRoomTable = () => {
                           <Link to={`../addRoomReservationRoom/${_id}`}>
                             <i className='fa-solid fa-clipboard button'></i>
                           </Link>
+                        </td>
+                        <td>
+                          <i onClick={()=> setState(_id)} className='fa-solid fa-clipboard button'></i>
                         </td>
                       </tr>
                     )

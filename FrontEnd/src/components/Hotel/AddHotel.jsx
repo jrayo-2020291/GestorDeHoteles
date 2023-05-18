@@ -109,6 +109,7 @@ export const AddHotel = () => {
                                 }
                             </select>
                         </div>
+                        <br />
                         <button onClick={(e)=>  addHotel(e)} type="submit" className="btn btn-primary">Add</button>
                         <Link to='/dashboard/hotel'>
                             <button  type="submit" className="btn btn-primary">Cancel</button>

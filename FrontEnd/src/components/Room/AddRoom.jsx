@@ -8,20 +8,6 @@ export const AddRoom = () => {
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
     const [hotels, setHotels] = useState([{}])
-    const [form, setForm] = useState({
-        noRoom: '',
-        category: '',
-        peopleCapacity: '',
-        price: '',
-        hotel: ''
-    })
-
-    const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        })
-    }
 
     const getHotel = async () => {
         try {
@@ -40,32 +26,39 @@ export const AddRoom = () => {
     const addUser = async (e) => {
         try {
             e.preventDefault()
+            let form = {
+                noRoom: document.getElementById('inputNoRoom').value,
+                category: document.getElementById('inputCategory').value,
+                peopleCapacity: document.getElementById('inputPeopleCapacity').value,
+                price: document.getElementById('inputPrice').value,
+                hotel: document.getElementById('inputHotel').value
+            }
             console.log(form)
             const { data } = await axios.post('http://localhost:3100/room/add', form, {
                 headers: {
                     'Authorization': token
                 }
             })
-            if(data.message== 'Room adding to hotel sucessfully'){ 
+            if (data.message == 'Room adding to hotel sucessfully') {
                 Swal.fire({
-                    title: data.message ,
-                      icon: 'success',
-                      timer: 2000
+                    title: data.message,
+                    icon: 'success',
+                    timer: 2000
                 })
-            }else{
+            } else {
                 Swal.fire({
-                    title: data.message ,
-                      icon: 'warning',
-                      timer: 2000
+                    title: data.message,
+                    icon: 'warning',
+                    timer: 2000
                 })
             }
-                navigate('/dashboard/Room')
+            navigate('/dashboard/Room')
         } catch (err) {
             Swal.fire({
-                title: err.response.data.message ,
+                title: err.response.data.message,
                 icon: 'error',
                 timer: 2000
-              })
+            })
         }
     }
 
@@ -78,27 +71,27 @@ export const AddRoom = () => {
                 <form>
                     <div>
                         <i className="fa-solid fa-user"></i>
-                        <input onChange={handleChange} type="text" name='noRoom' className="form-control" placeholder='noRoom' required />
+                        <input type="text" id='inputNoRoom' className="form-control" placeholder='noRoom' required />
                     </div>
                     <br />
                     <div>
                         <i className="fa-solid fa-pencil"></i>
-                        <input onChange={handleChange} type="text" name='category' className="form-control" placeholder='category' required />
+                        <input type="text" id='inputCategory' className="form-control" placeholder='category' required />
                     </div>
                     <br />
                     <div>
                         <i className="fa-solid fa-tag"></i>
-                        <input onChange={handleChange} type="number" name='peopleCapacity' className="form-control" placeholder='capacity' required />
+                        <input type="number" id='inputPeopleCapacity' className="form-control" placeholder='capacity' required />
                     </div>
                     <br />
                     <div>
                         <i className="fa-solid fa-tag"></i>
-                        <input onChange={handleChange} type="number" name='price' className="form-control" placeholder='price' required />
+                        <input type="number" id='inputPrice' className="form-control" placeholder='price' required />
                     </div>
                     <br />
                     <div>
                         <i className="fa-solid fa-user-shield icon side">Hotel</i>
-                        <select onChange={handleChange} className="form-control" name="hotel" required>
+                        <select className="form-control" id="inputHotel" required>
                             {
                                 hotels.map(({ _id, name }, i) => {
                                     return (

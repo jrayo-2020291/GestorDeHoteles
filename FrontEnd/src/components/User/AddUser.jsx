@@ -1,32 +1,25 @@
 import React from 'react'
 import axios from "axios"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { useState } from "react"
 import Swal from 'sweetalert2'
 
 export const AddUser = () => {
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
-    const [form, setForm] = useState({
-        name: '',
-        surname: '',
-        username: '',
-        password: '',
-        email: '',
-        phone: '',
-        role: ''
-    })
-
-    const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        })
-    }
 
     const addUser = async (e) => {
         try {
             e.preventDefault()
+            let form = {
+                name: document.getElementById('inputName').value,
+                surname: document.getElementById('inputSurname').value,
+                username: document.getElementById('inputUsername').value,
+                password: document.getElementById('inputPassword').value,
+                email: document.getElementById('inputEmail').value,
+                phone: document.getElementById('inputPhone').value,
+                role: document.getElementById('inputRole').value
+            }
+            console.log(form)
             const { data } = await axios.post('http://localhost:3100/user/addAccount', form, {
                 headers: {
                     'Authorization': token
@@ -44,9 +37,11 @@ export const AddUser = () => {
                       icon: 'warning',
                       timer: 2000
                 })
+                
             }
             navigate('/dashboard/user')
         } catch (err) {
+            console.error(err)
             Swal.fire({
                 title: err.response.data.message ,
                 icon: 'error',
@@ -59,43 +54,44 @@ export const AddUser = () => {
 
     return (
         <>
+        <br /><br /><br /><br /><br /><br /><br />
             <div className="container" >
                 <div className="box">
                     <h1>Agregar Usuario</h1>
                     <form>
                         <div>
                             <i className="fa-solid fa-user"></i>
-                            <input onChange={handleChange} type="text" name='name' className="form-control" placeholder='name' required />
+                            <input  type="text" id='inputName' className="form-control" placeholder='name' required />
                         </div>
                         <br />
                         <div>
                             <i className="fa-solid fa-pencil"></i>
-                            <input onChange={handleChange} type="text" name='surname' className="form-control" placeholder='surname' required />
+                            <input  type="text" id='inputSurname' className="form-control" placeholder='surname' required />
                         </div>
                         <br />
                         <div>
                             <i className="fa-solid fa-tag"></i>
-                            <input onChange={handleChange} type="text" name='username' className="form-control" placeholder='username' required />
+                            <input  type="text" id='inputUsername' className="form-control" placeholder='username' required />
                         </div>
                         <br />
                         <div>
                             <i className="fa-solid fa-pencil"></i>
-                            <input onChange={handleChange} type="text" name='password' className="form-control" placeholder='password' required />
+                            <input  type="text" id='inputPassword' className="form-control" placeholder='password' required />
                         </div>
                         <br />
                         <div>
                             <i className="fa-solid fa-tag"></i>
-                            <input onChange={handleChange} type="text" name='email' className="form-control" placeholder='email' required />
+                            <input  type="text" id='inputEmail' className="form-control" placeholder='email' required />
                         </div>
                         <br />
                         <div>
                             <i className="fa-solid fa-tag"></i>
-                            <input onChange={handleChange} type="text" name='phone' className="form-control" placeholder='phone' required />
+                            <input  type="text" id='inputPhone' className="form-control" placeholder='phone' required />
                         </div>
                         <br />
                         <div>
                             <i className="fa-solid fa-tag">Role</i>
-                            <select onChange={handleChange} name="role">
+                            <select  id="inputRole">
                                 <option value="CLIENT">Cliente</option>
                                 <option value="ADMIN">Administrador</option>
                                 <option value="MANAGER">Manager</option>
