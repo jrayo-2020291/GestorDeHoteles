@@ -9,10 +9,21 @@ export const BillRoomTable = () => {
   const navigate = useNavigate()
   const [reservation, setReservation] = useState([{}])
   const token = localStorage.getItem('token')
+  const date = new Date().toDateString()
 
   const LogOut = () => {
     localStorage.clear()
     navigate('/')
+  }
+
+  const report = async (e) => {
+    try {
+      e.preventDefault()
+      const { data } = await axios('http://localhost:3100/reservationRoom/createReport')
+      console.log(data)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
 
@@ -95,6 +106,11 @@ export const BillRoomTable = () => {
                 }
               </tbody>
             </table>
+            <br />
+            <button className='button' onClick={(e) => report(e)}>Generar reporte</button>
+            <a href="https://localhost:3100/src" download={`Report Reservations Rooms-${date}.pdf`}>
+              Descargar
+            </a>
           </div>
         </div>
       </main>
