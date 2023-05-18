@@ -108,7 +108,7 @@ export const BillRoomTable = () => {
             </table>
             <br />
             <button className='button' onClick={(e) => report(e)}>Generar reporte</button>
-            <a href="https://localhost:3100/src" download={`Report Reservations Rooms-${date}.pdf`}>
+            <a href="http://localhost:3100/src/" download={`Report Reservations Rooms-${date}.pdf`}>
               Descargar
             </a>
           </div>
