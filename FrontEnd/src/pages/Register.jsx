@@ -48,6 +48,7 @@ export const Register = () => {
 
   return (
     <>
+    <br /><br /><br /><br />
         <div className='container'>
             <div className="box">
                 <h1>Registro de Usuarios</h1>
