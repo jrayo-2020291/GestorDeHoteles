@@ -18,17 +18,39 @@ export const ReservationRoomTable = () => {
 
   const setState = async (id) => {
     try {
-
-      let confirmDelete = confirm('Desea efectuar el pago pertinente por reservación actual? (esto concretara su reservación oficialmente)')
-      if (confirmDelete) {
-        const { data } = await axios.put(`http://localhost:3100/reservationRoom/setState/${id}`, {
+      const result = await Swal.fire({
+        title: 'you are sure?',
+        text: 'You want to make the relevant payment for your current reservation, this will confirm your reservation officially?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'YES',
+        cancelButtonText: 'CANCEL',
+      });
+        if (result.isConfirmed) {
+          const { data } = await axios.put(`http://localhost:3100/reservationRoom/setState/${id}`, {
           headers: {
             'Authorization': token
           }
         })
-        alert(data.message)
         getReservation()
-      }
+        if(data.message=== 'Reservation deleted'){ 
+          Swal.fire({
+              title: data.message ,
+                icon: 'success',
+                timer: 2000
+          })
+      }else{
+        Swal.fire({
+            title: data.message ,
+              icon: 'warning',
+              timer: 2000
+        })
+        }  
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire('CANCEL', 'The payment was not made', 'error');
+        }
+      //
+      
     } catch (err) {
       console.error(err)
     }

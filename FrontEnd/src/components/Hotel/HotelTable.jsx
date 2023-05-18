@@ -20,7 +20,7 @@ export const HotelTable = () => {
     if (role === 'ADMIN') {
       setShow(true)
     }
-    if (role === 'USER') {
+    if (role === 'CLIENT') {
       setShowUser(true)
     }
   }

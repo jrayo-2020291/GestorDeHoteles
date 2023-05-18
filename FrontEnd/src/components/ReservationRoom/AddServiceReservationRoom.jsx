@@ -66,7 +66,11 @@ export const AddServiceReservationRoom = () => {
                   
                   getReservation();
         } catch (err) {
-            console.error(err)
+            Swal.fire({
+                title: err.response.data.message,
+                icon: 'error',
+                timer: 2000
+              })
         }
     }
 
