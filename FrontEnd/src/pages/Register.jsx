@@ -30,18 +30,25 @@ export const Register = () => {
             icon: 'success',
             timer: 2000
           })
-          if(data.message== 'Email is already taken' || data.message== 'Username is already taken'){ 
+          if(data.message== 'Account created sucessfully'){ 
+            Swal.fire({
+                title: data.message ,
+                  icon: 'success',
+                  timer: 2000
+            })
+        }else{
             Swal.fire({
                 title: data.message ,
                   icon: 'warning',
                   timer: 2000
-                })
-          }
-          if(data.message== 'Account created sucessfully'){
-            navigate('/login')
-          }
+            })
+        }
         }catch(err){
-          console.log(err)
+          Swal.fire({
+            title: err.response.data.message ,
+            icon: 'error',
+            timer: 2000
+          })
         }
     }
   
