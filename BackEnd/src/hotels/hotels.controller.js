@@ -3,6 +3,9 @@
 const Hotel = require('./hotels.model');
 const User = require('../users/user.model')
 const Event = require('../events/events.model');
+const Room = require('../rooms/rooms.model');
+const ReservationEvent = require('../reservationEvent/reservationEvent.model');
+const ReservationRoom = require('../reservationRoom/reservationRoom.model');
 const {validateData} = require('../utils/validate')
 const mongoose = require('mongoose');
 const {jsPDF} = require('jspdf');
@@ -167,6 +170,12 @@ exports.update = async(req,res)=>{
 exports.delete = async(req, res)=>{
     try{
         let hotelId = req.params.id;
+        let findRoom = await Room.findOne({hotel: hotelId});
+        if(findRoom) return res.send({message: 'This hotel is being used and cannot be deleted'})
+        let findReservationEvent = await ReservationEvent.findOne({hotel: hotelId});
+        if(findReservationEvent) return res.send({message: 'This hotel is being used and cannot be deleted'});
+        let findReservationRoom = await ReservationRoom.findOne({hotel: hotelId});
+        if(findReservationRoom) return res.send({message: 'This hotel is being used and cannot be deleted'});
         let deletedHotel = await Hotel.findOneAndDelete({_id: hotelId});
         if(!deletedHotel) return res.status(404).send({message: 'Hotel not found and not deleted'});
         return res.send({message: 'Hotel deleted', deletedHotel});

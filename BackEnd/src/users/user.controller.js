@@ -1,6 +1,9 @@
 'use strict'
 
 const User = require('./user.model')
+const Hotel = require('../hotels/hotels.model');
+const ReservationEvent = require('../reservationEvent/reservationEvent.model');
+const ReservationRoom = require('../reservationRoom/reservationRoom.model');
 const { validateData, encrypt, checkPassword, checkUpdate } = require('../utils/validate');
 const { createToken } = require('../services/jwt');
 
@@ -108,6 +111,12 @@ exports.updateOwnUser = async(req,res)=>{
 exports.deleteOwnUser = async(req,res)=>{
     try {
         let userId = req.user.sub;
+        let findHotel = await Hotel.findOne({manager: userId});
+        if(findHotel) return res.send({mesage: 'You already have records, you cannot delete your account'});
+        let findReservationEvent = await ReservationEvent.findOne({user: userId});
+        if(findReservationEvent) return res.send({mesage: 'You already have records, you cannot delete your account'});
+        let findReservationRoom = await ReservationRoom.findOne({user: userId});
+        if(findReservationRoom) return res.send({mesage: 'You already have records, you cannot delete your account'});
         let deleteUser = await User.findOneAndDelete({_id:userId});
         if(!deleteUser) return res.send({message:'User not found'})
         return res.send({message:`Account with username ${deleteUser.username} delete sucessfully`})
@@ -122,6 +131,12 @@ exports.delete = async(req,res)=>{
         let userId = req.params.id;
         let user = await User.findOne({_id:userId})
         if(user.role==='ADMIN') return res.send({message:'Cannot delete admin'})
+        let findHotel = await Hotel.findOne({manager: userId});
+        if(findHotel) return res.send({mesage: 'This account is being used and cannot be deleted'});
+        let findReservationEvent = await ReservationEvent.findOne({user: userId});
+        if(findReservationEvent) return res.send({mesage: 'This account is being used and cannot be deleted'});
+        let findReservationRoom = await ReservationRoom.findOne({user: userId});
+        if(findReservationRoom) return res.send({mesage: 'This account is being used and cannot be deleted'});
         let deleteUser = await User.findOneAndDelete({_id:userId});
         if(!deleteUser) return res.send({message:'User not found'})
         return res.send({message:'Account delete sucessfully'})
