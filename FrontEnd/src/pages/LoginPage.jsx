@@ -33,7 +33,6 @@ export const LoginPage = () => {
         })
         navigate('/dashboard')
         window.location.reload()
-        
       }
     }catch(err){
       console.log(err)

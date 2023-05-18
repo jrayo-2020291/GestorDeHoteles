@@ -36,7 +36,16 @@ exports.addAdminInitial = async(req, res)=>{
 exports.registerUser = async(req, res)=>{
     try{
         let data = req.body;
-        if(data ===''||data.name===''||data.surname===''||data.username===''||data.password===''||data.email===''||data.phone==='') return res.send({message:'you cannot leave empty data'})
+        let params = {
+            name: data.name,
+            username:data.username,
+            surname: data.surname,
+            password: data.password,
+            email: data.email,
+            phone: data.phone
+        }
+        let msg = validateData(params);
+        if(msg) return res.status(400).send({message: msg});
         data.password = await encrypt(data.password);
         data.role = 'CLIENT';
         let existUsername =await User.findOne({username: data.username})
