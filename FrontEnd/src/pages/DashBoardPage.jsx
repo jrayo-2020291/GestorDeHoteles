@@ -49,9 +49,13 @@ export const DashBoardPage = () => {
                             <li>
                                 <a className="desktop-link">Facturas</a>
                                 <ul>
-                                    <li><a >Reservaciones</a></li>
-                                    <li><a >Habitaciones</a></li>
-                                    <li><a >Eventos</a></li>
+                                    <Link to='billRoom'>
+                                        <li><a >Habitaciones</a></li>
+                                    </Link>
+                                    <Link to='billEvent'>
+                                        <li><a >Eventos</a></li>
+                                    </Link>
+
                                 </ul>
                             </li>
                         </ul>

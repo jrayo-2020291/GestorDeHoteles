@@ -44,7 +44,6 @@ export const AddReservationEvent = () => {
             e.preventDefault()
             let reservation = {
                 dateEvent: document.getElementById('date').value,
-                cost: document.getElementById('cost').value,
                 hoursEvent: document.getElementById('hours').value,
                 hotel:document.getElementById('hotel').value,
                 event:document.getElementById('event').value
@@ -93,12 +92,6 @@ export const AddReservationEvent = () => {
                 </div>
                 <br/>
                 <div>
-                    <i className="fa-solid fa-tag"></i>
-                    <input type="number" placeholder="Precio" id='cost'/>
-                </div>
-                <br/>
-                <br/>
-                <div>
                     <i className="fa-solid fa-user-shield icon side">Evento</i>
                     <select className="form-control" id="event" required>
                     {
@@ -123,6 +116,7 @@ export const AddReservationEvent = () => {
                         }
                     </select>
                 </div>
+                <br />
                 <button onClick={(e)=>  addReservation(e)} type="submit" className="btn btn-primary">Add</button>
                 <Link to='/dashboard/reservationEvent'>
                 <button type="submit" className="btn btn-primary">Cancel</button>

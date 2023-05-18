@@ -29,9 +29,27 @@ export const ReservationEventTable = () => {
     }
   }
 
+  const setState = async (id) => {
+    try {
+
+      let confirmDelete = confirm('Desea efectuar el pago pertinente por reservación actual? (esto concretara su reservación oficialmente)')
+      if (confirmDelete) {
+        const { data } = await axios.put(`http://localhost:3100/reservationEvent/setState/${id}`, {
+          headers: {
+            'Authorization': token
+          }
+        })
+        alert(data.message)
+        getReservations()
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   const getReservations = async () => {
     try {
-      const { data } = await axios('http://localhost:3100/reservationEvent/get', {
+      const { data } = await axios('http://localhost:3100/reservationEvent/getReservationsGeneral', {
         headers: {
           'Authorization': token
         }
@@ -55,13 +73,13 @@ export const ReservationEventTable = () => {
       <br />
       <br />
       <main>
-      <h1 className="title">Reservación de Eventos</h1>
-          <ul className="breadcrumbs">
-            <li><a href="#">User</a></li>
-            <li className="divider">/</li>
-            <li><a href="#" className="active">Gestor de Hoteles</a></li>
-          </ul>
-          <br />
+        <h1 className="title">Reservación de Eventos</h1>
+        <ul className="breadcrumbs">
+          <li><a href="#">User</a></li>
+          <li className="divider">/</li>
+          <li><a href="#" className="active">Gestor de Hoteles</a></li>
+        </ul>
+        <br />
         <Link to='/../dashboard/addReservationEvent'>
           <i className="fa-solid fa-plus add"></i>
         </Link>
@@ -71,13 +89,14 @@ export const ReservationEventTable = () => {
           <thead>
             <tr>
               <th>Fecha</th>
-              <th>Horas</th>
               <th>Costo</th>
+              <th>Horas</th>
               <th>Usuario</th>
               <th>Hotel</th>
               <th>Evento</th>
               <th>Acciones</th>
-              <th>Servicios</th>
+              <th>+ Servicios</th>
+              <th>Facturar</th>
             </tr>
           </thead>
           <tbody>
@@ -104,6 +123,9 @@ export const ReservationEventTable = () => {
                       <Link to={`/../dashboard/addService/${_id}`}>
                         <i className="fa-solid fa-plus-circle button"></i>
                       </Link>
+                    </td>
+                    <td>
+                      <i onClick={() => setState(_id)} className='fa-solid fa-clipboard button'></i>
                     </td>
                   </tr>
                 )

@@ -151,7 +151,7 @@ export const HotelTable = () => {
                   <th>Calificación</th>
                   <th>Habitaciones</th>
                   <th>Manager</th>
-                  <th>Eventos</th>
+                  <th>+ Eventos</th>
                   {
                     show ? (
                       <th>Acciones</th>

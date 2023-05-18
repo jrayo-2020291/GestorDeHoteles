@@ -36,7 +36,7 @@ const reservationSchema = mongoose.Schema({
         type: String,
         required: true,
         uppercase: true,
-        default: 'DISABLED'
+        default: 'RESERVED'
     }
 },{
     versionKey: false,

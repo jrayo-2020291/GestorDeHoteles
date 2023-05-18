@@ -16,7 +16,7 @@ exports.add =async (req, res)=>{
         let data = req.body;
         let userId = req.user.sub;
         let findUser = await User.findOne({_id: userId});
-        if(findUser.role !== 'CLIENT') return res.send({message: 'Only clients can have a reservation'});
+       // if(findUser.role !== 'CLIENT') return res.send({message: 'Only clients can have a reservation'});
         let findEvent = await Event.findOne({_id: data.event});
         if(!findEvent) return res.status(404).send({message: 'Event not found'});
         console.log(findEvent)
@@ -34,7 +34,7 @@ exports.add =async (req, res)=>{
             user: userId,
             hotel: data.hotel,
             event: data.event,
-            state: 'DISABLED'
+            state: 'RESERVED'
         };
         let newCounter = findHotel.counter + 1;
         let updatedHotel = await Hotel.findOneAndUpdate({_id: data.hotel}, {counter: newCounter}, {new:true});
@@ -153,17 +153,38 @@ exports.getReservationsGeneral = async(req, res)=>{
         let userId = req.user.sub;
         let findUser = await User.findOne({_id: userId});
         if(findUser.role == 'ADMIN' || findUser.role == 'MANAGER'){
-            let reservations = await ReservationEvent.find().populate('user').populate('hotel').populate('additionalServices.service').populate('event');
+            let reservations = await ReservationEvent.find({state: 'RESERVED'}).populate('user').populate('hotel').populate('additionalServices.service').populate('event');
             if(!reservations) return res.status(404).send({message: 'Reservations not found'});
             return res.send({reservations});
         }if(findUser.role == 'CLIENT'){
-            let reservations = await ReservationEvent.find({user: userId}).populate('user').populate('hotel').populate('additionalServices.service').populate('event');
+            let reservations = await ReservationEvent.find({user: userId, state: 'RESERVED'}).populate('user').populate('hotel').populate('additionalServices.service').populate('event');
             if(!reservations) return res.status(404).send({message: 'Reservations not found'});
             return res.send({reservations});
         }return res.status(404).send({message: 'Reservations not found'});
     } catch (error) {
         console.error(error);
         return res.status(500).send({message: 'Error getting reservations'});
+    }
+}
+
+exports.getReservationsGeneral2 = async (req, res) => {
+    try {
+        let userId = req.user.sub;
+        let findUser = await User.findOne({ _id: userId });
+        if (findUser.role == 'ADMIN' || findUser.role == 'MANAGER') {
+            let reservations = await ReservationEvent.find({state: 'INVOICED'}).populate('user').populate('hotel').populate('additionalServices.service').populate('event')
+            if (!reservations) return res.status(404).send({ message: 'Reservations not found' });
+            return res.send({ reservations });
+        }
+        if (findUser.role == 'CLIENT') {
+            let reservations = await ReservationEvent.find({ user: userId, state: 'INVOICED' }).populate('user').populate('hotel').populate('additionalServices.service').populate('event')
+            if (!reservations) return res.status(404).send({ message: 'Reservations not found' });
+            return res.send({ reservations });
+        }
+        return res.status(404).send({ message: 'User not found' });
+    } catch (error) {
+        console.error(error)
+        return res.status(500).send({ message: 'Error getting reservations' });
     }
 }
 
@@ -205,22 +226,33 @@ exports.deleteReservation = async(req, res) => {
     }
 }
 
-exports.setState = async (req, res)=>{
+// exports.setState = async (req, res)=>{
+//     try {
+//         let reservations = await ReservationEvent.find();
+//         let date = new Date();
+//         for(let i = 0; i<reservations.length; i++) {
+//             console.log( (reservations[i].dateEvent).getDate() , (date).getDate() );
+//             if((reservations[i].dateEvent).getDate() == (date).getDate() && (reservations[i].dateEvent).getMonth() == (date).getMonth()){
+//                 let updatedReservation = await ReservationEvent.findOneAndUpdate({_id: reservations[i]._id}, {state: 'ACTIVE'}, {new: true});
+//             }
+//             if((reservations[i].dateEvent).getDate() !== (date).getDate()){
+//                 let updatedReservation = await ReservationEvent.findOneAndUpdate({_id: reservations[i]._id}, {state: 'DISABLED'}, {new: true});
+//             }    
+//         }
+//     } catch (error) {
+//         return console.error(error);
+//     }
+// }
+
+exports.setState = async (req, res) => {
     try {
-        let reservations = await ReservationEvent.find();
-        let date = new Date();
-        for(let i = 0; i<reservations.length; i++) {
-            console.log( (reservations[i].dateEvent).getDate() , (date).getDate() );
-            if((reservations[i].dateEvent).getDate() == (date).getDate() && (reservations[i].dateEvent).getMonth() == (date).getMonth()){
-                let updatedReservation = await ReservationEvent.findOneAndUpdate({_id: reservations[i]._id}, {state: 'ACTIVE'}, {new: true});
-            }
-            if((reservations[i].dateEvent).getDate() !== (date).getDate()){
-                let updatedReservation = await ReservationEvent.findOneAndUpdate({_id: reservations[i]._id}, {state: 'DISABLED'}, {new: true});
-            }    
-        }
-    } catch (error) {
-        return console.error(error);
-    }
+        let reservationId = req.params.id 
+        let reservation = await ReservationEvent.findOne({_id: reservationId}).populate('user')
+        let updatedReservation = await ReservationEvent.findOneAndUpdate({ _id: reservationId}, { state: "INVOICED" }, { new: true });
+        res.send({message: `Pago de Reservación a nombre de ${reservation.user.surname} correctamente efectuado`})
+    } catch (err) {
+    return console.error(err);
+}
 }
 
 exports.createReport = async(req, res)=>{

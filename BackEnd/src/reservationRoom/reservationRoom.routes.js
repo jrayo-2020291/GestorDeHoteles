@@ -6,7 +6,7 @@ const reservationController = require('./reservationRoom.controller');
 const { ensureAuth, isAdmin} = require('../services/authenticated');
 
 api.get('/test/:id', reservationController.test);
-api.get('/setState', reservationController.setState);
+api.put('/setState/:id', reservationController.setState);
 api.post('/add', ensureAuth, reservationController.addReservation);
 api.put('/addRoom/:id', ensureAuth, reservationController.addRoom);
 api.put('/removeRoom/:id', ensureAuth, reservationController.substractRoom);
@@ -21,4 +21,5 @@ api.put('/updateReservation/:id' , ensureAuth, reservationController.updateReser
 api.delete('/deleteReservation/:id', ensureAuth, reservationController.deleteReservation);
 api.post('/getByHotel', ensureAuth, reservationController.getReservationsByHotel)
 api.get('/createReport', reservationController.createReport);
+api.get('/getReservationGeneral2', ensureAuth, reservationController.getReservationsGeneral2);
 module.exports = api;

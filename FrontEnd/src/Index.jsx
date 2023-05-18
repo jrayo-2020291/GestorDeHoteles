@@ -30,6 +30,11 @@ import { DashBoardPage } from './pages/DashBoardPage.jsx'
 import {EventForHotel} from './components/Hotel/EventsForHotel.jsx'
 import { AddRoomReservationRoom } from './components/ReservationRoom/AddRoomReservationRoom.jsx'
 import { AddServiceReservationRoom } from './components/ReservationRoom/AddServiceReservationRoom.jsx'
+import { BillEventTable } from './components/Bill/BillEventTable.jsx'
+import { BillRoomTable } from './components/Bill/BillRoomTable.jsx'
+import { BillRoom } from './components/Bill/BillRoom.jsx' 
+import { BillService } from './components/Bill/BillService.jsx'
+import { EventService } from './components/Bill/EventService.jsx'
 
 export const AuthContext = createContext();
 
@@ -172,6 +177,26 @@ export const Index = () => {
                         {
                             path: 'updateUser/:id',
                             element: loggedIn ? <UpdateUser></UpdateUser> : <LoginPage></LoginPage>
+                        },
+                        {
+                            path: 'billEvent',
+                            element: loggedIn ? <BillEventTable></BillEventTable> : <LoginPage></LoginPage>
+                        },
+                        {
+                            path: 'billRoom',
+                            element: loggedIn ? <BillRoomTable></BillRoomTable> : <LoginPage></LoginPage>
+                        },
+                        {
+                            path: 'billRoomRooms/:id',
+                            element: loggedIn ? <BillRoom></BillRoom> : <LoginPage></LoginPage>
+                        },
+                        {
+                            path: 'billRoomServices/:id',
+                            element: loggedIn ? <BillService></BillService> : <LoginPage></LoginPage>
+                        },
+                        {
+                            path: 'billEventServices/:id',
+                            element: loggedIn ? <EventService></EventService> : <LoginPage></LoginPage>
                         },
                     ]
                 }
