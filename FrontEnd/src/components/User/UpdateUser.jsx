@@ -65,6 +65,9 @@ export const UpdateUser = () => {
     useEffect(() => getUser, [])
 
     return (
+        <>
+        <br />
+        <br />
         <div className="container">
             <div className="box">
                 <h1>Actualizar Usuario</h1>
@@ -101,5 +104,6 @@ export const UpdateUser = () => {
                 </form>
             </div>
         </div>
+        </>
     )
 }

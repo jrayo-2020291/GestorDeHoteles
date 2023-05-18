@@ -53,7 +53,7 @@ export const AddUser = () => {
 
     return (
         <>
-        <br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br />
             <div className="container" >
                 <div className="box">
                     <h1>Agregar Usuario</h1>

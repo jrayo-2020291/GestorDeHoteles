@@ -80,6 +80,8 @@ export const UpdateRoom = () => {
     useEffect(()=> getHotel, [])
 
     return (
+        <>
+        <br /><br />
         <div className="container">
             <div className="box">
                 <h1>Actualizar Habitación</h1>
@@ -124,5 +126,6 @@ export const UpdateRoom = () => {
                 </form>
             </div>
         </div>
+        </>
     )
 }

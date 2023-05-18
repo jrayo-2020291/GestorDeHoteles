@@ -122,6 +122,7 @@ export const RoomTable = () => {
   return (
     <>
       {/* <section id="content"> */}
+      <br /><br />
       <main>
         <h1 className="title">Habitaciones</h1>
         <ul className="breadcrumbs">

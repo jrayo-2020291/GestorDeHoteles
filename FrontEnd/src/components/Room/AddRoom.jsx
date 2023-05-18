@@ -65,6 +65,9 @@ export const AddRoom = () => {
     useEffect(() => getHotel, [])
 
     return (
+        <>
+        <br />
+        <br />
         <div className="container">
             <div className="box">
                 <h1>Agregar Habitación</h1>
@@ -113,5 +116,6 @@ export const AddRoom = () => {
                 </form>
             </div>
         </div>
+        </>
     )
 }

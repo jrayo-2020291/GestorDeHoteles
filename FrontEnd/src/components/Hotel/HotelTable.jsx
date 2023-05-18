@@ -126,6 +126,7 @@ export const HotelTable = () => {
   return (
     <>
       {/* <section id="content"> */}
+      <br /><br />
       <main>
         <h1 className="title">Hoteles</h1>
         <ul className="breadcrumbs">

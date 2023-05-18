@@ -81,6 +81,7 @@ export const UpdateHotel = () => {
 
     return (
         <>
+        <br />
             <div className="container">
                 <div className="box">
                     <h1>Actualizar Hotel</h1>
