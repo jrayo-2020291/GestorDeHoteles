@@ -30,25 +30,25 @@ export const AddServiceReservationRoom = () => {
 
     const deleteService = async (idService) => {
         try {
-          let confirmDelete = confirm('Estás seguro de eliminar este evento?')
-          if (confirmDelete) {
-            const { data } = await axios.put(`http://localhost:3100/reservationRoom/removeService/${id}`, { service: idService }, {
-              headers: {
-                'Authorization': token
-              }
-            })
-            getReservation();
-            Swal.fire({
-              title: data.message || 'Deleting sucessfully',
-              icon: 'success',
-              timer: 2000
-            })
-          }
+            let confirmDelete = confirm('Estás seguro de eliminar este evento?')
+            if (confirmDelete) {
+                const { data } = await axios.put(`http://localhost:3100/reservationRoom/removeService/${id}`, { service: idService }, {
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                getReservation();
+                Swal.fire({
+                    title: data.message || 'Deleting sucessfully',
+                    icon: 'success',
+                    timer: 2000
+                })
+            }
         } catch (err) {
-          console.error(err)
-          alert(err.response.data.message)
+            console.error(err)
+            alert(err.response.data.message)
         }
-      }
+    }
 
     const getReservation = async () => {
         try {
@@ -80,6 +80,7 @@ export const AddServiceReservationRoom = () => {
                         'Authorization': token
                     }
                 })
+            getReservation();
             Swal.fire({
                 title: data.message || 'Service Added',
                 icon: 'success',
@@ -90,10 +91,9 @@ export const AddServiceReservationRoom = () => {
                     title: data.message,
                     icon: 'success',
                     timer: 2000
-                  })
-                  
-                  getReservation();
-        }} catch (err) {
+                })
+            }
+        } catch (err) {
             console.error(err)
         }
     }
