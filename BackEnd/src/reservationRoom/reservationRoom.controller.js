@@ -432,6 +432,6 @@ exports.createReport = async (req, res) => {
         return res.send({ message: 'Report Created' })
     } catch (error) {
         console.error(error);
-        return res.status(500).send({ message: 'Error creating report' });
+        return res.status(500).send({ message: 'Error creating report', doc });
     }
 }
