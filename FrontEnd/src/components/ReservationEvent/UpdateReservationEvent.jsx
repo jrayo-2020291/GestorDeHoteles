@@ -38,14 +38,26 @@ const updateReservation = async(e)=>{
             }
         }
             )
-        Swal.fire({
-            title: data.message || 'Reservation Updated',
-            icon: 'success',
-            timer: 2000
-          });
+            if(data.message== 'Updated Reservation'){ 
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'success',
+                      timer: 2000
+                })
+            }else{
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'warning',
+                      timer: 2000
+                })
+            }
         navigate('/dashboard/reservationEvent')
     }catch(err){
-        console.error(err)
+        Swal.fire({
+            title: err.response.data.message,
+            icon: 'error',
+            timer: 2000
+          })
     }
 }
 useEffect(()=> getReservation, [])

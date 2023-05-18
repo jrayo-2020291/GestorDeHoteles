@@ -5,6 +5,7 @@ const Event = require('../events/events.model');
 const Hotel = require('../hotels/hotels.model');
 const Services = require('../additionalServices/additionalService.model');
 const {jsPDF} = require('jspdf');
+const { validateData, encrypt, checkPassword, checkUpdate } = require('../utils/validate');
 require('jspdf-autotable');
 
 exports.test = (req, res)=>{
@@ -16,7 +17,7 @@ exports.add =async (req, res)=>{
         let data = req.body;
         let userId = req.user.sub;
         let findUser = await User.findOne({_id: userId});
-       // if(findUser.role !== 'CLIENT') return res.send({message: 'Only clients can have a reservation'});
+        if(findUser.role !== 'CLIENT') return res.send({message: 'Only clients can have a reservation'});
         let findEvent = await Event.findOne({_id: data.event});
         if(!findEvent) return res.status(404).send({message: 'Event not found'});
         console.log(findEvent)
@@ -36,6 +37,8 @@ exports.add =async (req, res)=>{
             event: data.event,
             state: 'RESERVED'
         };
+        let msg = validateData(params);
+        if(msg) return res.status(400).send({message: msg});
         let newCounter = findHotel.counter + 1;
         let updatedHotel = await Hotel.findOneAndUpdate({_id: data.hotel}, {counter: newCounter}, {new:true});
         let newReservation = new ReservationEvent(params);
@@ -205,6 +208,8 @@ exports.updatedReservation = async(req, res) =>{
             hoursEvent: data.hoursEvent,
             cost: newCost
         };
+        let msg = validateData(params);
+        if(msg) return res.status(400).send({message: msg});
         let updatedReservation = await ReservationEvent.findOneAndUpdate({_id: reservationExist._id}, params, {new:true});
         return res.send({message: 'Updated Reservation', updatedReservation});
     } catch (err) {
