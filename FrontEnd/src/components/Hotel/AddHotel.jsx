@@ -67,6 +67,7 @@ export const AddHotel = () => {
 
     return (
         <>
+        <br /><br />
             <div className="container">
                 <div className="box">
                     <h1>Agregar hotel</h1>

@@ -80,6 +80,7 @@ export const AServiceTable = () => {
   return (
     <>
       {/* <section id="content"> */}
+      <br /><br />
       <main>
       <h1 className="title">Servicios Adicionales</h1>
           <ul className="breadcrumbs">

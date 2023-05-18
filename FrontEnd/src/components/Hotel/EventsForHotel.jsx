@@ -118,7 +118,7 @@ export const EventForHotel = () => {
     return(
         <>
             {/* <section id="content"> */}
-            <br /><br /><br /><br />
+            <br /><br />
                 <main>
                     <h1 className="title">Agregar evento</h1>
                         <ul className="breadcrumbs">

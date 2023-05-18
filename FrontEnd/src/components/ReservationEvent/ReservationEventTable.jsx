@@ -112,6 +112,7 @@ export const ReservationEventTable = () => {
   return (
     <>
       {/* <section id="content"> */}
+      <br /><br />
       <main>
         <h1 className="title">Reservación de Eventos</h1>
         <ul className="breadcrumbs">
