@@ -1,6 +1,8 @@
 'use strict';
 
 const Events = require('./events.model');
+const Hotel = require('../hotels/hotels.model');
+const ReservationEvent = require('../reservationEvent/reservationEvent.model')
 
 exports.test = (req, res)=>{
     return res.send({message: 'Test function for Events is running'});
@@ -87,6 +89,10 @@ exports.update = async(req, res) =>{
 exports.delete = async(req, res)=>{
     try{
         let eventId = req.params.id;
+        let findHotel = await Hotel.findOne({events: eventId});
+        if(findHotel) return res.send({message: 'This event is being used and cannot be deleted'});
+        let findReservation = await ReservationEvent.findOne({event: eventId});
+        if(findReservation) return res.send({message: 'This event is being used and cannot be deleted'});
         let deletedEvent = await Events.findOneAndDelete({_id: eventId});
         if(!deletedEvent) return res.sta(404).send({message: 'Event not found and not deleted'});
         return res.send({message: 'Event deleted: ', deletedEvent});

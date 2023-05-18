@@ -89,6 +89,8 @@ exports.add = async(req,res)=>{
 exports.delete = async(req, res)=>{
     try{
         let roomId = req.params.id;
+        let findReservation = await Reservation.findOne({'rooms.room': roomId});
+        if(findReservation) return res.send({message: 'This room is being used and cannot be deleted'})
         let deletedRoom = await Room.findOneAndDelete({_id: roomId});
         if(!deletedRoom) return res.status(404).send({message: 'Room not found and not deleted'});
         return res.send({message: 'Room deleted: ', deletedRoom});
