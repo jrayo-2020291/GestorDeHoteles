@@ -40,6 +40,7 @@ export const UserTable = () => {
           }
           
         })
+        console.log(data.message)
         if(data.message=== 'Account delete sucessfully'){ 
           Swal.fire({
               title: data.message ,

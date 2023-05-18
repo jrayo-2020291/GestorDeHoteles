@@ -46,14 +46,26 @@ export const AddRoom = () => {
                     'Authorization': token
                 }
             })
-            Swal.fire({
-                title: 'Added!',
-                text: 'Room added Succesfully.',
-                icon: 'success'
-            }),
+            if(data.message== 'Room adding to hotel sucessfully'){ 
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'success',
+                      timer: 2000
+                })
+            }else{
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'warning',
+                      timer: 2000
+                })
+            }
                 navigate('/dashboard/Room')
         } catch (err) {
-            alert(err.response.data.message)
+            Swal.fire({
+                title: err.response.data.message ,
+                icon: 'error',
+                timer: 2000
+              })
         }
     }
 

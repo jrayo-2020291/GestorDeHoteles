@@ -44,7 +44,7 @@ export const UpdateRoom = () => {
             let update = {
                 noRoom: document.getElementById('inputNoRoom').value,
                 category: document.getElementById('inputCategory').value,
-                capacity: document.getElementById('inputCapacity').value,
+                peopleCapacity: document.getElementById('inputCapacity').value,
                 price: document.getElementById('inputPrice').value,
                 hotel: document.getElementById('inputHotel').value
             }
@@ -53,13 +53,26 @@ export const UpdateRoom = () => {
                     'Authorization': token
                 }
             })
-            Swal.fire({
-                title: 'Updated!',
-                text: 'Room updated Succesfully.',
-                icon: 'success'
-              }),            navigate('/dashboard/room')
+            if(data.message== 'Room updated'){ 
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'success',
+                      timer: 2000
+                })
+            }else{
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'warning',
+                      timer: 2000
+                })
+            }           
+              navigate('/dashboard/room')
         } catch (err) {
-            alert(err.response.data.message)
+            Swal.fire({
+                title: err.response.data.message,
+                icon: 'error',
+                timer: 2000
+              })
         }
     }
 

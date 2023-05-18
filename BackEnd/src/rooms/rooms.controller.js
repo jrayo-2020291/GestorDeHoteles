@@ -68,15 +68,21 @@ exports.getAvailability=async(req,res)=>{
 exports.add = async(req,res)=>{
     try {
         let data = req.body;
-        let validate = validateData(data);
-        if(validate) return res.status(400).send({validate});
+        let params ={
+            noRoom:data.noRoom,
+            category:data.category,
+            peopleCapacity: data.peopleCapacity,
+            price:data.price,
+            hotel:data.hotel
+        }
+        let msg = validateData(params);
+        if(msg) return res.status(400).send({message: msg});
         let existHotel = await Hotel.findOne({_id:data.hotel});
         if(!existHotel) return res.send({message:'Hotel not found'});
         let existRoom = await Room.findOne({noRoom:data.noRoom,hotel:data.hotel});
-        if (existRoom)
-            console.log('haha')
-        
         if(existRoom) return res.send({message:'This room already exists in this hotel'});
+        let rooms = await Room.find({hotel:data.hotel})
+        if(existHotel.numberRooms<=rooms.length) return res.send({message:`This hotel is capable of ${existHotel.numberRooms} rooms and already has them`})
         let room = new Room(data);
         await room.save();
         return res.send({message:'Room adding to hotel sucessfully'})
@@ -93,7 +99,7 @@ exports.delete = async(req, res)=>{
         if(findReservation) return res.send({message: 'This room is being used and cannot be deleted'})
         let deletedRoom = await Room.findOneAndDelete({_id: roomId});
         if(!deletedRoom) return res.status(404).send({message: 'Room not found and not deleted'});
-        return res.send({message: 'Room deleted: ', deletedRoom});
+        return res.send({message: 'Room deleted', deletedRoom});
     }catch(err){
         console.error(err);
         return res.status(500).send({message: 'Error deleting Room'});
@@ -104,16 +110,21 @@ exports.update = async(req,res)=>{
         let roomId = req.params.id;
         let data=req.body;
         let params = {
-            noRoom: data.room,
+            noRoom: data.noRoom,
             category: data.category,
-            peopleCapacity: data.capacity,
+            peopleCapacity: data.peopleCapacity,
             price: data.price,
-            availability:data.availability,
             hotel: data.hotel
         }
-        if(data.name=='')return res.send({message:'You have to add a valid name'})
+        let msg = validateData(params);
+        if(msg) return res.status(400).send({message: msg});
+        let existHotel = await Hotel.findOne({_id:data.hotel});
+        if(!existHotel) return res.send({message:'Hotel not found'});
+        let exisNametRoom = await Room.findOne({noRoom:data.noRoom,hotel:data.hotel});
+        if(exisNametRoom) return res.send({message:'This room already exists in this hotel'});
         let existRoom = await Room.findOne({_id: roomId})
-        console.log(existRoom.noRoom)
+        let rooms = await Room.find({hotel:data.hotel})
+        if(existHotel.numberRooms<=rooms.length) return res.send({message:`This hotel is capable of ${existHotel.numberRooms} rooms and already has them`})
         if(data.room !== existRoom.noRoom){
             let room = await Room.findOne({noRoom: data.room});
             if(room) return res.send({message:'Room name is already in use'})
