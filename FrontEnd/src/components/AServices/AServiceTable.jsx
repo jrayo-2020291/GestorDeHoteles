@@ -50,7 +50,9 @@ export const AServiceTable = () => {
   }
     
      getServices()
-        } 
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire('CANCEL', 'The service aditional was not deleted', 'error');
+        }
         //
       
       

@@ -97,7 +97,9 @@ export const EventTable = () => {
                       timer: 2000
                 })
             }
-                } 
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire('CANCEL', 'The event was not deleted', 'error');
+                  }
         } catch (err) {
             console.error(err)
             alert(err.response.data.message)

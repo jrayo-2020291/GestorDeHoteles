@@ -26,27 +26,26 @@ export const AddHotel = () => {
                     'Authorization': token
                 }
             })
-            Swal.fire({
-                title: data.message || 'hotel created sucessfully',
-                icon: 'success',
-                timer: 2000
-              })
-              if(data.message== 'Hotel already created'){ 
+            if(data.message== 'Hotel created sucessfully'){ 
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'success',
+                      timer: 2000
+                })
+            }else{
                 Swal.fire({
                     title: data.message ,
                       icon: 'warning',
                       timer: 2000
-                    })
-              }else if(data.message=='User already has an hotel'){
-                Swal.fire({
-                    title: data.message ,
-                      icon: 'warning',
-                      timer: 2000
-                    })
-              }
+                })
+            }
             navigate('/dashboard/hotel')
         } catch (err) {
-            alert(err.response.data.message)
+            Swal.fire({
+                title: err.response.data.message ,
+                icon: 'error',
+                timer: 2000
+              })
         }
     };
 

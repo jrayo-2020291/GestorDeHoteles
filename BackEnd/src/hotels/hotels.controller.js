@@ -28,7 +28,6 @@ exports.add = async(req,res)=>{
         let msg = validateData(params);
         if(msg) return res.status(400).send({message: msg});
         let existUser = await User.findOne({ _id: data.manager });  
-        if(validate) return res.status(400).send({validate})
     if (!existUser) {
       return res.send({ message: "User not found" });
     }
@@ -42,7 +41,7 @@ exports.add = async(req,res)=>{
     }
       let hotel = new Hotel(data);
         await hotel.save();
-        return res.send({message:'hotel created sucessfully', hotel});
+        return res.send({message:'Hotel created sucessfully', hotel});
     } catch (err) {
         console.error(err);
         return res.status(500).send({message:'Error adding Hotel'})    
@@ -168,9 +167,18 @@ exports.update = async(req,res)=>{
         }
         let msg = validateData(params);
         if(msg) return res.status(400).send({message: msg}); 
-        let hotel = await Hotel.findOne({name: data.name});
-        if(hotel && hotel._id.toString() !== hotelId) { 
-          return res.send({message: 'This Hotel already exists'});
+        //
+        let rooms = await Room.find({hotel:hotelId})
+        if(rooms.length>data.numberRooms) return res.send({message:`There are already ${rooms.length} rooms in this hotel, do not change the number of rooms less than ${rooms.length}`})
+        //
+        let hotel = await Hotel.findOne({_id: hotelId});
+        if(hotel.name!==data.name){
+            let nameHotel = await Hotel.findOne({name: data.name});
+            if(nameHotel) return res.send({message:'This name is already in use'})
+        }
+        if(hotel.manager.toString() !== data.manager){
+            let managerHotel = await Hotel.findOne({manager: data.manager});
+            if(managerHotel) return res.send({message:'This manager is already in use'})
         }
         let updatedHotel = await Hotel.findOneAndUpdate({_id: hotelId}, data, {new: true});
         if(!updatedHotel) return res.status(404).send({message: 'Hotel not found and not updated'});

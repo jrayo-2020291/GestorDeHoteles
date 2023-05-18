@@ -26,14 +26,26 @@ export const UpdateHotel = () => {
                   'Authorization': token
               }
             });
-            Swal.fire({
-                title: data.message || 'Hotel updated',
-                icon: 'success',
-                timer: 2000
-              })
+            if(data.message== 'Hotel updated'){ 
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'success',
+                      timer: 2000
+                })
+            }else{
+                Swal.fire({
+                    title: data.message ,
+                      icon: 'warning',
+                      timer: 2000
+                })
+            }
             navigate('/dashboard/hotel')
         } catch (err) {
-            console.error(err)
+            Swal.fire({
+                title: err.response.data.message ,
+                icon: 'error',
+                timer: 2000
+              })
         }
     }
 

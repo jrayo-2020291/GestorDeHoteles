@@ -97,11 +97,19 @@ export const HotelTable = () => {
            }
          })
          getHotels()
-         Swal.fire({
-          title: data.message,
-          icon: 'success',
-          timer: 2000
+         if(data.message=== 'Hotel deleted'){ 
+          Swal.fire({
+              title: data.message ,
+                icon: 'success',
+                timer: 2000
+          })
+      }else{
+        Swal.fire({
+            title: data.message ,
+              icon: 'warning',
+              timer: 2000
         })
+    }
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire('CANCEL', 'The hotel was not deleted', 'error');
         }

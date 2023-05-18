@@ -58,7 +58,9 @@ export const UserTable = () => {
         } else {
           getUser()
         }
-        } 
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire('CANCEL', 'The User was not deleted', 'error');
+        }
       //
       
     } catch (err) {
