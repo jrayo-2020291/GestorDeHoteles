@@ -222,7 +222,7 @@ exports.deleteReservation = async(req, res) => {
     try{
         let reservationId = req.params.id;
         let reservation = await ReservationEvent.findOne({_id: reservationId});
-        if(!reservation) return res.status.send({message: 'Reservation not found'});
+        if(!reservation) return res.send({message: 'Reservation not found'});
         let deletedReservation = await ReservationEvent.findOneAndDelete({_id: reservationId});
         return res.send({message: 'Reservation deleted', deletedReservation});
     }catch(err){
