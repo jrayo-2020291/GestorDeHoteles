@@ -75,9 +75,13 @@ export const AddRoom = () => {
                     </div>
                     <br />
                     <div>
-                        <i className="fa-solid fa-pencil"></i>
-                        <input type="text" id='inputCategory' className="form-control" placeholder='category' required />
-                    </div>
+                    <i className="fa-solid fa-list-alt"></i>
+
+                            <select id="inputCategory">
+                                <option value="ROOM">SWITE</option>
+                                <option value="EVENT">DELUXE</option>
+                            </select>
+                        </div>
                     <br />
                     <div>
                         <i className="fa-solid fa-tag"></i>
