@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
-import { AddService } from './components/ReservationEvent/AddService.jsx'
+import { AddService } from './components/ReservationEvent/addService.jsx'
 import { AServiceTable } from './components/AServices/AServiceTable.jsx'
 import { AddAService } from './components/AServices/AddAService.jsx'
 import { UpdateAService } from './components/AServices/UpdateAService.jsx'

@@ -7,64 +7,56 @@ export const DashBoardPage = () => {
 
     return (
         <>
-            <div className="wrapper">
-                <nav>
-                    <input type="checkbox" id="show-search" />
-                    <input type="checkbox" id="show-menu" />
-                    <label htmlFor="show-menu" className="menu-icon"><i className="fas fa-bars"></i></label>
-                    <div className="content">
-                        <div className="logo"><a ></a><img src={Logo} className="store" /></div>
-                        <ul className="links">
+            <main>
+                <header>
+                    <nav>
+                        <ul>
                             <Link to='user'>
-                                <li><a >Usuarios</a></li>
+                                <li><a href="#">Usuarios</a></li>
                             </Link>
                             <Link to='aService'>
-                                <li><a >Servicios</a></li>
+                                <li><a href="#">Servicios</a></li>
                             </Link>
                             <Link to='event'>
-                                <li><a >Eventos</a></li>
+                                <li><a href="#">Eventos</a></li>
                             </Link>
-                            <li>
-                                <a className="desktop-link">Hoteles</a>
-                                <ul>
-                                    <Link to='hotel'>
-                                        <li><a >Hoteles</a></li>
-                                    </Link>
-                                    <Link to='graphTopHotels'>
-                                        <li><a >Grafica Top</a></li>
-                                    </Link>
-                                </ul>
-                            </li>
+                            <Link to='hotel'>
+                                <li><a href="#">Hoteles</a>
+                                    <ul class="submenu">
+                                        <Link to='graphTopHotels'>
+                                            <li><a href="#">Grafica global</a></li>
+                                        </Link>
+                                    </ul>
+                                </li>
+                            </Link>
                             <Link to='room'>
-                                <li><a >Habitaciones</a></li>
+                                <li><a href="#">Habitaciones</a></li>
                             </Link>
-                            <li>
-                                <a className="desktop-link">Reservaciones</a>
-                                <ul>
+                            <li><a href="#">Reservaciones</a>
+                                <ul class="submenu">
                                     <Link to='reservationRoom'>
-                                        <li><a >Habitaciones</a></li>
+                                        <li><a href="#">Habitaciones</a></li>
                                     </Link>
                                     <Link to='reservationEvent'>
-                                        <li><a >Eventos</a></li>
-                                    </Link>
-                                </ul>
-                            </li>
-                            <li>
-                                <a className="desktop-link">Facturas</a>
-                                <ul>
-                                    <Link to='billRoom'>
-                                        <li><a >Habitaciones</a></li>
-                                    </Link>
-                                    <Link to='billEvent'>
-                                        <li><a >Eventos</a></li>
+                                        <li><a href="#">Eventos</a></li>
                                     </Link>
 
                                 </ul>
                             </li>
+                            <li><a href="#">Facturas</a>
+                                <ul class="submenu">
+                                    <Link to='billRoom'>
+                                        <li><a href="#">Habitaciones</a></li>
+                                    </Link>
+                                    <Link to='billEvent'>
+                                        <li><a href="#">Eventos</a></li>
+                                    </Link>
+                                </ul>
+                            </li>
                         </ul>
-                    </div>
-                </nav>
-            </div>
+                    </nav>
+                </header>
+            </main>
             <Outlet></Outlet>
         </>
     )

@@ -94,10 +94,6 @@ export const UserTable = () => {
   return (
     <>
       {/* <section id="content"> */}
-      <br />
-      <br />
-      <br />
-      <br />
         <main>
           <h1 className="title">Usuarios</h1>
           <ul className="breadcrumbs">
